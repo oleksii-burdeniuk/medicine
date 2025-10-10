@@ -1,0 +1,106 @@
+{
+  "internationalization": {
+    "locales": [
+      "en"
+    ],
+    "requiredLocales": [],
+    "strictMode": "inclusive",
+    "defaultLocale": "en"
+  },
+  "middleware": {
+    "headerName": "x-intlayer-locale",
+    "cookieName": "INTLAYER_LOCALE",
+    "prefixDefault": false,
+    "basePath": "",
+    "serverSetCookie": "always",
+    "noPrefix": false,
+    "detectLocaleOnPrefetchNoPrefix": false
+  },
+  "content": {
+    "fileExtensions": [
+      ".content.ts",
+      ".content.js",
+      ".content.cjs",
+      ".content.cjx",
+      ".content.mjs",
+      ".content.mjx",
+      ".content.json",
+      ".content.tsx",
+      ".content.jsx"
+    ],
+    "baseDir": "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine",
+    "excludedPath": [
+      "node_modules",
+      ".intlayer",
+      ".next",
+      ".nuxt",
+      ".expo",
+      "dist"
+    ],
+    "watch": true,
+    "contentDir": [
+      "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine"
+    ],
+    "dictionariesDir": "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/.intlayer/dictionary",
+    "moduleAugmentationDir": "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/.intlayer/types",
+    "unmergedDictionariesDir": "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/.intlayer/unmerged_dictionary",
+    "remoteDictionariesDir": "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/.intlayer/remote_dictionary",
+    "dynamicDictionariesDir": "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/.intlayer/dynamic_dictionary",
+    "fetchDictionariesDir": "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/.intlayer/fetch_dictionary",
+    "typesDir": "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/.intlayer/types",
+    "mainDir": "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/.intlayer/main",
+    "configDir": "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/.intlayer/config",
+    "watchedFilesPattern": [
+      "/**/*.content.ts",
+      "/**/*.content.js",
+      "/**/*.content.cjs",
+      "/**/*.content.cjx",
+      "/**/*.content.mjs",
+      "/**/*.content.mjx",
+      "/**/*.content.json",
+      "/**/*.content.tsx",
+      "/**/*.content.jsx"
+    ],
+    "watchedFilesPatternWithPath": [
+      "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/**/*.content.ts",
+      "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/**/*.content.js",
+      "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/**/*.content.cjs",
+      "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/**/*.content.cjx",
+      "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/**/*.content.mjs",
+      "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/**/*.content.mjx",
+      "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/**/*.content.json",
+      "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/**/*.content.tsx",
+      "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/**/*.content.jsx"
+    ],
+    "outputFilesPatternWithPath": "/Users/oleksiiburdeniuk/MyProjects/Medicine/medicine/.intlayer/dictionary/**/*.json"
+  },
+  "editor": {
+    "applicationURL": "",
+    "editorURL": "http://localhost:8000",
+    "cmsURL": "https://intlayer.org",
+    "backendURL": "https://back.intlayer.org",
+    "port": 8000,
+    "enabled": true,
+    "dictionaryPriorityStrategy": "local_first",
+    "liveSync": true,
+    "liveSyncPort": 4000,
+    "liveSyncURL": "http://localhost:4000"
+  },
+  "log": {
+    "mode": "default",
+    "prefix": "\u001b[38;5;239m[intlayer] \u001b[0m"
+  },
+  "ai": {},
+  "build": {
+    "optimize": false,
+    "importMode": "static",
+    "traversePattern": [
+      "**/*.{js,ts,mjs,cjs,jsx,tsx,mjx,cjx,vue,svelte,svte}",
+      "!**/node_modules/**"
+    ],
+    "outputFormat": [
+      "cjs",
+      "esm"
+    ]
+  }
+}
