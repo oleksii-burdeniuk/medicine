@@ -93,7 +93,7 @@ export default function BarcodePage() {
       <div className={styles.breakContainer}>
         <h3>Перерва:</h3>
         <span>8:20 - 08:35</span>
-        <span>11:20 - 1:40</span>
+        <span>11:20 - 11:40</span>
       </div>
 
       <div className={styles.container}>
