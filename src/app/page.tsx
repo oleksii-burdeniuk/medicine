@@ -63,10 +63,9 @@ export default function BarcodePage() {
       const value = result.getText();
       setText(value);
       stopScan(); // stop camera after successful scan
-    } catch (error: any) {
-      if (error && error.message) {
-        console.error('Scan error:', error);
-        alert(`Помилка сканування: ${error.message || 'невідома помилка'}`);
+    } catch (err) {
+      if (err) {
+        alert(`Помилка сканування:'невідома помилка'}`);
       }
       stopScan();
     }
