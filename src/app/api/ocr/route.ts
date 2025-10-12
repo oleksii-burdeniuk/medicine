@@ -3,6 +3,7 @@ import vision from '@google-cloud/vision';
 // const credentials = JSON.parse(fs.readFileSync('google-key.json', 'utf8'));
 const credentialsJsonString = process.env.GOOGLE_CREDENTIALS_JSON;
 const credentials = JSON.parse(credentialsJsonString!);
+
 export async function POST(req: Request) {
   try {
     const data = await req.formData();
