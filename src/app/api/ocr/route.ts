@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import vision from '@google-cloud/vision';
-import * as fs from 'fs';
-const credentials = JSON.parse(fs.readFileSync('google-key.json', 'utf8'));
+// const credentials = JSON.parse(fs.readFileSync('google-key.json', 'utf8'));
+const credentials = process.env.GOOGLE_CREDENTIALS_JSON;
 
 export async function POST(req: Request) {
   try {
@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     const bytes = Buffer.from(await file.arrayBuffer());
 
     const client = new vision.ImageAnnotatorClient({
-      credentials: credentials,
+      credentials: JSON.parse(credentials),
     });
 
     const [result] = await client.textDetection({ image: { content: bytes } });
