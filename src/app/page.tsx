@@ -53,6 +53,42 @@ export default function BarcodePage() {
     localStorage.setItem('savedCodes', JSON.stringify(savedCodes));
   }, [savedCodes]);
 
+  // текст патер
+
+  const recognizePlaceNumber = (text: string) => {
+    const regex = /\b[A-Z]{2}\/\d{2}\/\d{2}\/\d{2}\/\d{4}\b/;
+    const foundMatch = text.match(regex);
+    if (foundMatch) {
+      const extractedCode = foundMatch[0];
+      console.log('Вилучений код:', extractedCode);
+      return extractedCode;
+      // Вивід: PK/25/04/23/0313
+    } else {
+      console.log('Код за вказаним патерном не знайдено.');
+      return 'Щось пішло не так';
+    }
+  };
+
+  // --- Визначити текст на фото ---
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setDecoding(true);
+    const formData = new FormData();
+    formData.append('file', file);
+
+    const res = await fetch('/api/ocr', {
+      method: 'POST',
+      body: formData,
+    });
+
+    const data = await res.json();
+    console.log(data);
+    const barCodeText = recognizePlaceNumber(data.text);
+    setText(barCodeText || 'Нічого не знайдено 😕');
+    setDecoding(false);
+  };
+
   // --- Обробка вибору зображення ---
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -69,11 +105,10 @@ export default function BarcodePage() {
         const result = await codeReader.decodeFromImageElement(image);
         const decodedText = result.getText();
         setText(decodedText);
-      } catch (err) {
-        console.error('Помилка сканування з зображення:', err);
-        alert(`Не вдалося зчитати штрихкод або QR-код з зображення., ${err}`);
-      } finally {
         setDecoding(false);
+      } catch (err) {
+        handleUpload(e);
+      } finally {
         URL.revokeObjectURL(imageUrl);
       }
     };

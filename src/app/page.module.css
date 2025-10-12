@@ -166,3 +166,6 @@
 .deleteButton:hover {
   color: #e74c3c;
 }
+.loading {
+  color: #333;
+}
