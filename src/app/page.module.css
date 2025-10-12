@@ -89,23 +89,23 @@
 /* --- Перерва --- */
 .breakContainer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 4px;
   font-size: 1rem;
   align-items: center;
   padding-top: 10px;
   padding-bottom: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
 .breakContainer h3 {
-  margin-bottom: 6px;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 .breakContainer span {
   border-radius: 8px;
-  padding: 4px 8px;
-  font-size: 20px;
+  font-size: 14px;
 }
 
 /* --- Список збережених кодів --- */
