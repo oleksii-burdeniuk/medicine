@@ -13,9 +13,15 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-export const metadata: Metadata = {
-  title: 'Medicine',
-  description: 'Bar code generator',
+export const metadata = {
+  title: 'Barcode Scanner',
+  description: 'PWA штрихкод сканер та генератор',
+  manifest: '/manifest.json',
+  themeColor: '#000000',
+  icons: {
+    icon: '/icons/icon-192x192.png',
+    apple: '/icons/icon-512x512.png',
+  },
 };
 
 export default function RootLayout({
