@@ -1,4 +1,7 @@
-const withPWA = import('next-pwa')({
+import withPWA from 'next-pwa';
+
+// Конфігурація PWA
+const pwaConfig = withPWA({
   dest: 'public',
   register: true,
   skipWaiting: true,
@@ -20,6 +23,10 @@ const withPWA = import('next-pwa')({
   },
 });
 
-module.exports = withPWA({
+/** @type {import('next').NextConfig} */
+const nextConfig = {
   reactStrictMode: true,
-});
+};
+
+// Експортуємо об'єднану конфігурацію Next.js та PWA
+export default pwaConfig(nextConfig);
