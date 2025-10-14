@@ -1,11 +1,25 @@
-// next-pwa.config.mjs
-import runtimeCaching from 'next-pwa/cache.js';
+const withPWA = import('next-pwa')({
+  dest: 'public',
+  register: true,
+  skipWaiting: true,
+  disable: process.env.NODE_ENV === 'development',
+  runtimeCaching: [
+    {
+      urlPattern: /^https?.*/,
+      handler: 'NetworkFirst',
+      options: {
+        cacheName: 'offline-cache',
+        networkTimeoutSeconds: 10,
+        expiration: { maxEntries: 200, maxAgeSeconds: 7 * 24 * 60 * 60 },
+        cacheableResponse: { statuses: [0, 200] },
+      },
+    },
+  ],
+  fallbacks: {
+    document: '/offline.html', // 👈 важливо
+  },
+});
 
-const config = {
-  dest: 'public', // куди зберігається service worker
-  register: true, // автоматична реєстрація
-  skipWaiting: true, // активує нову версію одразу
-  runtimeCaching, // стандартне кешування сторінок і зображень
-};
-
-export default config;
+module.exports = withPWA({
+  reactStrictMode: true,
+});
