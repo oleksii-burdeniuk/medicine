@@ -28,7 +28,7 @@ export default function WorkBreakTimePage() {
         <div className={styles.shift}>
           <h2 className={styles.subtitle}>👷‍♂️ Druga zmiana</h2>
           <p className={styles.schedule}>
-            <strong>Godziny pracy:</strong> 14:00 — 22:00
+            <strong>Godziny pracy:</strong> 12:00 — 22:00
           </p>
           <ul className={styles.list}>
             <li>☕ Przerwa 1: 14:20 — 14:35</li>
