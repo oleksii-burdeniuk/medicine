@@ -1,0 +1,87 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.25rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* Logo */
+.logoText {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Menu button for mobile */
+.menuButton {
+  background: none;
+  border: none;
+  display: none;
+  cursor: pointer;
+}
+
+/* Navigation (desktop) */
+.nav {
+  z-index: 1100; /* 🔼 вище за overlay */
+}
+
+.nav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.nav a:hover {
+  color: #0070f3;
+}
+
+/* Mobile menu */
+@media (max-width: 768px) {
+  .menuButton {
+    display: block;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    height: 100%;
+    background: #fff;
+    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
+    padding-top: 4rem;
+    transition: right 0.3s ease;
+    z-index: 1101; /* 🔼 вище overlay */
+  }
+
+  .nav.open {
+    right: 0;
+  }
+
+  .nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1100; /* нижче меню */
+  }
+}

@@ -167,14 +167,9 @@ export default function BarcodePage() {
 
   return (
     <div>
-      <div className={styles.breakContainer}>
-        <span>Перерва 1: (8:20 - 08:35)</span>
-        <span>Перерва 2: (11:20 - 11:40)</span>
-      </div>
-
       <div className={styles.container}>
         <div className={styles.card}>
-          <h1 className={styles.title}>Генератор / Сканер Штрихкодів</h1>
+          <h1 className={styles.title}>Генератор Штрих-кодів</h1>
 
           <div className={styles.inputWrapper}>
             <input
