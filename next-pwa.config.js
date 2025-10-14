@@ -1,7 +1,7 @@
 import withPWA from 'next-pwa';
 
-// Конфігурація PWA
-const pwaConfig = withPWA({
+// 1. PWA-specific options (passed to the next-pwa function call)
+const pwaOptions = {
   dest: 'public',
   register: true,
   skipWaiting: true,
@@ -19,14 +19,19 @@ const pwaConfig = withPWA({
     },
   ],
   fallbacks: {
-    document: '/offline.html', // 👈 важливо
+    document: '/offline.html',
   },
-});
+};
+
+// 2. Wrap the PWA options
+const pwaConfig = withPWA(pwaOptions);
 
 /** @type {import('next').NextConfig} */
+// 3. Next.js specific options (THIS IS WHERE reactStrictMode BELONGS)
 const nextConfig = {
+  // FIX: Ensure reactStrictMode is only here, and remove swcMinify
   reactStrictMode: true,
 };
 
-// Експортуємо об'єднану конфігурацію Next.js та PWA
+// 4. Export the combined configuration
 export default pwaConfig(nextConfig);
