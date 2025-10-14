@@ -2,38 +2,24 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-// 👈 ІМПОРТУЄМО usePathname
 import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
 import { Menu } from 'lucide-react';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  // 👈 ОТРИМУЄМО ПОТОЧНИЙ ШЛЯХ
   const pathname = usePathname();
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
 
-  // 1. Функція для перевірки активності
-  const isActive = (href) => {
-    // Особливий випадок для головної сторінки (/)
-    if (href === '/') {
-      // Домашня сторінка активна, якщо pathname === '/'
-      // або якщо pathname === '/index.html' (для деяких PWA конфігурацій)
-      return (
-        pathname === '/' || pathname === '/index.html' || pathname === '/index'
-      );
-    }
-    // Для всіх інших сторінок просто перевіряємо, чи шлях починається з href
-    return pathname.startsWith(href);
-  };
+  // 🟢 Sprawdź, czy link jest aktywny
+  const isActive = (href: string) => pathname === `/${href}`;
 
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        {/* Використовуємо '/' для логотипу */}
-        <Link href='/' onClick={closeMenu}>
+        <Link href={`/`} onClick={closeMenu}>
           <span className={styles.logoText}>Medicine</span>
         </Link>
       </div>
@@ -50,38 +36,35 @@ export default function Header() {
         <ul>
           <li>
             <Link
-              href='/' // Змінив './' на '/' для Next.js
+              href={`/`}
               onClick={closeMenu}
-              // 2. Додаємо клас, якщо isActive
               className={isActive('/') ? styles.active : ''}
             >
-              Штрих-код
+              Kod kreskowy
             </Link>
           </li>
           <li>
             <Link
-              href='/work-break-time'
+              href={`/work-break-time`}
               onClick={closeMenu}
-              // 2. Додаємо клас, якщо isActive
               className={isActive('/work-break-time') ? styles.active : ''}
             >
-              Робота і перерва
+              Praca i przerwy
             </Link>
           </li>
           <li>
             <Link
-              href='/about'
+              href={`/about`}
               onClick={closeMenu}
-              // 2. Додаємо клас, якщо isActive
               className={isActive('/about') ? styles.active : ''}
             >
-              Про цей додаток
+              O aplikacji
             </Link>
           </li>
         </ul>
       </nav>
 
-      {/* Overlay for mobile when menu open */}
+      {/* 🟣 Overlay zamyka menu tylko po kliknięciu poza menu */}
       {isOpen && <div className={styles.overlay} onClick={closeMenu}></div>}
     </header>
   );

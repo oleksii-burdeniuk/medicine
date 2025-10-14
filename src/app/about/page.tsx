@@ -6,55 +6,56 @@ export default function AboutPage() {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h1 className={styles.title}>📦 Medicine Штрих-код</h1>
+        <h1 className={styles.title}>📦 Medicine Kod kreskowy</h1>
 
         <p className={styles.text}>
-          <strong>Medicine</strong> — це зручний застосунок для генерації
-          штрих-кодів. Він допомагає&ldquo;
-          <strong>швидко створювати, зчитувати та зберігати штрихкоди</strong>
-          для ефективної роботи.
+          <strong>Medicine</strong> — to wygodna aplikacja do generowania kodów
+          kreskowych. Pomaga{' '}
+          <strong>szybko tworzyć, skanować i zapisywać kody kreskowe</strong>{' '}
+          dla efektywnej pracy na magazynie.
         </p>
 
-        <h2 className={styles.subtitle}>⚙️ Основні можливості:</h2>
+        <h2 className={styles.subtitle}>⚙️ Główne funkcje:</h2>
         <ul className={styles.list}>
           <li>
-            🧾 <strong>Генерація штрихкоду</strong> — введи будь-який текст або
-            артикул, і застосунок автоматично створить&ldquo;
-            <strong>штрихкод (CODE128)</strong>.
+            🧾 <strong>Generowanie kodu kreskowego</strong> — wpisz dowolny
+            tekst lub numer artykułu, a aplikacja automatycznie utworzy{' '}
+            <strong>kod kreskowy (CODE128)</strong>.
           </li>
           <li>
-            📷 <strong>Сканування коду з фото</strong> — зроби фото сканера або
-            коробки з кодом, і система&ldquo;
-            <strong>автоматично розпізнає потрібний номер.</strong> фото має
-            мітити номер по типу &ldquo;PK/25/04/23/0813&ldquo;
+            📷 <strong>Skanowanie kodu ze zdjęcia</strong> — zrób zdjęcie
+            skanera lub pudełka z kodem, a system{' '}
+            <strong>automatycznie rozpozna potrzebny numer</strong>. Na zdjęciu
+            powinien być widoczny numer w formacie „PK/25/04/23/0813”.
           </li>
           <li>
-            💾 <strong>Збереження результатів</strong> — усі згенеровані або
-            зчитані коди можна зберігати локально для швидкого доступу пізніше.
+            💾 <strong>Zapisywanie wyników</strong> — wszystkie wygenerowane lub
+            zeskanowane kody można zapisać lokalnie, aby mieć do nich szybki
+            dostęp później.
           </li>
           <li>
-            🕒 <strong>Розклад перерв</strong> — в навігації ти знайдеш розклад
-            роботи і перерв, щоб не забути відпочити під час зміни 😄
+            🕒 <strong>Harmonogram przerw</strong> — w menu nawigacyjnym
+            znajdziesz grafik pracy i przerw, aby nie zapomnieć o odpoczynku 😄
           </li>
         </ul>
 
-        <h2 className={styles.subtitle}>📱 Як користуватись:</h2>
+        <h2 className={styles.subtitle}>📱 Jak korzystać:</h2>
         <ol className={styles.steps}>
-          <li>Перейди на головну сторінку застосунку.</li>
+          <li>Przejdź na stronę główną aplikacji.</li>
           <li>
-            Введи артикул або натисни 📷, щоб завантажити фото де видно код
-            штрих-коду по типу &ldquo;PK/25/04/23/0813&ldquo;.
+            Wpisz numer artykułu lub naciśnij 📷, aby przesłać zdjęcie z kodem
+            kreskowym w formacie „PK/25/04/23/0813”.
           </li>
           <li>
-            Зачекай, поки система зчитає код — він зʼявиться у полі вводу.
+            Poczekaj, aż system odczyta kod — pojawi się on w polu tekstowym.
           </li>
-          <li>Збережи результат, щоб мати його під рукою пізніше.</li>
+          <li>Zapisz wynik, aby mieć go zawsze pod ręką.</li>
         </ol>
 
         <p className={styles.footer}>
-          Застосунок працює навіть <strong>офлайн</strong> і підтримує{' '}
-          <strong>PWA</strong> — ти можеш додати його на головний екран телефону
-          та користуватися як звичайним додатком.
+          Aplikacja działa również <strong>offline</strong> i obsługuje{' '}
+          <strong>PWA</strong> — możesz dodać ją na ekran główny telefonu i
+          korzystać jak ze zwykłej aplikacji.
         </p>
       </div>
     </div>

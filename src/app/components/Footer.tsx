@@ -8,8 +8,8 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <p className={styles.text}>
-        Зроблено з ❤️ для складу <strong>Medicine</strong>. Цей додаток створено
-        повністю безкоштовно, щоб полегшити вашу роботу 🙌
+        Stworzone z ❤️ dla magazynu <strong>Medicine</strong>. Ta aplikacja
+        została wykonana całkowicie za darmo, aby ułatwić Twoją pracę 🙌
       </p>
 
       <p className={styles.links}>
@@ -19,7 +19,7 @@ export default function Footer() {
           rel='noopener noreferrer'
           className={styles.link}
         >
-          Мій LinkedIn
+          Mój LinkedIn
         </Link>
         {' | '}
         <Link
