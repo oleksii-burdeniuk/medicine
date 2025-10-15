@@ -8,7 +8,7 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <p className={styles.text}>
-        Stworzone z ❤️ dla magazynu <strong>Medicine</strong>. Ta aplikacja
+        Stworzone z troską dla magazynu <strong>Medicine</strong>. Ta aplikacja
         została wykonana całkowicie za darmo, aby ułatwić Twoją pracę 🙌
       </p>
 
