@@ -17,7 +17,7 @@ export default function BarcodePage() {
   const compressImage = (
     file: File,
     maxSize = 600,
-    quality = 0.5
+    quality = 0.4
   ): Promise<Blob> => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -133,6 +133,7 @@ export default function BarcodePage() {
       } else {
         // 3️⃣ Jeśli nie znaleziono kodu kreskowego → OCR
         const formData = new FormData();
+        console.log('compressedFile', compressedFile);
         formData.append('file', compressedFile);
 
         const res = await fetch('/api/ocr', {
