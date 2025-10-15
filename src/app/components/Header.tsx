@@ -12,14 +12,14 @@ export default function Header() {
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
-
-  // 🟢 Sprawdź, czy link jest aktywny
-  const isActive = (href: string) => pathname === `/${href}`;
+  console.log('pathname', pathname);
+  // 🟢 Перевіряємо, чи шлях збігається
+  const isActive = (href: string) => pathname === href;
 
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Link href={`/`} onClick={closeMenu}>
+        <Link href='/' onClick={closeMenu}>
           <span className={styles.logoText}>Medicine</span>
         </Link>
       </div>
@@ -36,7 +36,7 @@ export default function Header() {
         <ul>
           <li>
             <Link
-              href={`/`}
+              href='/'
               onClick={closeMenu}
               className={isActive('/') ? styles.active : ''}
             >
@@ -45,7 +45,7 @@ export default function Header() {
           </li>
           <li>
             <Link
-              href={`/work-break-time`}
+              href='/work-break-time'
               onClick={closeMenu}
               className={isActive('/work-break-time') ? styles.active : ''}
             >
@@ -54,7 +54,7 @@ export default function Header() {
           </li>
           <li>
             <Link
-              href={`/about`}
+              href='/about'
               onClick={closeMenu}
               className={isActive('/about') ? styles.active : ''}
             >
@@ -64,7 +64,6 @@ export default function Header() {
         </ul>
       </nav>
 
-      {/* 🟣 Overlay zamyka menu tylko po kliknięciu poza menu */}
       {isOpen && <div className={styles.overlay} onClick={closeMenu}></div>}
     </header>
   );
