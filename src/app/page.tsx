@@ -164,6 +164,11 @@ export default function BarcodePage() {
   };
 
   const handleSelect = (code: string) => setText(code);
+  const onInputFocus = () => {
+    if (text === 'Nic nie znaleziono 😕') {
+      setText('');
+    }
+  };
 
   return (
     <div>
@@ -179,6 +184,7 @@ export default function BarcodePage() {
               value={text}
               onChange={(e) => setText(e.target.value)}
               className={styles.input}
+              onFocus={onInputFocus}
             />
 
             <button
