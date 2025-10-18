@@ -1,0 +1,113 @@
+.savedList {
+  margin-top: 1.5rem;
+  text-align: left;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.337);
+  padding: 1rem 0.5rem;
+  border-width: 1px solid #636262;
+}
+
+.savedList h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+/* 🔍 Search input */
+.searchInput {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+}
+
+/* --- List of saved codes --- */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 180px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+  overflow-x: hidden;
+}
+
+/* --- Scrollbar for WebKit --- */
+.list::-webkit-scrollbar {
+  width: 6px;
+}
+.list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+.list::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f8fa;
+  padding: 8px 12px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  transition: background 0.2s, transform 0.1s;
+}
+
+.listItem:hover {
+  background: #c4c5c7;
+  transform: scale(1.01);
+}
+
+.codeText {
+  flex: 1;
+  color: #333;
+  font-size: 0.95rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.codeText:hover {
+  color: #000;
+}
+
+/* --- Delete button --- */
+.deleteButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #c0392b;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.deleteButton:hover {
+  color: #e74c3c;
+}
+
+/* --- Empty state --- */
+.noResults {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}

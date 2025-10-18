@@ -5,6 +5,7 @@ import JsBarcode from 'jsbarcode';
 import { BrowserMultiFormatReader } from '@zxing/browser';
 import { Image as ImageIcon, Trash2, Save } from 'lucide-react';
 import styles from './page.module.css';
+import SavedCodes from './components/SavedCodes';
 
 export default function BarcodePage() {
   const [text, setText] = useState('');
@@ -143,6 +144,7 @@ export default function BarcodePage() {
 
         const data = await res.json();
         setText(recognizePlaceNumber(data.text));
+        handleSave(recognizePlaceNumber(data.text));
       }
     } catch (err) {
       console.error('Błąd przetwarzania:', err);
@@ -153,7 +155,7 @@ export default function BarcodePage() {
   };
 
   // --- Zapisywanie / usuwanie kodów ---
-  const handleSave = () => {
+  const handleSave = (text: string) => {
     const trimmed = text.trim();
     if (trimmed && !savedCodes.includes(trimmed)) {
       setSavedCodes((prev) => [trimmed, ...prev]);
@@ -209,7 +211,7 @@ export default function BarcodePage() {
               type='button'
               className={styles.saveButton}
               title='Zapisz kod'
-              onClick={handleSave}
+              onClick={() => handleSave(text)}
             >
               <Save size={18} />
             </button>
@@ -225,30 +227,11 @@ export default function BarcodePage() {
             <svg ref={svgRef}></svg>
           </div>
 
-          {savedCodes.length > 0 && (
-            <div className={styles.savedList}>
-              <h2>Zapisane kody</h2>
-              <ul className={styles.list}>
-                {savedCodes.map((code, i) => (
-                  <li key={code} className={styles.listItem}>
-                    <span
-                      onClick={() => handleSelect(code)}
-                      className={styles.codeText}
-                    >
-                      {i + 1}: {code}
-                    </span>
-                    <button
-                      className={styles.deleteButton}
-                      onClick={() => handleDelete(code)}
-                      title='Usuń'
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+          <SavedCodes
+            savedCodes={savedCodes}
+            onSelect={handleSelect}
+            onDelete={handleDelete}
+          />
         </div>
       </div>
     </div>

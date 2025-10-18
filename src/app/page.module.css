@@ -1,7 +1,7 @@
 .container {
   display: flex;
   justify-content: center;
-  min-height: 80vh;
+  min-height: 70vh;
   background: #f7f8fa;
   padding: 1rem;
   border-radius: 20px;

@@ -61,6 +61,15 @@ export default function Header() {
               O aplikacji
             </Link>
           </li>
+          <li>
+            <Link
+              href='/share'
+              onClick={closeMenu}
+              className={isActive('/share') ? styles.active : ''}
+            >
+              Udostępnij aplikację
+            </Link>
+          </li>
         </ul>
       </nav>
 
