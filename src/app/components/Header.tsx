@@ -79,6 +79,15 @@ export default function Header() {
               Powiadomienia push
             </Link>
           </li> */}
+          <li>
+            <Link
+              href='/PWA'
+              onClick={closeMenu}
+              className={isActive('/PWA') ? styles.active : ''}
+            >
+              Czym jest PWA?
+            </Link>
+          </li>
         </ul>
       </nav>
 

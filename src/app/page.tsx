@@ -7,6 +7,7 @@ import { Image as ImageIcon, Trash2, Save } from 'lucide-react';
 import styles from './page.module.css';
 import SavedCodes from './components/SavedCodes';
 import PushNotificationManager from './components/pushNotifications/PushNotificationManager';
+import HowToInstallPWA from './components/HowToInstallPWA';
 
 export default function BarcodePage() {
   const [text, setText] = useState('');

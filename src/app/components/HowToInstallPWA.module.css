@@ -19,6 +19,35 @@
   line-height: 1.6;
 }
 
+/* 💡 DODANY STYL: Przycisk instalacji */
+.installButton {
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  background-color: #0070f3; /* Używamy koloru z Twojego motywu */
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 2rem; /* Dodatkowa przestrzeń nad nagłówkiem */
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 4px 10px rgba(0, 112, 243, 0.3);
+}
+
+.installButton:hover {
+  background-color: #005bb5;
+}
+
+.installButton:active {
+  transform: translateY(1px);
+}
+/* Koniec nowego stylu */
+
 .title {
   font-size: 1.4rem;
   font-weight: 600;
@@ -55,6 +84,7 @@
 }
 
 .tipBox {
+  /* Zmieniono na flex, aby dostosować ikonę */
   background: #eef6ff;
   border-left: 4px solid #0070f3;
   padding: 1rem;
@@ -62,6 +92,8 @@
   font-size: 0.95rem;
   color: #222;
   margin-top: 1rem;
+  display: flex;
+  align-items: flex-start;
 }
 
 @media (max-width: 600px) {
@@ -74,6 +106,10 @@
   }
 
   .subtitle {
+    font-size: 1rem;
+  }
+
+  .installButton {
     font-size: 1rem;
   }
 }
