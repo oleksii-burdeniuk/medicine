@@ -70,6 +70,15 @@ export default function Header() {
               Udostępnij aplikację
             </Link>
           </li>
+          <li>
+            <Link
+              href='/push-notifications'
+              onClick={closeMenu}
+              className={isActive('/push-notifications') ? styles.active : ''}
+            >
+              Powiadomienia push
+            </Link>
+          </li>
         </ul>
       </nav>
 
