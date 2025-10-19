@@ -47,17 +47,34 @@ export default function PushNotificationManager() {
   async function subscribeToPush() {
     const registration = await navigator.serviceWorker.ready;
     try {
+      const vapidKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+      if (!vapidKey) {
+        alert(
+          '❌ VAPID public key is not configured. Set NEXT_PUBLIC_VAPID_PUBLIC_KEY in your environment.'
+        );
+        return;
+      }
+
+      let applicationServerKey: Uint8Array;
+      try {
+        applicationServerKey = urlBase64ToUint8Array(vapidKey);
+      } catch {
+        alert('❌ Invalid VAPID public key format.');
+        return;
+      }
+
       const sub = await registration.pushManager.subscribe({
         userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(
-          process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
-        ),
+        applicationServerKey: applicationServerKey as unknown as BufferSource,
       });
       setSubscription(sub);
       const serializedSub = JSON.parse(JSON.stringify(sub));
       await subscribeUser(serializedSub);
     } catch (error) {
-      alert('❌ Błąd podczas subskrypcji na powiadomienia push:' + error);
+      console.error('Push subscription error', error);
+      alert(
+        '❌ Błąd podczas subskrypcji na powiadomienia push: ' + String(error)
+      );
     }
   }
 
