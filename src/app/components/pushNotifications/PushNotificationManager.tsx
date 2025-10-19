@@ -47,8 +47,7 @@ export default function PushNotificationManager() {
   async function subscribeToPush() {
     const registration = await navigator.serviceWorker.ready;
     try {
-      const vapidKey =
-        'BNSWLy74lcGjAxu-iUuIfY5TqWinsUwKd1AuYtr8Br8qiNRf7T4losLZiXAhqacbegIRCyVYlruBojbeVustKMc';
+      const vapidKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
       if (!vapidKey) {
         alert(
           '❌ VAPID public key is not configured. Set NEXT_PUBLIC_VAPID_PUBLIC_KEY in your environment.'
