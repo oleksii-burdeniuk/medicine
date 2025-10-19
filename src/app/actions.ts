@@ -2,20 +2,36 @@
 
 import webpush from 'web-push';
 
-const VAPID_PUBLIC_KEY = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!;
-const VAPID_PRIVATE_KEY = process.env.VAPID_PRIVATE_KEY!;
+// Read env vars lazily and initialize web-push only when needed to avoid throwing
+// during module import (which causes opaque server render errors).
+const VAPID_PUBLIC_KEY =
+  process.env.VAPID_PUBLIC_KEY ?? process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
+const VAPID_PRIVATE_KEY = process.env.VAPID_PRIVATE_KEY;
 
-webpush.setVapidDetails(
-  'mailto:alejandroburdenyk@gmail.com',
-  VAPID_PUBLIC_KEY,
-  VAPID_PRIVATE_KEY
-);
+let vapidInitialized = false;
+function ensureVapid() {
+  if (vapidInitialized) return;
+  if (!VAPID_PUBLIC_KEY || !VAPID_PRIVATE_KEY) {
+    // Throw a clear error that will be easier to diagnose than an import-time crash
+    throw new Error(
+      'VAPID keys not configured. Set VAPID_PUBLIC_KEY and VAPID_PRIVATE_KEY in the environment.'
+    );
+  }
+  webpush.setVapidDetails(
+    'mailto:alejandroburdenyk@gmail.com',
+    VAPID_PUBLIC_KEY,
+    VAPID_PRIVATE_KEY
+  );
+  vapidInitialized = true;
+}
 
 let subscription: webpush.PushSubscription | null = null;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function subscribeUser(sub: any) {
-  // Safely cast the browser subscription object
+  // Ensure VAPID keys are configured (so server doesn't crash silently)
+  ensureVapid();
+  // Safely cast and store the browser subscription object
   subscription = sub as webpush.PushSubscription;
   return { success: true };
 }
@@ -27,6 +43,8 @@ export async function unsubscribeUser() {
 
 export async function sendNotification(message: string) {
   if (!subscription) throw new Error('No subscription available');
+
+  ensureVapid();
 
   try {
     await webpush.sendNotification(
