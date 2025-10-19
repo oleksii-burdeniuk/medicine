@@ -83,7 +83,7 @@ export default function PushNotificationManager() {
       <div className={styles.card}>
         <h3 className={styles.title}>🔔 Powiadomienia Push</h3>
 
-        {subscription ? (
+        {!!subscription ? (
           <>
             <p className={styles.info}>
               Jesteś subskrybowany na powiadomienia push.
