@@ -70,7 +70,7 @@ export default function Header() {
               Udostępnij aplikację
             </Link>
           </li>
-          <li>
+          {/* <li>
             <Link
               href='/push-notifications'
               onClick={closeMenu}
@@ -78,7 +78,7 @@ export default function Header() {
             >
               Powiadomienia push
             </Link>
-          </li>
+          </li> */}
         </ul>
       </nav>
 
