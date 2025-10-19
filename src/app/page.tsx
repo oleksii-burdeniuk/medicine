@@ -233,7 +233,6 @@ export default function BarcodePage() {
             onSelect={handleSelect}
             onDelete={handleDelete}
           />
-          <PushNotificationManager />
         </div>
       </div>
     </div>
