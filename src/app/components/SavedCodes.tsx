@@ -23,7 +23,7 @@ export default function SavedCodes({
 
   return (
     <div className={styles.savedList}>
-      <h2 id='listTitle'>Zapisane kody</h2>
+      <h2 id='listTitle'>Zapisane kody: {savedCodes.length}</h2>
       <input
         type='text'
         placeholder='Szukaj kodu...'

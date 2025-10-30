@@ -88,6 +88,16 @@ export default function Header() {
               Czym jest PWA?
             </Link>
           </li>
+          <li style={{ textAlign: 'center', lineHeight: '1.5' }}>
+            <Link
+              href='https://t.me/+Ebf3rXwZtAQ5NmYy'
+              target='_blank'
+              rel='noopener noreferrer'
+              onClick={closeMenu}
+            >
+              Grupa feedbackowa i <br /> aktualizacje aplikacji Medicine
+            </Link>
+          </li>
         </ul>
       </nav>
 

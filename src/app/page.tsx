@@ -3,11 +3,9 @@
 import { useEffect, useRef, useState } from 'react';
 import JsBarcode from 'jsbarcode';
 import { BrowserMultiFormatReader } from '@zxing/browser';
-import { Image as ImageIcon, Trash2, Save } from 'lucide-react';
+import { Image as ImageIcon, Save } from 'lucide-react';
 import styles from './page.module.css';
 import SavedCodes from './components/SavedCodes';
-import PushNotificationManager from './components/pushNotifications/PushNotificationManager';
-import HowToInstallPWA from './components/HowToInstallPWA';
 
 export default function BarcodePage() {
   const [text, setText] = useState('');
@@ -15,6 +13,7 @@ export default function BarcodePage() {
   const [decoding, setDecoding] = useState(false);
   const svgRef = useRef<SVGSVGElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const noFoundMessage = 'Nic nie znaleziono 😕';
 
   // --- Kompresja obrazu ---
   const compressImage = (
@@ -92,8 +91,11 @@ export default function BarcodePage() {
   // --- Wyszukiwanie numeru miejsca (PK/25/04/23/0813) ---
   const recognizePlaceNumber = (text: string) => {
     const regex = /\b[A-Z]{2}\/\d{2}\/\d{2}\/\d{2}\/\d{4}\b/;
+    const regex2 = /\b\d{8,13}\b/;
     const found = text.match(regex);
-    return found ? found[0] : 'Nic nie znaleziono 😕';
+    const found2 = text.match(regex2);
+    console.log('found2', found2);
+    return found ? found[0] : found2 ? found2[0] : noFoundMessage;
   };
 
   // --- Obsługa pliku i rozpoznawanie kodu ---
@@ -145,6 +147,7 @@ export default function BarcodePage() {
         });
 
         const data = await res.json();
+        console.log('data.text', data.text);
         setText(recognizePlaceNumber(data.text));
         handleSave(recognizePlaceNumber(data.text));
       }
@@ -159,6 +162,7 @@ export default function BarcodePage() {
   // --- Zapisywanie / usuwanie kodów ---
   const handleSave = (text: string) => {
     const trimmed = text.trim();
+    if (trimmed === noFoundMessage) return;
     if (trimmed && !savedCodes.includes(trimmed)) {
       setSavedCodes((prev) => [trimmed, ...prev]);
     }
@@ -170,7 +174,7 @@ export default function BarcodePage() {
 
   const handleSelect = (code: string) => setText(code);
   const onInputFocus = () => {
-    if (text === 'Nic nie znaleziono 😕') {
+    if (text === noFoundMessage) {
       setText('');
     }
   };
