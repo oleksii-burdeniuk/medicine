@@ -92,10 +92,30 @@ export default function BarcodePage() {
   const recognizePlaceNumber = (text: string) => {
     const regex = /\b[A-Z]{2}\/\d{2}\/\d{2}\/\d{2}\/\d{4}\b/;
     const regex2 = /\b\d{8,13}\b/;
+    const regex3 = /^[A-Za-z]\/\d{6}\/\d{4}$/m;
+    const regex4 = /^\d{3}-[A-Za-z0-9]+\s+[A-Za-z0-9]+$/;
     const found = text.match(regex);
     const found2 = text.match(regex2);
-    console.log('found2', found2);
-    return found ? found[0] : found2 ? found2[0] : noFoundMessage;
+    const found3 = text.match(regex3);
+    const found4 = text.match(regex4);
+
+    if (found4) {
+      const raw = found4[0].trim();
+      const parts = raw.split(/\s+/);
+      if (parts.length === 2) {
+        const [first, second] = parts;
+        const finalCode = `${second}-${first}`;
+        return finalCode;
+      }
+    }
+
+    return found
+      ? found[0]
+      : found2
+      ? found2[0]
+      : found3
+      ? found3[0]
+      : noFoundMessage;
   };
 
   // --- Obsługa pliku i rozpoznawanie kodu ---
@@ -138,7 +158,6 @@ export default function BarcodePage() {
       } else {
         // 3️⃣ Jeśli nie znaleziono kodu kreskowego → OCR
         const formData = new FormData();
-        console.log('compressedFile', compressedFile);
         formData.append('file', compressedFile);
 
         const res = await fetch('/api/ocr', {

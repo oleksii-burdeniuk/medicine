@@ -95,7 +95,7 @@ export default function Header() {
               rel='noopener noreferrer'
               onClick={closeMenu}
             >
-              Grupa feedbackowa i <br /> aktualizacje aplikacji Medicine
+              aktualizacje aplikacji
             </Link>
           </li>
         </ul>
