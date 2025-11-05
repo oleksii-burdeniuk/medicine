@@ -45,6 +45,15 @@ export default function Header() {
           </li>
           <li>
             <Link
+              href='/colors'
+              onClick={closeMenu}
+              className={isActive('/colors') ? styles.active : ''}
+            >
+              Kolory i Asortyment
+            </Link>
+          </li>
+          <li>
+            <Link
               href='/work-break-time'
               onClick={closeMenu}
               className={isActive('/work-break-time') ? styles.active : ''}

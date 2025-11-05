@@ -153,7 +153,7 @@ export default function BarcodePage() {
 
       URL.revokeObjectURL(imageUrl);
 
-      if (result) {
+      if (false) {
         setText(result);
       } else {
         // 3️⃣ Jeśli nie znaleziono kodu kreskowego → OCR
