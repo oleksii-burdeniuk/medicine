@@ -29,7 +29,8 @@ export default function Header() {
         onClick={toggleMenu}
         aria-label='Menu'
       >
-        <Menu size={24} />
+        <span className={styles.menu}>Menu</span>
+        {/* <Menu size={24} /> */}
       </button>
 
       <nav className={`${styles.nav} ${isOpen ? styles.open : ''}`}>
@@ -63,15 +64,6 @@ export default function Header() {
           </li>
           <li>
             <Link
-              href='/about'
-              onClick={closeMenu}
-              className={isActive('/about') ? styles.active : ''}
-            >
-              O aplikacji
-            </Link>
-          </li>
-          <li>
-            <Link
               href='/share'
               onClick={closeMenu}
               className={isActive('/share') ? styles.active : ''}
@@ -79,6 +71,7 @@ export default function Header() {
               Udostępnij aplikację
             </Link>
           </li>
+
           {/* <li>
             <Link
               href='/push-notifications'
@@ -88,6 +81,18 @@ export default function Header() {
               Powiadomienia push
             </Link>
           </li> */}
+        </ul>
+        <ul>
+          <li>
+            <Link
+              href='/about'
+              onClick={closeMenu}
+              className={isActive('/about') ? styles.active : ''}
+            >
+              O aplikacji
+            </Link>
+          </li>
+
           <li>
             <Link
               href='/PWA'
@@ -99,12 +104,12 @@ export default function Header() {
           </li>
           <li style={{ textAlign: 'center', lineHeight: '1.5' }}>
             <Link
-              href='https://t.me/+Ebf3rXwZtAQ5NmYy'
+              href='https://chat.whatsapp.com/GbCHo13Y57x1eySed9Au01'
               target='_blank'
               rel='noopener noreferrer'
               onClick={closeMenu}
             >
-              aktualizacje aplikacji
+              Grupa publiczna
             </Link>
           </li>
         </ul>
