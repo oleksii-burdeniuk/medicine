@@ -72,6 +72,16 @@ export default function Header() {
             </Link>
           </li>
 
+          <li>
+            <Link
+              href='/contact'
+              onClick={closeMenu}
+              className={isActive('/contact') ? styles.active : ''}
+            >
+              Telefony kontaktowe
+            </Link>
+          </li>
+
           {/* <li>
             <Link
               href='/push-notifications'
