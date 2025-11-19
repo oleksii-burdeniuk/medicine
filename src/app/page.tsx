@@ -151,7 +151,16 @@ export default function BarcodePage() {
         onClick={goToColors}
         aria-label='Colors'
       >
-        <span className={styles.colorIcon}></span>
+        <svg
+          className={styles.paletteIcon}
+          viewBox='0 0 24 24'
+          xmlns='http://www.w3.org/2000/svg'
+        >
+          <circle cx='12' cy='6' r='4' fill='#ff595e' />
+          <circle cx='6' cy='14' r='4' fill='#8ac926' />
+          <circle cx='18' cy='14' r='4' fill='#1982c4' />
+          <circle cx='12' cy='18' r='4' fill='#ffca3a' />
+        </svg>
       </button>
     </div>
   );

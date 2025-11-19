@@ -120,40 +120,29 @@
   bottom: 90px;
   left: 20px;
 
-  width: 48px;
-  height: 48px;
+  width: 50px;
+  height: 50px;
 
-  background: #ffffff;
+  background: #454545;
   border: none;
   border-radius: 50%;
-  padding: 0;
   cursor: pointer;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-  transition: transform 0.2s ease, opacity 0.2s ease;
-  z-index: 9000;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  z-index: 9999;
 }
 
 .colorBtn:hover {
-  transform: scale(1.07);
+  transform: scale(1.1);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
 }
 
-.colorIcon {
+.paletteIcon {
   width: 28px;
   height: 28px;
-  border-radius: 6px;
-  background: linear-gradient(
-    45deg,
-    #ff0000,
-    #ffa500,
-    #ffff00,
-    #17ee54,
-    #00ffff,
-    #0000ff,
-    #ff00ff
-  );
 }
