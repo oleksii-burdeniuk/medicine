@@ -25,61 +25,6 @@
   color: black;
 }
 
-.inputWrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.input {
-  flex: 1;
-  padding: 0.75rem 1rem;
-  font-size: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  transition: border-color 0.2s;
-}
-
-.input:focus {
-  outline: none;
-  border-color: #0070f3;
-}
-
-.iconButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #0070f3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 6px;
-  transition: color 0.2s;
-}
-
-.iconButton:hover {
-  color: #0055b3;
-}
-
-/* --- Кнопка Зберегти --- */
-.saveButton {
-  background: #4caf50;
-  border: none;
-  color: white;
-  border-radius: 8px;
-  padding: 6px 10px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.2s;
-}
-
-.saveButton:hover {
-  background: #45a049;
-}
-
 .barcodeWrapper {
   margin-top: 1.5rem;
   display: flex;
@@ -169,4 +114,46 @@
 }
 .loading {
   color: #333;
+}
+.colorBtn {
+  position: fixed;
+  bottom: 90px;
+  left: 20px;
+
+  width: 48px;
+  height: 48px;
+
+  background: #ffffff;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  z-index: 9000;
+}
+
+.colorBtn:hover {
+  transform: scale(1.07);
+}
+
+.colorIcon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ffa500,
+    #ffff00,
+    #17ee54,
+    #00ffff,
+    #0000ff,
+    #ff00ff
+  );
 }

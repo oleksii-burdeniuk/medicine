@@ -1,11 +1,13 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import JsBarcode from 'jsbarcode';
 import { BrowserMultiFormatReader } from '@zxing/browser';
-import { Image as ImageIcon, Save } from 'lucide-react';
 import styles from './page.module.css';
 import SavedCodes from './components/SavedCodes';
+import { compressImage } from './utils/compressImage';
+import { recognizePlaceNumber } from './utils/recognizePlaceNumber';
+import generateBarcode from './utils/generateBarcode';
+import BarcodeInput from './components/BarcodeInput';
 
 export default function BarcodePage() {
   const [text, setText] = useState('');
@@ -15,67 +17,9 @@ export default function BarcodePage() {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const noFoundMessage = 'Nic nie znaleziono 😕';
 
-  // --- Kompresja obrazu ---
-  const compressImage = (
-    file: File,
-    maxSize = 600,
-    quality = 0.4
-  ): Promise<Blob> => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const img = new Image();
-        img.onload = () => {
-          const canvas = document.createElement('canvas');
-          const ctx = canvas.getContext('2d');
-          if (!ctx) return reject('Brak kontekstu canvas');
-
-          const scale = Math.min(maxSize / img.width, maxSize / img.height, 1);
-          const width = img.width * scale;
-          const height = img.height * scale;
-
-          canvas.width = width;
-          canvas.height = height;
-          ctx.drawImage(img, 0, 0, width, height);
-
-          canvas.toBlob(
-            (blob) => {
-              if (blob) resolve(blob);
-              else reject('Kompresja nie powiodła się');
-            },
-            'image/jpeg',
-            quality
-          );
-        };
-        img.onerror = reject;
-        img.src = event.target?.result as string;
-      };
-      reader.onerror = reject;
-      reader.readAsDataURL(file);
-    });
-  };
-
   // --- Generowanie kodu kreskowego ---
-  const generateBarcode = () => {
-    if ((svgRef.current && text) || '1234567890') {
-      try {
-        JsBarcode(svgRef.current, text || '1234567890', {
-          format: 'CODE128',
-          lineColor: '#000',
-          width: 2,
-          height: 80,
-          displayValue: true,
-        });
-      } catch (err) {
-        console.error('Błąd generowania kodu kreskowego:', err);
-      }
-    } else if (svgRef.current) {
-      svgRef.current.innerHTML = '';
-    }
-  };
-
   useEffect(() => {
-    generateBarcode();
+    generateBarcode(svgRef.current, text);
   }, [text]);
 
   // --- Ładowanie / zapisywanie w localStorage ---
@@ -88,47 +32,15 @@ export default function BarcodePage() {
     localStorage.setItem('savedCodes', JSON.stringify(savedCodes));
   }, [savedCodes]);
 
-  // --- Wyszukiwanie numeru miejsca (PK/25/04/23/0813) ---
-  const recognizePlaceNumber = (text: string) => {
-    const regex = /\b[A-Z]{2}\/\d{2}\/\d{2}\/\d{2}\/\d{4}\b/;
-    const regex2 = /\b\d{8,13}\b/;
-    const regex3 = /^[A-Za-z]\/\d{6}\/\d{4}$/m;
-    const regex4 = /^\d{3}-[A-Za-z0-9]+\s+[A-Za-z0-9]+$/;
-    const regex5 = /\b[A-Z]\d{2}-\d{3}-[A-Z]\d\b/;
-    const found = text.match(regex);
-    const found2 = text.match(regex2);
-    const found3 = text.match(regex3);
-    const found4 = text.match(regex4);
-    const found5 = text.match(regex5);
-
-    if (found4) {
-      const raw = found4[0].trim();
-      const parts = raw.split(/\s+/);
-      if (parts.length === 2) {
-        const [first, second] = parts;
-        const finalCode = `${second}-${first}`;
-        return finalCode;
-      }
-    }
-
-    return found
-      ? found[0]
-      : found2
-      ? found2[0]
-      : found3
-      ? found3[0]
-      : found5
-      ? found5[0]
-      : noFoundMessage;
+  const goToColors = () => {
+    window.location.href = '/colors';
   };
 
   // --- Obsługa pliku i rozpoznawanie kodu ---
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-
     setDecoding(true);
-
     try {
       // 1️⃣ Kompresja
       const compressed = await compressImage(file);
@@ -157,7 +69,7 @@ export default function BarcodePage() {
 
       URL.revokeObjectURL(imageUrl);
 
-      if (false) {
+      if (result) {
         setText(result);
       } else {
         // 3️⃣ Jeśli nie znaleziono kodu kreskowego → OCR
@@ -170,9 +82,9 @@ export default function BarcodePage() {
         });
 
         const data = await res.json();
-        console.log('data.text', data.text);
-        setText(recognizePlaceNumber(data.text));
-        handleSave(recognizePlaceNumber(data.text));
+        const recognizedText = recognizePlaceNumber(data.text);
+        setText(recognizedText);
+        handleSave(recognizedText);
       }
     } catch (err) {
       console.error('Błąd przetwarzania:', err);
@@ -208,43 +120,14 @@ export default function BarcodePage() {
         <div className={styles.card}>
           <h1 className={styles.title}>Generator kodów kreskowych</h1>
 
-          <div className={styles.inputWrapper}>
-            <input
-              name='input'
-              type='text'
-              placeholder='Wpisz lub zeskanuj kod'
-              value={text}
-              onChange={(e) => setText(e.target.value)}
-              className={styles.input}
-              onFocus={onInputFocus}
-            />
-
-            <button
-              type='button'
-              className={styles.iconButton}
-              title='Załaduj obraz'
-              onClick={() => fileInputRef.current?.click()}
-            >
-              <ImageIcon size={20} />
-            </button>
-
-            <input
-              ref={fileInputRef}
-              type='file'
-              accept='image/*'
-              style={{ display: 'none' }}
-              onChange={handleFileChange}
-            />
-
-            <button
-              type='button'
-              className={styles.saveButton}
-              title='Zapisz kod'
-              onClick={() => handleSave(text)}
-            >
-              <Save size={18} />
-            </button>
-          </div>
+          <BarcodeInput
+            text={text}
+            setText={setText}
+            onInputFocus={onInputFocus}
+            handleFileChange={handleFileChange}
+            handleSave={handleSave}
+            fileInputRef={fileInputRef}
+          />
 
           {decoding && (
             <p className={styles.loading}>
@@ -263,6 +146,13 @@ export default function BarcodePage() {
           />
         </div>
       </div>
+      <button
+        className={styles.colorBtn}
+        onClick={goToColors}
+        aria-label='Colors'
+      >
+        <span className={styles.colorIcon}></span>
+      </button>
     </div>
   );
 }

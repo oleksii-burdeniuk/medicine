@@ -6,6 +6,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import ServiceWorkerRegister from './components/ServiceWorkerRegister';
 import { Analytics } from '@vercel/analytics/next';
+import FloatingHomeButton from './components/FloatingHomeButton';
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -40,6 +41,7 @@ export default function RootLayout({
 
         <SpeedInsights />
         <Analytics />
+        <FloatingHomeButton />
         <Footer />
         <ServiceWorkerRegister />
       </body>

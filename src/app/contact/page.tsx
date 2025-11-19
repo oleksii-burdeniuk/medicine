@@ -1,7 +1,7 @@
 'use client';
 
 import styles from './Contacts.module.css';
-import { Phone } from 'lucide-react';
+import { Phone, MessageCircle } from 'lucide-react';
 
 export default function ContactPage() {
   const contacts = [
@@ -22,9 +22,21 @@ export default function ContactPage() {
               <div className={styles.info}>
                 <span className={styles.role}>{c.role}</span>
                 {c.name && <span className={styles.name}>{c.name}</span>}
-                <a href={`tel:${c.phone}`} className={styles.phone}>
-                  <Phone size={18} /> {c.phone}
-                </a>
+
+                <div className={styles.actions}>
+                  <a href={`tel:${c.phone}`} className={styles.phone}>
+                    <Phone size={18} /> {c.phone}
+                  </a>
+
+                  <a
+                    href={`https://wa.me/48${c.phone}`}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className={styles.whatsapp}
+                  >
+                    <MessageCircle size={18} />
+                  </a>
+                </div>
               </div>
             </li>
           ))}
