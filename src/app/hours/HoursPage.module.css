@@ -1,0 +1,132 @@
+.container {
+  padding: 20px;
+}
+
+.title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.calendar {
+  background: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.weekdays {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  font-weight: bold;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.daysGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 4px;
+}
+
+.day {
+  background: #f0f0f0;
+  padding: 8px;
+  border-radius: 8px;
+  min-height: 60px;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #000;
+}
+
+.day:hover {
+  background: #e0e0e0;
+}
+
+.hasHours {
+  background: #c0ffc0;
+  border: 1px solid #4caf50;
+}
+
+.empty {
+  visibility: hidden;
+}
+
+.modalBackdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000;
+}
+
+.modal {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 360px;
+  color: #000;
+}
+
+.modalActions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.cancel {
+  background: #ccc;
+  padding: 8px 14px;
+  border-radius: 6px;
+  color: #000;
+}
+
+.save {
+  background: #4caf50;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+}
+.darkText {
+  color: black;
+}
+
+.day small,
+.day span,
+.weekdays div,
+.header button {
+  color: black;
+}
+
+.summaryContainer {
+  margin-top: 25px;
+  padding: 20px;
+  background: #ffffff;
+  color: #000;
+  border-radius: 12px;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
+  font-size: 18px;
+  line-height: 1.6;
+}
+
+.summaryContainer h2 {
+  margin: 0 0 10px 0;
+  font-size: 22px;
+  font-weight: 600;
+}

@@ -81,6 +81,15 @@ export default function Header() {
               Telefony kontaktowe
             </Link>
           </li>
+          <li>
+            <Link
+              href='/hours'
+              onClick={closeMenu}
+              className={isActive('/hours') ? styles.active : ''}
+            >
+              godziny pracy
+            </Link>
+          </li>
 
           {/* <li>
             <Link
