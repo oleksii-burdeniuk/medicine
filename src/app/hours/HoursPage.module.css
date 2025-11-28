@@ -108,9 +108,11 @@
 
 .day small,
 .day span,
-.weekdays div,
-.header button {
+.weekdays div {
   color: black;
+}
+.header button {
+  color: rgb(249, 249, 249);
 }
 
 .summaryContainer {

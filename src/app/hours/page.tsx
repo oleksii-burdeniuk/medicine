@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import styles from './HoursPage.module.css';
 import WorkHoursModal from './WorkHoursModal';
+import jsPDF from 'jspdf';
 
 export default function HoursPage() {
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
@@ -10,6 +11,15 @@ export default function HoursPage() {
     Record<string, { start: string; end: string }>
   >({});
   const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [rate, setRate] = useState<number | string>(30);
+
+  const changeRate = (newRate: number) => {
+    if (newRate) {
+      setRate(newRate);
+    } else {
+      setRate('');
+    }
+  };
 
   // Load saved hours on mount
   useEffect(() => {
@@ -67,6 +77,51 @@ export default function HoursPage() {
   // --- Average hours per day ---
   const averageHours =
     workedDays > 0 ? (Number(totalHours) / workedDays).toFixed(1) : '0';
+  const salary = (Number(totalHours) * +rate).toFixed(2);
+
+  const generatePDF = () => {
+    const doc = new jsPDF();
+
+    const monthName = currentMonth.toLocaleString('pl-PL', {
+      month: 'long',
+      year: 'numeric',
+    });
+
+    doc.setFontSize(18);
+    doc.text(`Raport godzin pracy – ${monthName}`, 10, 15);
+
+    doc.setFontSize(12);
+    let y = 30;
+
+    doc.text('Dni pracy:', 10, y);
+
+    Object.entries(hours)
+      .filter(([key]) =>
+        key.startsWith(
+          `${currentMonth.getFullYear()}-${currentMonth.getMonth() + 1}-`
+        )
+      )
+      .forEach(([date, { start, end }]) => {
+        y += 7;
+        doc.text(`• ${date}: ${start} – ${end}`, 10, y);
+      });
+
+    y += 15;
+
+    doc.setFontSize(14);
+    doc.text('Summary:', 10, y);
+
+    y += 8;
+    doc.setFontSize(12);
+
+    doc.text(`Total hours: ${totalHours}`, 10, y);
+    y += 6;
+    doc.text(`Working days: ${workedDays}`, 10, y);
+    y += 6;
+    doc.text(`Average hours per day: ${averageHours}`, 10, y);
+    y += 6;
+    doc.save(`hours_${monthName}.pdf`);
+  };
 
   return (
     <div className={`${styles.container} ${styles.darkText}`}>
@@ -163,6 +218,43 @@ export default function HoursPage() {
         <p>
           🟨 Średnia ilość godzin dziennie: <b>{averageHours} h</b>
         </p>
+        <p>
+          💵 Stawka godzinowa:
+          <input
+            type='number'
+            value={rate}
+            onChange={(e) => changeRate(+e.target.value)}
+            style={{
+              width: '80px',
+              marginLeft: '10px',
+              padding: '5px',
+              borderRadius: '6px',
+              border: '1px solid #ccc',
+            }}
+          />{' '}
+          zł
+        </p>
+
+        <p>
+          💰 Wynagrodzenie za miesiąc:
+          <b> {salary} zł </b>
+        </p>
+
+        <button
+          onClick={generatePDF}
+          style={{
+            marginTop: '15px',
+            padding: '10px 20px',
+            background: '#0070f3',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '8px',
+            cursor: 'pointer',
+            fontSize: '16px',
+          }}
+        >
+          📄 Eksport do PDF
+        </button>
       </div>
 
       {/* Modal */}
