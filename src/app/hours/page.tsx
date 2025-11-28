@@ -11,7 +11,7 @@ export default function HoursPage() {
     Record<string, { start: string; end: string }>
   >({});
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [rate, setRate] = useState<number | string>(30);
+  const [rate, setRate] = useState<number | string>(0);
 
   const changeRate = (newRate: number) => {
     if (newRate) {
@@ -20,6 +20,19 @@ export default function HoursPage() {
       setRate('');
     }
   };
+
+  useEffect(() => {
+    const storedRate = localStorage.getItem('hourlyRate');
+    if (storedRate) {
+      setRate(Number(storedRate));
+    }
+  }, []);
+
+  useEffect(() => {
+    if (rate !== '') {
+      localStorage.setItem('hourlyRate', rate.toString());
+    }
+  }, [rate]);
 
   // Load saved hours on mount
   useEffect(() => {
