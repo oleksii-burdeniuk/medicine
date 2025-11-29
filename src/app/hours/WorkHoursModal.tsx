@@ -6,9 +6,11 @@ import { useState } from 'react';
 interface Props {
   date: string;
   data?: { start: string; end: string };
+  isPrevDateData: boolean;
   onClose: () => void;
   onSave: (start: string, end: string) => void;
   onDelete: () => void;
+  onCopyTime: () => void;
 }
 
 export default function WorkHoursModal({
@@ -17,6 +19,8 @@ export default function WorkHoursModal({
   onClose,
   onSave,
   onDelete,
+  onCopyTime,
+  isPrevDateData,
 }: Props) {
   const [start, setStart] = useState(data?.start || '');
   const [end, setEnd] = useState(data?.end || '');
@@ -48,6 +52,20 @@ export default function WorkHoursModal({
         />
 
         <div className={styles.buttons}>
+          {!!isPrevDateData && !data ? (
+            <button
+              className={styles.saveBtn}
+              onClick={() => {
+                onCopyTime();
+                onClose();
+              }}
+            >
+              💾 Zapisz jako wczoraj
+            </button>
+          ) : (
+            <div> </div>
+          )}
+
           <button
             className={styles.saveBtn}
             onClick={() => {

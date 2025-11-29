@@ -136,6 +136,27 @@ export default function HoursPage() {
     doc.save(`hours_${monthName}.pdf`);
   };
 
+  const isPrevDateDataAvailable = () => {
+    const [year, month, day] = selectedDate.split('-').map(Number);
+    const prevDayKey = `${year}-${month}-${day - 1}`;
+    return hours[prevDayKey];
+  };
+
+  const copyTime = () => {
+    const [year, month, day] = selectedDate.split('-').map(Number);
+
+    const prevDayKey = `${year}-${month}-${day - 1}`;
+
+    if (hours[prevDayKey]) {
+      const { start, end } = hours[prevDayKey];
+
+      setHours((prev) => ({
+        ...prev,
+        [selectedDate]: { start, end },
+      }));
+    }
+  };
+
   return (
     <div className={`${styles.container} ${styles.darkText}`}>
       <h1 className={styles.title}>🕒 Moje godziny pracy</h1>
@@ -276,6 +297,8 @@ export default function HoursPage() {
           date={selectedDate}
           data={hours[selectedDate]}
           onClose={() => setSelectedDate(null)}
+          isPrevDateData={isPrevDateDataAvailable()}
+          onCopyTime={copyTime}
           onSave={(start, end) => {
             setHours((prev) => ({
               ...prev,
