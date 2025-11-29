@@ -291,7 +291,6 @@ export default function HoursPage() {
         </button>
       </div>
 
-      {/* Modal */}
       {selectedDate && (
         <WorkHoursModal
           date={selectedDate}
