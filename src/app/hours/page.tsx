@@ -297,7 +297,7 @@ export default function HoursPage() {
           date={selectedDate}
           data={hours[selectedDate]}
           onClose={() => setSelectedDate(null)}
-          isPrevDateData={isPrevDateDataAvailable()}
+          isPrevDateData={!!isPrevDateDataAvailable()}
           onCopyTime={copyTime}
           onSave={(start, end) => {
             setHours((prev) => ({
