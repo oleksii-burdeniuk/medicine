@@ -132,8 +132,18 @@ export default function HoursPage() {
     doc.text(`Working days: ${workedDays}`, 10, y);
     y += 6;
     doc.text(`Average hours per day: ${averageHours}`, 10, y);
-    y += 6;
-    doc.save(`hours_${monthName}.pdf`);
+
+    // --- FIX for mobile: true PDF download ---
+    const pdfBlob = doc.output('blob');
+
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(pdfBlob);
+
+    // link.download = `hours_${monthName}.pdf`;
+    // link.click();
+    window.open(URL.createObjectURL(pdfBlob));
+    // Cleanup
+    URL.revokeObjectURL(link.href);
   };
 
   const isPrevDateDataAvailable = () => {
