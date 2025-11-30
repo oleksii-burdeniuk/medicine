@@ -2,6 +2,7 @@
 
 import { Image as ImageIcon, Save } from 'lucide-react';
 import styles from './BarcodeInput.module.css';
+import { useTranslations } from 'next-intl';
 
 interface BarcodeInputProps {
   text: string;
@@ -20,12 +21,14 @@ export default function BarcodeInput({
   handleSave,
   fileInputRef,
 }: BarcodeInputProps) {
+  const t = useTranslations('BarcodeInput');
+
   return (
     <div className={styles.inputWrapper}>
       <input
         name='input'
         type='text'
-        placeholder='Wpisz lub zeskanuj kod'
+        placeholder={t('placeholder')}
         value={text}
         onChange={(e) => setText(e.target.value)}
         className={styles.input}
@@ -35,7 +38,7 @@ export default function BarcodeInput({
       <button
         type='button'
         className={styles.iconButton}
-        title='Załaduj obraz'
+        title={t('uploadButton')}
         onClick={() => fileInputRef.current?.click()}
       >
         <ImageIcon size={20} />
@@ -52,7 +55,7 @@ export default function BarcodeInput({
       <button
         type='button'
         className={styles.saveButton}
-        title='Zapisz kod'
+        title={t('saveButton')}
         onClick={() => handleSave(text)}
       >
         <Save size={18} />

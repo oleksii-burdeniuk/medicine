@@ -8,14 +8,16 @@ import { compressImage } from './utils/compressImage';
 import { recognizePlaceNumber } from './utils/recognizePlaceNumber';
 import generateBarcode from './utils/generateBarcode';
 import BarcodeInput from './components/BarcodeInput';
+import { useTranslations } from 'next-intl';
 
 export default function BarcodePage() {
   const [text, setText] = useState('');
   const [savedCodes, setSavedCodes] = useState<string[]>([]);
   const [decoding, setDecoding] = useState(false);
+  const t = useTranslations('HomePage');
   const svgRef = useRef<SVGSVGElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const noFoundMessage = 'Nic nie znaleziono 😕';
+  const noFoundMessage = t('noFoundMessage');
 
   // --- Generowanie kodu kreskowego ---
   useEffect(() => {
@@ -118,7 +120,7 @@ export default function BarcodePage() {
     <div>
       <div className={styles.container}>
         <div className={styles.card}>
-          <h1 className={styles.title}>Generator kodów kreskowych</h1>
+          <h1 className={styles.title}>{t('title')}</h1>
 
           <BarcodeInput
             text={text}
@@ -129,11 +131,7 @@ export default function BarcodePage() {
             fileInputRef={fileInputRef}
           />
 
-          {decoding && (
-            <p className={styles.loading}>
-              🔍 Odczytywanie kodu, proszę czekać...
-            </p>
-          )}
+          {decoding && <p className={styles.loading}>{t('decodingMessage')}</p>}
 
           <div className={styles.barcodeWrapper}>
             <svg ref={svgRef}></svg>
@@ -149,7 +147,7 @@ export default function BarcodePage() {
       <button
         className={styles.colorBtn}
         onClick={goToColors}
-        aria-label='Colors'
+        aria-label={t('colorsButtonAria')}
       >
         <svg
           className={styles.paletteIcon}

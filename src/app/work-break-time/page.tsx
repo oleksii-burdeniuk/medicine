@@ -1,45 +1,40 @@
 'use client';
 
 import styles from './workBreakTime.module.css';
+import { useTranslations } from 'next-intl';
 
 export default function WorkBreakTimePage() {
+  const t = useTranslations('WorkBreakTimePage');
+
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h1 className={styles.title}>🕒 Grafik pracy i przerwy</h1>
+        <h1 className={styles.title}>{t('title')}</h1>
 
-        <p className={styles.text}>
-          Na magazynie pracują <strong>2 zmiany</strong>. Poniżej znajdziesz
-          harmonogram pracy oraz godziny przerw, aby każdy mógł odpocząć i napić
-          się kawy ☕️
-        </p>
+        <p
+          className={styles.text}
+          dangerouslySetInnerHTML={{ __html: t('description') }}
+        />
 
         <div className={styles.shift}>
-          <h2 className={styles.subtitle}>👷‍♀️ Pierwsza zmiana</h2>
-          <p className={styles.schedule}>
-            <strong>Godziny pracy:</strong> 06:00 — 14:00
-          </p>
+          <h2 className={styles.subtitle}>{t('firstShift')}</h2>
+          <p className={styles.schedule}>{t('firstShiftHours')}</p>
           <ul className={styles.list}>
-            <li>☕ Przerwa 1: 08:20 — 08:35</li>
-            <li>🍴 Przerwa 2: 11:20 — 11:40</li>
+            <li>{t('firstShiftBreak1')}</li>
+            <li>{t('firstShiftBreak2')}</li>
           </ul>
         </div>
 
         <div className={styles.shift}>
-          <h2 className={styles.subtitle}>👷‍♂️ Druga zmiana</h2>
-          <p className={styles.schedule}>
-            <strong>Godziny pracy:</strong> 12:00 — 22:00
-          </p>
+          <h2 className={styles.subtitle}>{t('secondShift')}</h2>
+          <p className={styles.schedule}>{t('secondShiftHours')}</p>
           <ul className={styles.list}>
-            <li>☕ Przerwa 1: 14:20 — 14:35</li>
-            <li>🍴 Przerwa 2: 17:20 — 17:40</li>
+            <li>{t('secondShiftBreak1')}</li>
+            <li>{t('secondShiftBreak2')}</li>
           </ul>
         </div>
 
-        <p className={styles.footer}>
-          Przestrzegaj czasu przerw 🕰️, aby magazyn działał sprawnie, a Ty nie
-          był zmęczony 💪
-        </p>
+        <p className={styles.footer}>{t('footer')}</p>
       </div>
     </div>
   );

@@ -3,14 +3,16 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './Footer.module.css';
+import { useTranslations } from 'next-intl';
 
 export default function Footer() {
+  const t = useTranslations('Footer');
+  const year = new Date().getFullYear();
+  const appName = 'Medicine';
+
   return (
     <footer className={styles.footer}>
-      <p className={styles.text}>
-        Stworzone z troską dla magazynu <strong>Medicine</strong>. Ta aplikacja
-        została wykonana całkowicie za darmo, aby ułatwić Twoją pracę 🙌
-      </p>
+      <p className={styles.text}>{t('description', { appName })}</p>
 
       <p className={styles.links}>
         <Link
@@ -19,7 +21,7 @@ export default function Footer() {
           rel='noopener noreferrer'
           className={styles.link}
         >
-          Mój LinkedIn
+          {t('linkedin')}
         </Link>
         {' | '}
         <Link
@@ -28,13 +30,11 @@ export default function Footer() {
           rel='noopener noreferrer'
           className={styles.link}
         >
-          GitHub
+          {t('github')}
         </Link>
       </p>
 
-      <p className={styles.copy}>
-        © {new Date().getFullYear()} Oleksii Burdeniuk
-      </p>
+      <p className={styles.copy}>{t('copyright', { year })}</p>
     </footer>
   );
 }
