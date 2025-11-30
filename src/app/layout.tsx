@@ -7,6 +7,7 @@ import Footer from './components/Footer';
 import ServiceWorkerRegister from './components/ServiceWorkerRegister';
 import { Analytics } from '@vercel/analytics/next';
 import FloatingHomeButton from './components/FloatingHomeButton';
+import { NextIntlClientProvider } from 'next-intl';
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -34,16 +35,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='en'>
+    <html>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <Header />
-        {children}
+        <NextIntlClientProvider>
+          <Header />
+          {children}
 
-        <SpeedInsights />
-        <Analytics />
-        <FloatingHomeButton />
-        <Footer />
-        <ServiceWorkerRegister />
+          <SpeedInsights />
+          <Analytics />
+          <FloatingHomeButton />
+          <Footer />
+          <ServiceWorkerRegister />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

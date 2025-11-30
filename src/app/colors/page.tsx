@@ -1,6 +1,7 @@
 'use client';
 
 import styles from './ColorsPage.module.css';
+import { useTranslations } from 'next-intl';
 
 const COLORS = [
   {
@@ -44,18 +45,20 @@ const ASSORTMENT = [
 ];
 
 export default function ColorsPage() {
+  const t = useTranslations('ColorsPage');
+  const tColors = useTranslations('Colors');
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h1 className={styles.title}>Kolory i Asortyment</h1>
+        <h1 className={styles.title}>{t('title')}</h1>
 
         <div className={styles.section}>
-          <h2>Asortyment</h2>
+          <h2>{t('assortmentTitle')}</h2>
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Rodzaj</th>
-                <th>Skrót</th>
+                <th>{t('type')}</th>
+                <th>{t('code')}</th>
               </tr>
             </thead>
             <tbody>
@@ -70,20 +73,25 @@ export default function ColorsPage() {
         </div>
 
         <div className={styles.section}>
-          <h2>Kolory</h2>
+          <h2>{t('colorsTitle')}</h2>
           <table className={styles.table}>
             <thead>
               <tr>
-                <th>Numer</th>
-                <th>Kolor</th>
-                <th>Podgląd</th>
+                <th>{t('number')}</th>
+                <th>{t('color')}</th>
+                <th>{t('preview')}</th>
               </tr>
             </thead>
             <tbody>
               {COLORS.map((c) => (
                 <tr key={c.number}>
                   <td>{c.number}</td>
-                  <td>{c.name}</td>
+                  <td>
+                    {c.number === 'MLA, MLB...'
+                      ? tColors('MLA_MLB')
+                      : tColors(c.number)}
+                  </td>
+
                   <td>
                     <div
                       className={styles.colorCircle}
@@ -101,11 +109,7 @@ export default function ColorsPage() {
         </div>
 
         <div className={styles.infoBox}>
-          <p>
-            <strong>X</strong> – czysty kolor bez wzorów
-            <br />
-            <strong>A</strong> – wzór lub tekstura
-          </p>
+          <p>{t('infoBox')}</p>
         </div>
       </div>
     </div>

@@ -4,14 +4,15 @@ import { useEffect, useState } from 'react';
 import QRCode from 'qrcode';
 import { Share2 } from 'lucide-react';
 import styles from './shareApp.module.css';
-import HowToInstallPWA from '../components/HowToInstallPWA';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 
 export default function ShareAppPage() {
+  const t = useTranslations('ShareAppPage');
+
   const [qrUrl, setQrUrl] = useState<string>('');
   const appUrl = typeof window !== 'undefined' ? window.location.origin : '';
 
-  // ✅ Generate QR code
   useEffect(() => {
     if (appUrl) {
       QRCode.toDataURL(appUrl, { width: 180, margin: 1 })
@@ -20,56 +21,52 @@ export default function ShareAppPage() {
     }
   }, [appUrl]);
 
-  // ✅ Share button handler
   const handleShare = async () => {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: 'Medicine App',
-          text: 'Sprawdź aplikację Medicine — łatwe generowanie i skanowanie kodów kreskowych!',
+          title: t('shareTitle'),
+          text: t('shareText'),
           url: appUrl,
         });
       } catch (err) {
-        console.error('Błąd udostępniania:', err);
+        console.error('Share error:', err);
       }
     } else {
-      alert('Twoja przeglądarka nie obsługuje funkcji udostępniania 😕');
+      alert(t('shareUnsupported'));
     }
   };
 
   return (
-    <>
-      <div className={styles.container}>
-        <div className={styles.card}>
-          <h1 className={styles.title}>📱 Udostępnij aplikację</h1>
+    <div className={styles.container}>
+      <div className={styles.card}>
+        <h1 className={styles.title}>{t('title')}</h1>
 
-          <p className={styles.text}>
-            Udostępnij aplikację <strong>Medicine</strong> swoim
-            współpracownikom! Zeskanuj kod QR lub użyj przycisku poniżej, aby
-            przesłać link do aplikacji.
-          </p>
+        <p
+          className={styles.text}
+          dangerouslySetInnerHTML={{ __html: t('description') }}
+        />
 
-          <div className={styles.qrWrapper}>
-            {qrUrl ? (
-              <Image
-                src={qrUrl}
-                alt='Medicine App'
-                width={228}
-                height={228}
-                priority
-                className={styles.qrImage}
-              />
-            ) : (
-              <p>Ładowanie kodu QR...</p>
-            )}
-          </div>
-
-          <button className={styles.shareButton} onClick={handleShare}>
-            <Share2 size={18} />
-            <span>Udostępnij</span>
-          </button>
+        <div className={styles.qrWrapper}>
+          {qrUrl ? (
+            <Image
+              src={qrUrl}
+              alt='Medicine App'
+              width={228}
+              height={228}
+              priority
+              className={styles.qrImage}
+            />
+          ) : (
+            <p>{t('qrLoading')}</p>
+          )}
         </div>
+
+        <button className={styles.shareButton} onClick={handleShare}>
+          <Share2 size={18} />
+          <span>{t('shareButton')}</span>
+        </button>
       </div>
-    </>
+    </div>
   );
 }

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { Trash2 } from 'lucide-react';
 import styles from './SavedCodes.module.css';
+import { useTranslations } from 'next-intl';
 
 interface SavedCodesProps {
   savedCodes: string[];
@@ -16,6 +17,7 @@ export default function SavedCodes({
   onDelete,
 }: SavedCodesProps) {
   const [searchTerm, setSearchTerm] = useState('');
+  const t = useTranslations('SavedCodes');
 
   const filteredCodes = savedCodes.filter((code) =>
     code.toLowerCase().includes(searchTerm.toLowerCase())
@@ -23,10 +25,10 @@ export default function SavedCodes({
 
   return (
     <div className={styles.savedList}>
-      <h2 id='listTitle'>Zapisane kody: {savedCodes.length}</h2>
+      <h2 id='listTitle'>{t('title', { count: savedCodes.length })}</h2>
       <input
         type='text'
-        placeholder='Szukaj kodu...'
+        placeholder={t('searchPlaceholder')}
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
         className={styles.searchInput}
@@ -34,7 +36,7 @@ export default function SavedCodes({
 
       {filteredCodes.length > 0 ? (
         <ul className={styles.list}>
-          {filteredCodes.map((code, i) => (
+          {filteredCodes.map((code) => (
             <li key={code} className={styles.listItem}>
               <span onClick={() => onSelect(code)} className={styles.codeText}>
                 {code}
@@ -42,7 +44,7 @@ export default function SavedCodes({
               <button
                 className={styles.deleteButton}
                 onClick={() => onDelete(code)}
-                title='Usuń'
+                title={t('deleteButton')}
               >
                 <Trash2 size={16} />
               </button>
@@ -50,7 +52,7 @@ export default function SavedCodes({
           ))}
         </ul>
       ) : (
-        <p className={styles.noResults}>Brak wyników</p>
+        <p className={styles.noResults}>{t('noResults')}</p>
       )}
     </div>
   );

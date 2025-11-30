@@ -4,33 +4,32 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
-import { Menu } from 'lucide-react';
+import LocaleSwitcher from './LocaleSwitcher';
+import { useTranslations } from 'next-intl';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
+  const t = useTranslations('Header');
 
   const toggleMenu = () => setIsOpen((prev) => !prev);
   const closeMenu = () => setIsOpen(false);
-  console.log('pathname', pathname);
-  // 🟢 Перевіряємо, чи шлях збігається
   const isActive = (href: string) => pathname === href;
 
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
         <Link href='/' onClick={closeMenu}>
-          <span className={styles.logoText}>Medicine</span>
+          <span className={styles.logoText}>{t('logo')}</span>
         </Link>
       </div>
 
       <button
         className={styles.menuButton}
         onClick={toggleMenu}
-        aria-label='Menu'
+        aria-label={t('menu')}
       >
-        <span className={styles.menu}>Menu</span>
-        {/* <Menu size={24} /> */}
+        <span className={styles.menu}>{t('menu')}</span>
       </button>
 
       <nav className={`${styles.nav} ${isOpen ? styles.open : ''}`}>
@@ -41,7 +40,7 @@ export default function Header() {
               onClick={closeMenu}
               className={isActive('/') ? styles.active : ''}
             >
-              Kod kreskowy
+              {t('barcode')}
             </Link>
           </li>
           <li>
@@ -50,7 +49,7 @@ export default function Header() {
               onClick={closeMenu}
               className={isActive('/colors') ? styles.active : ''}
             >
-              Kolory i Asortyment
+              {t('colors')}
             </Link>
           </li>
           <li>
@@ -59,7 +58,7 @@ export default function Header() {
               onClick={closeMenu}
               className={isActive('/work-break-time') ? styles.active : ''}
             >
-              Praca i przerwy
+              {t('workBreak')}
             </Link>
           </li>
           <li>
@@ -68,17 +67,16 @@ export default function Header() {
               onClick={closeMenu}
               className={isActive('/share') ? styles.active : ''}
             >
-              Udostępnij aplikację
+              {t('share')}
             </Link>
           </li>
-
           <li>
             <Link
               href='/contact'
               onClick={closeMenu}
               className={isActive('/contact') ? styles.active : ''}
             >
-              Telefony kontaktowe
+              {t('contact')}
             </Link>
           </li>
           <li>
@@ -87,20 +85,13 @@ export default function Header() {
               onClick={closeMenu}
               className={isActive('/hours') ? styles.active : ''}
             >
-              godziny pracy
+              {t('hours')}
             </Link>
           </li>
-
-          {/* <li>
-            <Link
-              href='/push-notifications'
-              onClick={closeMenu}
-              className={isActive('/push-notifications') ? styles.active : ''}
-            >
-              Powiadomienia push
-            </Link>
-          </li> */}
         </ul>
+
+        <LocaleSwitcher />
+
         <ul>
           <li>
             <Link
@@ -108,17 +99,16 @@ export default function Header() {
               onClick={closeMenu}
               className={isActive('/about') ? styles.active : ''}
             >
-              O aplikacji
+              {t('about')}
             </Link>
           </li>
-
           <li>
             <Link
               href='/PWA'
               onClick={closeMenu}
               className={isActive('/PWA') ? styles.active : ''}
             >
-              Czym jest PWA?
+              {t('pwa')}
             </Link>
           </li>
           <li style={{ textAlign: 'center', lineHeight: '1.5' }}>
@@ -128,7 +118,7 @@ export default function Header() {
               rel='noopener noreferrer'
               onClick={closeMenu}
             >
-              Grupa publiczna
+              {t('publicGroup')}
             </Link>
           </li>
         </ul>

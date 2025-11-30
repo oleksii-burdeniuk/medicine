@@ -4,8 +4,11 @@ import { useState, useEffect } from 'react';
 import styles from './HoursPage.module.css';
 import WorkHoursModal from './WorkHoursModal';
 import jsPDF from 'jspdf';
+import { useTranslations } from 'next-intl';
 
 export default function HoursPage() {
+  const t = useTranslations('HoursPage');
+
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [hours, setHours] = useState<
     Record<string, { start: string; end: string }>
@@ -13,25 +16,15 @@ export default function HoursPage() {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [rate, setRate] = useState<number | string>(0);
 
-  const changeRate = (newRate: number) => {
-    if (newRate) {
-      setRate(newRate);
-    } else {
-      setRate('');
-    }
-  };
+  const changeRate = (newRate: number) => setRate(newRate || '');
 
   useEffect(() => {
     const storedRate = localStorage.getItem('hourlyRate');
-    if (storedRate) {
-      setRate(Number(storedRate));
-    }
+    if (storedRate) setRate(Number(storedRate));
   }, []);
 
   useEffect(() => {
-    if (rate !== '') {
-      localStorage.setItem('hourlyRate', rate.toString());
-    }
+    if (rate !== '') localStorage.setItem('hourlyRate', rate.toString());
   }, [rate]);
 
   // Load saved hours on mount
@@ -46,7 +39,6 @@ export default function HoursPage() {
     }
   }, []);
 
-  // Save hours whenever they change
   useEffect(() => {
     localStorage.setItem('workHours', JSON.stringify(hours));
   }, [hours]);
@@ -56,7 +48,6 @@ export default function HoursPage() {
     currentMonth.getMonth() + 1,
     0
   ).getDate();
-
   const firstDay = new Date(
     currentMonth.getFullYear(),
     currentMonth.getMonth(),
@@ -64,54 +55,59 @@ export default function HoursPage() {
   ).getDay();
 
   const dateKey = (day: number) =>
-    `${currentMonth.getFullYear()}-${currentMonth.getMonth() + 1}-${day}`;
+    `${currentMonth.getFullYear()}-${String(
+      currentMonth.getMonth() + 1
+    ).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
 
-  // --- Count total monthly hours ---
   const totalHours = Object.entries(hours)
     .filter(([key]) =>
       key.startsWith(
-        `${currentMonth.getFullYear()}-${currentMonth.getMonth() + 1}-`
+        `${currentMonth.getFullYear()}-${String(
+          currentMonth.getMonth() + 1
+        ).padStart(2, '0')}-`
       )
     )
     .reduce((sum, [, { start, end }]) => {
       const [sh, sm] = start.split(':').map(Number);
       const [eh, em] = end.split(':').map(Number);
-
       const diff = eh * 60 + em - (sh * 60 + sm);
       return diff > 0 ? sum + diff / 60 : sum;
     }, 0)
     .toFixed(1);
+
   const workedDays = Object.entries(hours).filter(([key]) =>
     key.startsWith(
-      `${currentMonth.getFullYear()}-${currentMonth.getMonth() + 1}-`
+      `${currentMonth.getFullYear()}-${String(
+        currentMonth.getMonth() + 1
+      ).padStart(2, '0')}-`
     )
   ).length;
 
-  // --- Average hours per day ---
   const averageHours =
     workedDays > 0 ? (Number(totalHours) / workedDays).toFixed(1) : '0';
   const salary = (Number(totalHours) * +rate).toFixed(2);
 
   const generatePDF = () => {
     const doc = new jsPDF();
-
     const monthName = currentMonth.toLocaleString('pl-PL', {
       month: 'long',
       year: 'numeric',
     });
 
     doc.setFontSize(18);
-    doc.text(`Raport godzin pracy – ${monthName}`, 10, 15);
+    doc.text(`${t('monthSummary')} – ${monthName}`, 10, 15);
 
     doc.setFontSize(12);
     let y = 30;
 
-    doc.text('Dni pracy:', 10, y);
+    doc.text(`${t('workingDays')}:`, 10, y);
 
     Object.entries(hours)
       .filter(([key]) =>
         key.startsWith(
-          `${currentMonth.getFullYear()}-${currentMonth.getMonth() + 1}-`
+          `${currentMonth.getFullYear()}-${String(
+            currentMonth.getMonth() + 1
+          ).padStart(2, '0')}-`
         )
       )
       .forEach(([date, { start, end }]) => {
@@ -120,46 +116,57 @@ export default function HoursPage() {
       });
 
     y += 15;
-
     doc.setFontSize(14);
-    doc.text('Summary:', 10, y);
-
+    doc.text(t('summary'), 10, y);
     y += 8;
     doc.setFontSize(12);
+    doc.text(`${t('totalHours')}: ${totalHours}`, 10, y);
+    y += 6;
+    doc.text(`${t('workedDays')}: ${workedDays}`, 10, y);
+    y += 6;
+    doc.text(`${t('averageHours')}: ${averageHours}`, 10, y);
+    y += 6;
+    doc.text(`${t('monthlySalary')}: ${salary} ${t('currency')}`, 10, y);
 
-    doc.text(`Total hours: ${totalHours}`, 10, y);
-    y += 6;
-    doc.text(`Working days: ${workedDays}`, 10, y);
-    y += 6;
-    doc.text(`Average hours per day: ${averageHours}`, 10, y);
-    y += 6;
     doc.save(`hours_${monthName}.pdf`);
   };
 
   const isPrevDateDataAvailable = () => {
+    if (!selectedDate) return false;
     const [year, month, day] = selectedDate.split('-').map(Number);
-    const prevDayKey = `${year}-${month}-${day - 1}`;
+    const prevDayKey = `${year}-${String(month).padStart(2, '0')}-${String(
+      day - 1
+    ).padStart(2, '0')}`;
     return hours[prevDayKey];
   };
 
   const copyTime = () => {
+    if (!selectedDate) return;
     const [year, month, day] = selectedDate.split('-').map(Number);
-
-    const prevDayKey = `${year}-${month}-${day - 1}`;
+    const prevDayKey = `${year}-${String(month).padStart(2, '0')}-${String(
+      day - 1
+    ).padStart(2, '0')}`;
 
     if (hours[prevDayKey]) {
       const { start, end } = hours[prevDayKey];
-
       setHours((prev) => ({
         ...prev,
         [selectedDate]: { start, end },
       }));
     }
   };
-
+  const weekdays = [
+    t('weekdayMon'),
+    t('weekdayTue'),
+    t('weekdayWed'),
+    t('weekdayThu'),
+    t('weekdayFri'),
+    t('weekdaySat'),
+    t('weekdaySun'),
+  ];
   return (
     <div className={`${styles.container} ${styles.darkText}`}>
-      <h1 className={styles.title}>🕒 Moje godziny pracy</h1>
+      <h1 className={styles.title}>{t('title')}</h1>
 
       <div className={styles.calendar}>
         {/* Header */}
@@ -176,14 +183,12 @@ export default function HoursPage() {
           >
             ◀
           </button>
-
           <span>
             {currentMonth.toLocaleString('pl-PL', {
               month: 'long',
               year: 'numeric',
             })}
           </span>
-
           <button
             onClick={() =>
               setCurrentMonth(
@@ -200,7 +205,7 @@ export default function HoursPage() {
 
         {/* Weekdays */}
         <div className={styles.weekdays}>
-          {['Pn', 'Wt', 'Śr', 'Czw', 'Pt', 'Sob', 'Nd'].map((d) => (
+          {weekdays.map((d: string) => (
             <div key={d}>{d}</div>
           ))}
         </div>
@@ -212,12 +217,10 @@ export default function HoursPage() {
             .map((_, i) => (
               <div key={i} className={styles.empty}></div>
             ))}
-
           {Array.from({ length: daysInMonth }, (_, i) => {
             const day = i + 1;
             const key = dateKey(day);
             const hasHours = !!hours[key];
-
             return (
               <div
                 key={day}
@@ -225,7 +228,6 @@ export default function HoursPage() {
                 onClick={() => setSelectedDate(key)}
               >
                 <span>{day}</span>
-
                 {hasHours && (
                   <small>
                     {hours[key].start} – {hours[key].end}
@@ -239,56 +241,33 @@ export default function HoursPage() {
 
       {/* Monthly summary */}
       <div className={styles.summaryContainer}>
-        <h2>📊 Podsumowanie miesiąca</h2>
-
+        <h2>{t('monthSummary')}</h2>
         <p>
-          🟦 Łącznie przepracowane: <b>{totalHours} h</b>
-        </p>
-
-        <p>
-          🟩 Ilość dni pracujących: <b>{workedDays}</b>
-        </p>
-
-        <p>
-          🟨 Średnia ilość godzin dziennie: <b>{averageHours} h</b>
+          {t('totalHours')}: <b>{totalHours} h</b>
         </p>
         <p>
-          💵 Stawka godzinowa:
+          {t('workedDays')}: <b>{workedDays}</b>
+        </p>
+        <p>
+          {t('averageHours')}: <b>{averageHours} h</b>
+        </p>
+        <p>
+          {t('hourlyRate')}:
           <input
             type='number'
             value={rate}
             onChange={(e) => changeRate(+e.target.value)}
-            style={{
-              width: '80px',
-              marginLeft: '10px',
-              padding: '5px',
-              borderRadius: '6px',
-              border: '1px solid #ccc',
-            }}
+            style={{ width: '80px', marginLeft: '10px' }}
           />{' '}
-          zł
+          {t('currency')}
         </p>
-
         <p>
-          💰 Wynagrodzenie za miesiąc:
-          <b> {salary} zł </b>
+          {t('monthlySalary')}:{' '}
+          <b>
+            {salary} {t('currency')}
+          </b>
         </p>
-
-        <button
-          onClick={generatePDF}
-          style={{
-            marginTop: '15px',
-            padding: '10px 20px',
-            background: '#0070f3',
-            color: '#fff',
-            border: 'none',
-            borderRadius: '8px',
-            cursor: 'pointer',
-            fontSize: '16px',
-          }}
-        >
-          📄 Eksport do PDF
-        </button>
+        <button onClick={generatePDF}>{t('exportPDF')}</button>
       </div>
 
       {selectedDate && (
@@ -299,10 +278,7 @@ export default function HoursPage() {
           isPrevDateData={!!isPrevDateDataAvailable()}
           onCopyTime={copyTime}
           onSave={(start, end) => {
-            setHours((prev) => ({
-              ...prev,
-              [selectedDate]: { start, end },
-            }));
+            setHours((prev) => ({ ...prev, [selectedDate]: { start, end } }));
             setSelectedDate(null);
           }}
           onDelete={() => {
