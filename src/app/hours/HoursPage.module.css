@@ -1,5 +1,5 @@
 .container {
-  padding: 20px;
+  padding: 10px;
 }
 
 .title {
@@ -30,17 +30,18 @@
   font-weight: bold;
   color: #000000;
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .daysGrid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 4px;
+  gap: 6px;
 }
 
 .day {
   background: #f0f0f0;
-  padding: 8px;
+  padding: 6px;
   border-radius: 8px;
   min-height: 60px;
   cursor: pointer;
