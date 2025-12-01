@@ -152,5 +152,13 @@
     "iosStep2": "Kliknij ikonę Udostępnij w dolnym pasku (kwadrat ze strzałką w górę).",
     "iosStep3": "Przewiń w dół i wybierz \"Dodaj do ekranu początkowego\" (Add to Home Screen).",
     "iosStep4": "Nadaj nazwę i kliknij Dodaj."
+  },
+  "modal": {
+    "start": "Godzina rozpoczęcia",
+    "end": "Godzina zakończenia",
+    "copyYesterday": "Skopiuj z wczoraj",
+    "save": "Zapisz",
+    "delete": "Usuń wpis",
+    "close": "Zamknij"
   }
 }

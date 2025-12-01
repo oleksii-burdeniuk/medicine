@@ -77,22 +77,23 @@
     "97": "Olive green"
   },
   "HoursPage": {
-    "title": "🕒 Moje godziny pracy",
-    "monthSummary": "📊 Podsumowanie miesiąca",
-    "totalHours": "🟦 Łącznie przepracowane",
-    "workedDays": "🟩 Ilość dni pracujących",
-    "averageHours": "🟨 Średnia ilość godzin dziennie",
-    "hourlyRate": "💵 Stawka godzinowa",
-    "monthlySalary": "💰 Wynagrodzenie za miesiąc",
-    "exportPDF": "📄 Eksport do PDF",
+    "title": "🕒 My Working Hours",
+    "monthSummary": "📊 Monthly Summary",
+    "totalHours": "🟦 Total hours worked",
+    "workedDays": "🟩 Number of working days",
+    "averageHours": "🟨 Average hours per day",
+    "hourlyRate": "💵 Hourly rate",
+    "monthlySalary": "💰 Monthly earnings",
+    "exportPDF": "📄 Export to PDF",
     "currency": "zł",
-    "weekdayMon": "Pn",
-    "weekdayTue": "Wt",
-    "weekdayWed": "Śr",
-    "weekdayThu": "Czw",
-    "weekdayFri": "Pt",
-    "weekdaySat": "Sob",
-    "weekdaySun": "Nd"
+
+    "weekdayMon": "Mon",
+    "weekdayTue": "Tue",
+    "weekdayWed": "Wed",
+    "weekdayThu": "Thu",
+    "weekdayFri": "Fri",
+    "weekdaySat": "Sat",
+    "weekdaySun": "Sun"
   },
   "WorkBreakTimePage": {
     "title": "🕒 Work & Break Schedule",
@@ -152,5 +153,13 @@
     "iosStep2": "Click the Share icon in the bottom bar (square with arrow up).",
     "iosStep3": "Scroll down and choose 'Add to Home Screen'.",
     "iosStep4": "Give it a name and click Add."
+  },
+  "modal": {
+    "start": "Start time",
+    "end": "End time",
+    "copyYesterday": "Copy from yesterday",
+    "save": "Save",
+    "delete": "Delete entry",
+    "close": "Close"
   }
 }
