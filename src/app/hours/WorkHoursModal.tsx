@@ -1,7 +1,8 @@
 'use client';
 
 import styles from './WorkHoursModal.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 
 interface Props {
   date: string;
@@ -22,12 +23,20 @@ export default function WorkHoursModal({
   onCopyTime,
   isPrevDateData,
 }: Props) {
+  const t = useTranslations('modal');
+
   const [start, setStart] = useState(data?.start || '');
   const [end, setEnd] = useState(data?.end || '');
 
+  // 🔥 синхронізація даних дня – основна проблема була тут
+  useEffect(() => {
+    setStart(data?.start || '');
+    setEnd(data?.end || '');
+  }, [data, date]);
+
   const formatDate = (d: string) => {
-    const [year, month, day] = d.split('-');
-    return `${day}.${month}.${year}`;
+    const [y, m, day] = d.split('-');
+    return `${day}.${m}.${y}`;
   };
 
   return (
@@ -35,7 +44,7 @@ export default function WorkHoursModal({
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <h2 className={styles.title}>📅 {formatDate(date)}</h2>
 
-        <label className={styles.label}>Godzina rozpoczęcia</label>
+        <label className={styles.label}>{t('start')}</label>
         <input
           type='time'
           value={start}
@@ -43,7 +52,7 @@ export default function WorkHoursModal({
           className={styles.input}
         />
 
-        <label className={styles.label}>Godzina zakończenia</label>
+        <label className={styles.label}>{t('end')}</label>
         <input
           type='time'
           value={end}
@@ -60,10 +69,10 @@ export default function WorkHoursModal({
                 onClose();
               }}
             >
-              💾 Zapisz jako wczoraj
+              💾 {t('copyYesterday')}
             </button>
           ) : (
-            <div> </div>
+            <div />
           )}
 
           <button
@@ -73,17 +82,17 @@ export default function WorkHoursModal({
               onSave(start, end);
             }}
           >
-            💾 Zapisz
+            💾 {t('save')}
           </button>
 
           {data && (
             <button className={styles.deleteBtn} onClick={onDelete}>
-              🗑 Usuń wpis
+              🗑 {t('delete')}
             </button>
           )}
 
           <button className={styles.cancelBtn} onClick={onClose}>
-            ✖ Zamknij
+            ✖ {t('close')}
           </button>
         </div>
       </div>
