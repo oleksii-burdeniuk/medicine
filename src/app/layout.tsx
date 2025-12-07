@@ -23,7 +23,6 @@ export const metadata = {
   title: 'Barcode Scanner',
   description: 'PWA штрихкод сканер та генератор',
   manifest: '/manifest.json',
-  themeColor: '#000000',
   icons: {
     icon: '/icons/icon-192x192.png',
     apple: '/icons/icon-512x512.png',
