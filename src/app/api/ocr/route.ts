@@ -12,7 +12,6 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: 'No file uploaded' }, { status: 400 });
 
     // Читаємо файл у буфер
-    console.log('// Читаємо файл у буфер');
     const bytes = Buffer.from(await file.arrayBuffer());
 
     const client = new vision.ImageAnnotatorClient({

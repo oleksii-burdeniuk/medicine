@@ -1,17 +1,20 @@
-// Service Worker for Medicine PWA
-// - Caches core assets and offline fallback
-// - Handles push notifications and notification clicks
+// ------ PWA Service Worker (safe for next-pwa) ------
 
-const CACHE_NAME = 'medicine-core-v1';
+// VERSION (change this to clear cache after deployment)
+const CACHE_VERSION = 'v3';
+const CACHE_NAME = `medicine-cache-${CACHE_VERSION}`;
+
 const OFFLINE_URL = '/offline.html';
+
+// Only static assets you want to precache manually
 const PRECACHE_ASSETS = [
   OFFLINE_URL,
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
   '/manifest.json',
-  '/',
 ];
 
+// INSTALL
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS))
@@ -19,111 +22,58 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
+// ACTIVATE — clears all old caches EXCEPT workbox
 self.addEventListener('activate', (event) => {
   event.waitUntil(
-    (async () => {
-      // Clear old caches if any
-      const keys = await caches.keys();
-      await Promise.all(
-        keys.map((k) =>
-          k !== CACHE_NAME ? caches.delete(k) : Promise.resolve()
-        )
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames
+          .filter(
+            (cacheName) =>
+              cacheName !== CACHE_NAME && !cacheName.includes('workbox')
+          )
+          .map((cacheName) => caches.delete(cacheName))
       );
-      await self.clients.claim();
-    })()
+    })
   );
+
+  self.clients.claim();
 });
 
-// Navigation fallback: try network first, fallback to cached offline page
+// -------- Fix navigation freezes (important!) -----------
 self.addEventListener('fetch', (event) => {
-  const { request } = event;
-  if (request.method !== 'GET') return;
-
-  let url;
-  try {
-    url = new URL(request.url);
-  } catch (e) {
-    // If URL can't be parsed, fallback to default
-    return;
-  }
-
-  // Don't try to handle chrome-extension or other unsupported schemes
-  if (!url.protocol.startsWith('http')) {
-    return;
-  }
-
-  // Let Next.js static files be handled by the network/browser to avoid MIME issues
-  if (url.pathname.startsWith('/_next/')) {
-    event.respondWith(fetch(request).catch(() => caches.match(OFFLINE_URL)));
-    return;
-  }
-
-  // Only handle same-origin requests; avoid caching cross-origin resources here
-  if (url.origin !== self.location.origin) {
-    event.respondWith(fetch(request).catch(() => caches.match(OFFLINE_URL)));
-    return;
-  }
-
-  // Handle navigation (HTML) requests: network-first, fallback to offline page
+  // Skip Next.js internals + API
   if (
-    request.mode === 'navigate' ||
-    (request.headers.get('accept') || '').includes('text/html')
+    event.request.url.includes('_next') ||
+    event.request.url.includes('/api') ||
+    event.request.method !== 'GET'
   ) {
-    event.respondWith(
-      fetch(request)
-        .then((response) => {
-          // Optionally update cache with fresh HTML, but guard caching
-          try {
-            const cloned = response.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              // cache only same-origin http(s) navigations
-              cache.put(request, cloned).catch(() => {});
-            });
-          } catch (e) {}
-          return response;
-        })
-        .catch(() => caches.match(OFFLINE_URL))
-    );
     return;
   }
 
-  // For other GET requests: try cache first, then network. If both fail, return network error
   event.respondWith(
-    caches.match(request).then((cached) => {
-      if (cached) return cached;
-      return fetch(request)
-        .then((res) => {
-          // Cache successful same-origin basic responses
-          try {
-            if (res && res.status === 200 && res.type === 'basic') {
-              const clone = res.clone();
-              caches.open(CACHE_NAME).then((cache) => {
-                // Guard cache.put to prevent caching unsupported schemes
-                cache.put(request, clone).catch(() => {});
-              });
-            }
-          } catch (e) {
-            // ignore
-          }
-          return res;
+    caches.match(event.request).then((cachedResponse) => {
+      const fetchPromise = fetch(event.request)
+        .then((networkResponse) => {
+          return caches.open('dynamic-v2').then((cache) => {
+            cache.put(event.request, networkResponse.clone());
+            return networkResponse;
+          });
         })
-        .catch(() => {
-          // Don't return the HTML offline page for CSS/JS/images — return a network error so the browser
-          // doesn't try to interpret HTML as script/style (which causes MIME type errors).
-          return Response.error();
-        });
+        .catch(() => cachedResponse || caches.match(OFFLINE_URL));
+
+      return cachedResponse || fetchPromise;
     })
   );
 });
 
-// --- Push notification handlers (preserve existing behavior) ---
+// ------- Push Notifications -------
 self.addEventListener('push', function (event) {
   if (event.data) {
     let data = {};
     try {
       data = event.data.json();
     } catch (e) {
-      // If payload isn't JSON, fallback to text
       data = { title: 'Medicine App', body: event.data.text() };
     }
 
@@ -135,7 +85,6 @@ self.addEventListener('push', function (event) {
       data: {
         url: data.url || '/',
         dateOfArrival: Date.now(),
-        primaryKey: data.primaryKey || '2',
       },
     };
 
@@ -145,6 +94,7 @@ self.addEventListener('push', function (event) {
   }
 });
 
+// ------- Notification Click -------
 self.addEventListener('notificationclick', function (event) {
   event.notification.close();
   event.waitUntil(

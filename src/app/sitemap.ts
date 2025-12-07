@@ -3,14 +3,14 @@ const root = 'https://medicine-sand.vercel.app';
 const locales = ['en', 'uk']; // без defaultLocale
 
 const paths = [
-  '',
+  '/',
   '/colors',
   '/hours',
   '/work-break-time',
   '/share',
   '/contact',
   '/about',
-  '/PWA', // якщо існує саме так
+  '/pwa', // рекомендую нижній регістр
 ];
 
 export default function sitemap() {
@@ -23,12 +23,12 @@ export default function sitemap() {
     routes.push({
       url: `${root}${path}`,
       lastModified,
-      priority: path === '' ? 1.0 : 0.7,
-      changeFrequency: path === '' ? 'weekly' : 'monthly',
+      priority: path === '/' ? 1.0 : 0.7,
+      changeFrequency: path === '/' ? 'weekly' : 'monthly',
     });
   }
 
-  // Інші локалі з префіксами
+  // Локалізовані версії
   for (const locale of locales) {
     for (const path of paths) {
       routes.push({

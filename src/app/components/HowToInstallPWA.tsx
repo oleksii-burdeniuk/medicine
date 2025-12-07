@@ -53,10 +53,6 @@ export default function HowToInstallPWA() {
     if (!installPrompt) return;
 
     installPrompt.prompt();
-    const { outcome } = await installPrompt.userChoice;
-
-    if (outcome === 'accepted') console.log('PWA accepted by user.');
-    else console.log('PWA dismissed by user.');
 
     setShowInstallButton(false);
     setInstallPrompt(null);
