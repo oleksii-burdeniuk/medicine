@@ -8,6 +8,11 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "browserslist": [
+    "> 0.3%",
+    "not dead",
+    "not op_mini all"
+  ],
   "dependencies": {
     "@google-cloud/vision": "^5.3.3",
     "@vercel/analytics": "^1.5.0",
