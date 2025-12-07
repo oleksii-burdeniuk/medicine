@@ -1,32 +1,23 @@
-import { NextConfig } from 'next';
-import createNextIntlPlugin from 'next-intl/plugin';
+// next.config.mjs
 
-const nextConfig: NextConfig = {
+import createNextIntlPlugin from 'next-intl/plugin';
+// 1. Імпортуємо плагін next-pwa
+import withPWA from 'next-pwa';
+// 2. Імпортуємо вашу конфігурацію
+import pwaConfig from './next-pwa.config.js';
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // ... ваш основний контент конфігурації
   async headers() {
     return [
-      {
-        source: '/(.*)',
-        headers: [
-          { key: 'X-Content-Type-Options', value: 'nosniff' },
-          { key: 'X-Frame-Options', value: 'DENY' },
-          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
-        ],
-      },
-      {
-        source: '/sw.js',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/javascript; charset=utf-8',
-          },
-          {
-            key: 'Cache-Control',
-            value: 'no-cache, no-store, must-revalidate',
-          },
-        ],
-      },
+      // ... ваші заголовки, включаючи sw.js
     ];
   },
 };
 
-export default createNextIntlPlugin()(nextConfig);
+// 3. Обгортаємо nextConfig плагіном PWA, передаючи конфігурацію
+const pwaMiddleware = withPWA(pwaConfig)(nextConfig);
+
+// 4. Обгортаємо результат плагіном next-intl
+export default createNextIntlPlugin()(pwaMiddleware);
