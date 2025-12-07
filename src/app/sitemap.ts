@@ -10,7 +10,7 @@ const paths = [
   '/share',
   '/contact',
   '/about',
-  '/pwa', // якщо існує саме так
+  '/PWA', // якщо існує саме так
 ];
 
 export default function sitemap() {
