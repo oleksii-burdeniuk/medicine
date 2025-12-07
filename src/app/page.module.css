@@ -7,7 +7,6 @@
   border-radius: 20px;
   margin-top: 20px;
 }
-
 .card {
   background: white;
   padding: 2rem;
@@ -17,103 +16,11 @@
   width: 100%;
   text-align: center;
 }
-
 .title {
   font-size: 1.4rem;
   font-weight: 600;
   margin-bottom: 1.5rem;
   color: black;
-}
-
-.barcodeWrapper {
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: center;
-  overflow-x: auto;
-}
-
-/* --- Перерва --- */
-.breakContainer {
-  display: flex;
-  flex-direction: row;
-  gap: 4px;
-  font-size: 1rem;
-  align-items: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  justify-content: center;
-  align-items: center;
-}
-
-.breakContainer h3 {
-  font-size: 14px;
-}
-
-.breakContainer span {
-  border-radius: 8px;
-  font-size: 14px;
-}
-
-/* --- Список збережених кодів --- */
-.savedList {
-  margin-top: 24px;
-  text-align: left;
-}
-
-.savedList h2 {
-  font-size: 1.1rem;
-  margin-bottom: 0.75rem;
-  color: #333;
-}
-
-.list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  max-height: 300px;
-  overflow-y: scroll;
-}
-
-.listItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f2f2f2;
-  padding: 8px 12px;
-  border-radius: 8px;
-  margin-bottom: 6px;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.listItem:hover {
-  background: #e6e6e6;
-}
-
-.codeText {
-  flex: 1;
-  color: #333;
-  font-size: 0.95rem;
-  overflow: hidden;
-}
-
-.deleteButton {
-  background: none;
-  border: none;
-  cursor: pointer;
-  color: #c0392b;
-  transition: color 0.2s;
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.deleteButton:hover {
-  color: #e74c3c;
-}
-.loading {
-  color: #333;
 }
 .colorBtn {
   position: fixed;

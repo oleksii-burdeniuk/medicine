@@ -104,9 +104,9 @@ export default function Header() {
           </li>
           <li>
             <Link
-              href='/PWA'
+              href='/pwa'
               onClick={closeMenu}
-              className={isActive('/PWA') ? styles.active : ''}
+              className={isActive('/pwa') ? styles.active : ''}
             >
               {t('pwa')}
             </Link>

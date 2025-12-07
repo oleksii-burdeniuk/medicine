@@ -8,6 +8,7 @@ import ServiceWorkerRegister from './components/ServiceWorkerRegister';
 import { Analytics } from '@vercel/analytics/next';
 import FloatingHomeButton from './components/FloatingHomeButton';
 import { NextIntlClientProvider } from 'next-intl';
+import { cookies } from 'next/headers';
 const geistSans = Geist({
   variable: '--font-geist-sans',
   subsets: ['latin'],
@@ -29,13 +30,15 @@ export const metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const store = await cookies();
+  const locale = store.get('locale')?.value || 'pl';
   return (
-    <html>
+    <html suppressHydrationWarning lang={locale}>
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <NextIntlClientProvider>
           <Header />
