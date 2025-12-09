@@ -164,7 +164,7 @@ export default function HoursPage() {
     t('weekdaySat'),
     t('weekdaySun'),
   ];
-
+  const todayKey = dateKey(new Date().getDate());
   return (
     <div className={`${styles.container} ${styles.darkText}`}>
       <h1 className={styles.title}>{t('title')}</h1>
@@ -225,7 +225,11 @@ export default function HoursPage() {
             return (
               <div
                 key={day}
-                className={`${styles.day} ${hasHours ? styles.hasHours : ''}`}
+                className={`
+    ${styles.day}
+    ${hasHours ? styles.hasHours : ''}
+    ${key === todayKey ? styles.today : ''}
+  `}
                 onClick={() => setSelectedDate(key)}
               >
                 <span>{day}</span>
