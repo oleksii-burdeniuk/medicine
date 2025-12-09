@@ -79,7 +79,7 @@
 /* 🌟 КІНЕЦЬ АКТИВНОГО СТИЛЮ 🌟 */
 
 /* Mobile menu */
-@media (max-width: 768px) {
+@media (max-width: 4468px) {
   .menuButton {
     display: block;
     border: 1px solid #fff;
