@@ -7,9 +7,10 @@
   justify-content: space-between;
   padding: 0.75rem 1.25rem;
   border-bottom: 1px solid #e0e0e0;
+  background: #000;
 }
 
-/* Logo */
+/* LOGO */
 .logoText {
   font-size: 1.5rem;
   font-weight: 700;
@@ -17,114 +18,90 @@
   text-decoration: none;
 }
 
-/* Menu button for mobile */
+/* BURGER BUTTON (VISIBLE ALWAYS — DESKTOP + MOBILE) */
 .menuButton {
   background: none;
-  border: none;
-  display: none;
+  border: 1px solid #fff;
+  padding: 0.4rem 0.6rem;
+  border-radius: 10px;
   cursor: pointer;
 }
+
 .menu {
   color: #fff;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
-/* Navigation (desktop) */
+/* SIDEBAR MENU (UNIFIED FOR MOBILE + DESKTOP) */
 .nav {
-  z-index: 1100;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  max-width: 350px;
+  height: 100%;
+  background: #000;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  padding-bottom: 40px;
+  gap: 5rem;
+  transition: right 0.3s ease;
+  z-index: 1101;
+}
+
+.nav.open {
+  right: 0;
 }
 
 .nav ul {
   display: flex;
+  flex-direction: column;
   gap: 1.5rem;
   list-style: none;
   margin: 0;
   padding: 0;
+  align-items: center;
 }
 
 .nav a {
   text-decoration: none;
   color: #c4c4c4;
   font-weight: 500;
-  transition: color 0.2s;
-  position: relative; /* Для підкреслення */
+  transition: 0.2s;
+  position: relative;
 }
 
 .nav a:hover {
   color: #fff;
 }
 
-/* 🌟 АКТИВНИЙ СТИЛЬ 🌟 */
-.nav .active {
-  color: #fff; /* Змінюємо колір тексту */
+/* ACTIVE LINK */
+.active {
+  color: #fff !important;
   font-weight: 700;
 }
 
-/* Опціонально: Додаємо підкреслення для активної вкладки */
-.nav .active::after {
+.active::after {
   content: '';
   position: absolute;
-  bottom: -5px; /* Регулюйте відступ від тексту */
   left: 0;
+  bottom: -5px;
   width: 100%;
   height: 2px;
-  background-color: #fff; /* Колір підкреслення */
-  border-radius: 1px;
+  background: #fff;
 }
-/* 🌟 КІНЕЦЬ АКТИВНОГО СТИЛЮ 🌟 */
 
-/* Mobile menu */
-@media (max-width: 4468px) {
-  .menuButton {
-    display: block;
-    border: 1px solid #fff;
-    padding: 0.4rem 0.6rem;
-    border-radius: 10px;
-  }
+/* DISABLE underline for sidebar */
+.nav.open .active::after {
+  display: none;
+}
 
-  .nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100%;
-    background: #000;
-    box-shadow: -2px 0 6px rgba(0, 0, 0, 0.1);
-    padding-top: 4rem;
-    transition: right 0.3s ease;
-    z-index: 1101;
-  }
-
-  .nav.open {
-    right: 0;
-  }
-
-  .nav ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 2rem;
-  }
-
-  /* 🌟 Стиль для активної вкладки у мобільному меню (коли фон білий) 🌟 */
-  .nav.open .active {
-    color: #fff; /* Синій або інший помітний колір */
-    font-weight: 700;
-  }
-
-  .nav.open .active::after {
-    display: none; /* Приховуємо підкреслення у мобільному меню */
-  }
-  /* 🌟 КІНЕЦЬ АКТИВНОГО СТИЛЮ 🌟 */
-
-  .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1100;
-  }
+/* OVERLAY */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1100;
 }
