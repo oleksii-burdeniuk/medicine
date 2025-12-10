@@ -1,7 +1,7 @@
 // ------ PWA Service Worker (safe for next-pwa) ------
 
 // VERSION (change this to clear cache after deployment)
-const CACHE_VERSION = 'v5';
+const CACHE_VERSION = 'v6';
 const CACHE_NAME = `medicine-cache-${CACHE_VERSION}`;
 
 const OFFLINE_URL = '/offline.html';
