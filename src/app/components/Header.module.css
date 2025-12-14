@@ -105,3 +105,14 @@
   background: rgba(0, 0, 0, 0.4);
   z-index: 1100;
 }
+.smartLunchBtn {
+  background: linear-gradient(135deg, #ff9800, #ffb74d);
+  color: #000;
+  border: none;
+  padding: 12px 18px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}

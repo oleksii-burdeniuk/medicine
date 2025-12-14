@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
 import LocaleSwitcher from './LocaleSwitcher';
 import { useTranslations } from 'next-intl';
+import { openSmartLunch } from './SmartLunchButton';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -87,6 +88,11 @@ export default function Header() {
             >
               {t('hours')}
             </Link>
+          </li>
+          <li>
+            <button onClick={openSmartLunch} className={styles.smartLunchBtn}>
+              🍽 SmartLunch
+            </button>
           </li>
         </ul>
 
