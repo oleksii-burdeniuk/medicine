@@ -8,7 +8,7 @@ export function openSmartLunch() {
 
   if (isIOS) {
     // ✅ Відкриє апку або App Store
-    window.location.href = 'https://apps.apple.com/app/id1473018374';
+    window.location.href = 'https://app.smartlunch.pl/employees/history';
     return;
   }
 
