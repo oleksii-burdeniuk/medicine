@@ -88,3 +88,89 @@
 .loading {
   color: #333;
 }
+
+/* Контейнер для перемикача та додаткових опцій */
+.switcherWrapper {
+  display: flex;
+  flex-direction: column; /* На мобільних краще в колонку */
+  gap: 12px;
+}
+
+/* Основний тумблер (Codes / Users) */
+.toggleWrapper {
+  display: flex;
+
+  padding: 5px;
+  border-radius: 10px;
+  margin-bottom: 5px;
+}
+
+.tab {
+  flex: 1;
+
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  font-weight: 500;
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Активний стан тумблера */
+.activeTab {
+  flex: 1;
+  padding: 5;
+  border: none;
+  background: #ffffff; /* Біла "кнопка" на сірому фоні */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  border-radius: 8px;
+  font-weight: 600;
+  color: #000;
+  text-align: center;
+}
+
+/* Поле для пароля */
+.passwordInput {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-sizing: border-box;
+}
+
+.passwordInput:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+}
+
+/* Чекбокс або додатковий перемикач (Save Credentials) */
+.saveToggle {
+  font-size: 0.85rem;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: #444;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+.saveToggle input[type='checkbox'] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #0070f3; /* Колір галочки */
+}
+
+/* Адаптивність для десктопа */
+@media (min-width: 480px) {
+  .switcherWrapper {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}

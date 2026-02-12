@@ -1,0 +1,118 @@
+.savedUsers {
+  margin-top: 1.5rem;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 1.2rem 0.8rem;
+  border: 1px solid #e0e0e0;
+}
+
+.savedUsers h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 350px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Відстань між картками юзерів */
+}
+
+.listItem {
+  display: flex;
+  align-items: stretch;
+  background: #f8f9fa; /* Світлий фон під карткою */
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid #eee;
+  gap: 10px;
+}
+
+.userData {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Відстань між кнопкою логіна і пароля */
+}
+
+/* Окремі кнопки для логіна та пароля */
+.clickableRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  background: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.clickableRow:hover {
+  border-color: #0070f3;
+  background: #f0f7ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 112, 243, 0.1);
+}
+
+.clickableRow:active {
+  transform: translateY(0);
+  background: #e1effe;
+}
+
+.icon {
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.clickableRow:hover .icon {
+  color: #0070f3;
+}
+
+.valText {
+  font-size: 0.9rem;
+  color: #374151;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Кнопка видалення */
+.deleteButton {
+  background: #fff0f0;
+  border: 1px solid #ffdada;
+  cursor: pointer;
+  color: #e53e3e;
+  padding: 0 12px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.deleteButton:hover {
+  background: #e53e3e;
+  color: #ffffff;
+  border-color: #e53e3e;
+}
+
+.noResults {
+  text-align: center;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  padding: 2rem 0;
+}

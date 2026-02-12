@@ -20,7 +20,7 @@ export default function SavedCodes({
   const t = useTranslations('SavedCodes');
 
   const filteredCodes = savedCodes.filter((code) =>
-    code.toLowerCase().includes(searchTerm.toLowerCase())
+    code.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
