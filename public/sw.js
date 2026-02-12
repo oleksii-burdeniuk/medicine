@@ -1,7 +1,7 @@
 // ------ PWA Service Worker (safe for next-pwa) ------
 
 // VERSION (change this to clear cache after deployment)
-const CACHE_VERSION = 'v8';
+const CACHE_VERSION = 'v9';
 const CACHE_NAME = `medicine-cache-${CACHE_VERSION}`;
 
 const OFFLINE_URL = '/offline.html';
@@ -17,7 +17,7 @@ const PRECACHE_ASSETS = [
 // INSTALL
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS)),
   );
   self.skipWaiting();
 });
@@ -30,11 +30,11 @@ self.addEventListener('activate', (event) => {
         cacheNames
           .filter(
             (cacheName) =>
-              cacheName !== CACHE_NAME && !cacheName.includes('workbox')
+              cacheName !== CACHE_NAME && !cacheName.includes('workbox'),
           )
-          .map((cacheName) => caches.delete(cacheName))
+          .map((cacheName) => caches.delete(cacheName)),
       );
-    })
+    }),
   );
 
   self.clients.claim();
@@ -63,7 +63,7 @@ self.addEventListener('fetch', (event) => {
         .catch(() => cachedResponse || caches.match(OFFLINE_URL));
 
       return cachedResponse || fetchPromise;
-    })
+    }),
   );
 });
 
@@ -89,7 +89,7 @@ self.addEventListener('push', function (event) {
     };
 
     event.waitUntil(
-      self.registration.showNotification(data.title || 'Medicine App', options)
+      self.registration.showNotification(data.title || 'Medicine App', options),
     );
   }
 });
@@ -109,6 +109,6 @@ self.addEventListener('notificationclick', function (event) {
         if (clients.openWindow) {
           return clients.openWindow(event.notification.data?.url || '/');
         }
-      })
+      }),
   );
 });
