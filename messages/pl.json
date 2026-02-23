@@ -160,5 +160,13 @@
     "save": "Zapisz",
     "delete": "Usuń wpis",
     "close": "Zamknij"
+  },
+  "ListCodes": {
+    "title": "Zapisane kody ({count})",
+    "searchPlaceholder": "Szukaj kodu…",
+    "deleteButton": "Usuń kod",
+    "saveButton": "Wstaw kod",
+    "saveAll": "Wstaw wszystkie",
+    "noResults": "Brak wyników"
   }
 }

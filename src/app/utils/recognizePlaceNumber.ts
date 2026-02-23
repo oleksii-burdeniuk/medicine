@@ -11,6 +11,7 @@ export const recognizePlaceNumber = (text: string) => {
   const found3 = text.match(regex3);
   const found4 = text.match(regex4);
   const found5 = text.match(regex5);
+  console.log('Found:', found, found2, found3, found4, found5);
 
   if (found4) {
     const raw = found4[0].trim();
@@ -25,10 +26,26 @@ export const recognizePlaceNumber = (text: string) => {
   return found
     ? found[0]
     : found2
-    ? found2[0]
-    : found3
-    ? found3[0]
-    : found5
-    ? found5[0]
-    : noFoundMessage;
+      ? found2[0]
+      : found3
+        ? found3[0]
+        : found5
+          ? found5[0]
+          : noFoundMessage;
 };
+
+export function extractUniqueCodes(text: string) {
+  // --- 1. Формат PO/26/02/11/0454 ---
+  const slashPattern = /\b[A-Z]{1,3}\/\d{2}\/\d{2}\/\d{2}\/\d{3,4}\b/g;
+
+  // --- 2. Формат C127-Y-1 ---
+  const dashPattern = /\b[A-Z]\d{2,4}(?:-[A-Z0-9]+)+\b/g;
+
+  const slashMatches = text.match(slashPattern) ?? [];
+  const dashMatches = text.match(dashPattern) ?? [];
+
+  // Обʼєднуємо і робимо унікальними
+  const unique = Array.from(new Set([...slashMatches, ...dashMatches]));
+
+  return unique;
+}

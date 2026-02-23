@@ -8,16 +8,21 @@ import { useTranslations } from 'next-intl';
 import generateBarcode from '@/app/utils/generateBarcode';
 import { compressImage } from '@/app/utils/compressImage';
 import { BrowserMultiFormatReader } from '@zxing/browser';
-import { recognizePlaceNumber } from '@/app/utils/recognizePlaceNumber';
+import {
+  extractUniqueCodes,
+  recognizePlaceNumber,
+} from '@/app/utils/recognizePlaceNumber';
 import styles from './BarCodeContent.module.css';
-import { QrCode, User } from 'lucide-react';
+import { List, QrCode, User } from 'lucide-react';
+import Modal from '../modalWindow/Modal';
+import ListCodes from '../listCodes/ListCodes';
 
 interface SavedUser {
   login: string;
   password: string;
 }
 // Виправив типи для відповідності вашим умовам у рендері
-type ViewMode = 'savedCodes' | 'savedUsers';
+type ViewMode = 'savedCodes' | 'savedUsers' | 'listCodes';
 
 const BarCodeContent = () => {
   const [text, setText] = useState('');
@@ -26,6 +31,8 @@ const BarCodeContent = () => {
   const [savedUsers, setSavedUsers] = useState<SavedUser[]>([]);
   const [viewMode, setViewMode] = useState<ViewMode>('savedCodes');
   const [decoding, setDecoding] = useState(false);
+  const [activeModal, setActiveModal] = useState<boolean>(false);
+  const [listCodes, setListCodes] = useState<string[]>([]);
 
   const t = useTranslations('HomePage');
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -36,6 +43,11 @@ const BarCodeContent = () => {
     generateBarcode(svgRef.current, text);
   }, [text]);
 
+  useEffect(() => {
+    if (listCodes.length > 0) {
+      setActiveModal(true);
+    }
+  }, [listCodes]);
   // Завантаження даних
   useEffect(() => {
     const storedCodes = localStorage.getItem('savedCodes');
@@ -58,7 +70,7 @@ const BarCodeContent = () => {
     const trimmed = inputText.trim();
     if (!trimmed || trimmed === noFoundMessage) return;
 
-    if (viewMode === 'savedCodes') {
+    if (viewMode !== 'savedUsers') {
       if (!savedCodes.includes(trimmed)) {
         setSavedCodes((prev) => [trimmed, ...prev]);
       }
@@ -77,6 +89,10 @@ const BarCodeContent = () => {
       }
     }
   };
+
+  useEffect(() => {
+    handleSave(text);
+  }, [text]);
 
   const handleDeleteCode = (code: string) => {
     setSavedCodes((prev) => prev.filter((c) => c !== code));
@@ -126,6 +142,10 @@ const BarCodeContent = () => {
         formData.append('file', compressedFile);
         const res = await fetch('/api/ocr', { method: 'POST', body: formData });
         const data = await res.json();
+        if (viewMode === 'listCodes') {
+          const uniqueCodes = extractUniqueCodes(data.text);
+          setListCodes(uniqueCodes);
+        }
         const recognizedText = recognizePlaceNumber(data.text);
         setText(recognizedText);
         // Автоматично не зберігаємо, щоб юзер міг ввести пароль якщо треба
@@ -146,6 +166,13 @@ const BarCodeContent = () => {
           title='Codes'
         >
           <QrCode size={18} />
+        </button>
+        <button
+          className={viewMode === 'listCodes' ? styles.activeTab : styles.tab}
+          onClick={() => setViewMode('listCodes')}
+          title={'listButton'}
+        >
+          <List size={18} />
         </button>
         <button
           className={viewMode === 'savedUsers' ? styles.activeTab : styles.tab}
@@ -181,6 +208,16 @@ const BarCodeContent = () => {
       <div className={styles.barcodeWrapper}>
         <svg ref={svgRef}></svg>
       </div>
+
+      <Modal isOpen={activeModal} onClose={() => setActiveModal(!activeModal)}>
+        <ListCodes
+          listCodes={listCodes}
+          onSelect={(code) => setText(code)}
+          onSaveAll={(codes) => {
+            setSavedCodes((prev) => [...codes, ...prev]);
+          }}
+        />
+      </Modal>
 
       {/* ВІДОБРАЖЕННЯ СПИСКІВ */}
       {viewMode === 'savedUsers' ? (

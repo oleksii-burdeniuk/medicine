@@ -161,5 +161,13 @@
     "save": "Save",
     "delete": "Delete entry",
     "close": "Close"
+  },
+  "ListCodes": {
+    "title": "Saved codes ({count})",
+    "searchPlaceholder": "Search code…",
+    "deleteButton": "Delete code",
+    "saveButton": "Insert code",
+    "saveAll": "Insert all",
+    "noResults": "No results found"
   }
 }

@@ -1,0 +1,136 @@
+.savedList {
+  margin-top: 1.5rem;
+  text-align: left;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+  padding: 1rem 0.75rem;
+}
+
+/* --- Save all button --- */
+.saveAllButton {
+  width: 100%;
+  margin-bottom: 0.75rem;
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #0070f3;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.1s,
+    box-shadow 0.2s;
+}
+
+.saveAllButton:hover {
+  background: #0059c1;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 112, 243, 0.25);
+}
+
+/* --- List --- */
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #ccc transparent;
+}
+
+/* Scrollbar webkit */
+.list::-webkit-scrollbar {
+  width: 6px;
+}
+.list::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 4px;
+}
+.list::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+/* --- Item --- */
+.listItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f8fa;
+  padding: 8px 12px;
+  border-radius: 10px;
+  margin-bottom: 6px;
+  transition:
+    background 0.2s,
+    transform 0.1s;
+}
+
+.listItem:hover {
+  background: #e9eaec;
+  transform: scale(1.01);
+}
+
+/* --- Code text --- */
+.codeText {
+  flex: 1;
+  font-size: 0.95rem;
+  color: #333;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* --- Actions container --- */
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+/* --- Save button --- */
+.saveButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #0070f3;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    color 0.2s,
+    transform 0.1s;
+}
+
+.saveButton:hover {
+  color: #0059c1;
+  transform: scale(1.1);
+}
+
+/* --- Empty state --- */
+.noResults {
+  text-align: center;
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+}

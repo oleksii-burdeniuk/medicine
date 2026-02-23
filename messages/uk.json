@@ -160,5 +160,13 @@
     "save": "Зберегти",
     "delete": "Видалити запис",
     "close": "Закрити"
+  },
+  "ListCodes": {
+    "title": "Збережені коди ({count})",
+    "searchPlaceholder": "Пошук коду…",
+    "deleteButton": "Видалити код",
+    "saveButton": "Вставити код",
+    "saveAll": "Вставити всі",
+    "noResults": "Нічого не знайдено"
   }
 }
