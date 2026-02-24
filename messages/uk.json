@@ -165,8 +165,8 @@
     "title": "Збережені коди ({count})",
     "searchPlaceholder": "Пошук коду…",
     "deleteButton": "Видалити код",
-    "saveButton": "Вставити код",
-    "saveAll": "Вставити всі",
+    "saveButton": "Зберегти код",
+    "saveAll": "Зберегти всі",
     "noResults": "Нічого не знайдено"
   }
 }

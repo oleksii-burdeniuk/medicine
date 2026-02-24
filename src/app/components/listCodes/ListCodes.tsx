@@ -8,7 +8,7 @@ import { useState } from 'react';
 interface ListCodesProps {
   listCodes: string[];
   onSelect: (code: string) => void;
-
+  onSave: (code: string) => void;
   onSaveAll: (codes: string[]) => void;
 }
 
@@ -16,6 +16,7 @@ export default function ListCodes({
   listCodes,
   onSelect,
   onSaveAll,
+  onSave,
 }: ListCodesProps) {
   const [searchTerm, setSearchTerm] = useState<string>('');
   const t = useTranslations('ListCodes');
@@ -47,14 +48,22 @@ export default function ListCodes({
       {filteredCodes.length > 0 ? (
         <ul className={styles.list}>
           {filteredCodes.map((code, index) => (
-            <li key={code + index} className={styles.listItem}>
+            <li
+              key={code + index}
+              className={styles.listItem}
+              onClick={() => {
+                onSelect(code);
+              }}
+            >
               <span className={styles.codeText}>{code}</span>
 
               <div className={styles.actions}>
                 {/* Save single */}
                 <button
                   className={styles.saveButton}
-                  onClick={() => onSelect(code)}
+                  onClick={() => {
+                    onSave(code);
+                  }}
                   title={t('saveButton')}
                 >
                   <Save size={16} />

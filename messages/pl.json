@@ -165,8 +165,8 @@
     "title": "Zapisane kody ({count})",
     "searchPlaceholder": "Szukaj kodu…",
     "deleteButton": "Usuń kod",
-    "saveButton": "Wstaw kod",
-    "saveAll": "Wstaw wszystkie",
+    "saveButton": "Zapisz kod",
+    "saveAll": "Zapisz wszystkie",
     "noResults": "Brak wyników"
   }
 }

@@ -43,11 +43,11 @@ const BarCodeContent = () => {
     generateBarcode(svgRef.current, text);
   }, [text]);
 
-  useEffect(() => {
-    if (listCodes.length > 0) {
-      setActiveModal(true);
-    }
-  }, [listCodes]);
+  // useEffect(() => {
+  //   if (listCodes.length > 0) {
+  //     setActiveModal(true);
+  //   }
+  // }, [listCodes]);
   // Завантаження даних
   useEffect(() => {
     const storedCodes = localStorage.getItem('savedCodes');
@@ -89,10 +89,6 @@ const BarCodeContent = () => {
       }
     }
   };
-
-  useEffect(() => {
-    handleSave(text);
-  }, [text]);
 
   const handleDeleteCode = (code: string) => {
     setSavedCodes((prev) => prev.filter((c) => c !== code));
@@ -142,12 +138,15 @@ const BarCodeContent = () => {
         formData.append('file', compressedFile);
         const res = await fetch('/api/ocr', { method: 'POST', body: formData });
         const data = await res.json();
-        if (viewMode === 'listCodes') {
-          const uniqueCodes = extractUniqueCodes(data.text);
+        const uniqueCodes = extractUniqueCodes(data.text);
+        if (uniqueCodes.length > 1) {
           setListCodes(uniqueCodes);
         }
         const recognizedText = recognizePlaceNumber(data.text);
         setText(recognizedText);
+        if (viewMode === 'savedCodes') {
+          handleSave(text);
+        }
         // Автоматично не зберігаємо, щоб юзер міг ввести пароль якщо треба
       }
     } catch (err) {
@@ -169,10 +168,16 @@ const BarCodeContent = () => {
         </button>
         <button
           className={viewMode === 'listCodes' ? styles.activeTab : styles.tab}
-          onClick={() => setViewMode('listCodes')}
+          onClick={() => {
+            if (listCodes.length > 0) {
+              setActiveModal(true);
+            }
+
+            // setViewMode('listCodes');
+          }}
           title={'listButton'}
         >
-          <List size={18} />
+          <List size={18} color={listCodes.length > 0 ? '#007bff' : '#ccc'} />
         </button>
         <button
           className={viewMode === 'savedUsers' ? styles.activeTab : styles.tab}
@@ -213,6 +218,9 @@ const BarCodeContent = () => {
         <ListCodes
           listCodes={listCodes}
           onSelect={(code) => setText(code)}
+          onSave={(text) => {
+            handleSave(text);
+          }}
           onSaveAll={(codes) => {
             setSavedCodes((prev) => [...codes, ...prev]);
           }}

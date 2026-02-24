@@ -166,8 +166,8 @@
     "title": "Saved codes ({count})",
     "searchPlaceholder": "Search code…",
     "deleteButton": "Delete code",
-    "saveButton": "Insert code",
-    "saveAll": "Insert all",
+    "saveButton": "Save code",
+    "saveAll": "Save all",
     "noResults": "No results found"
   }
 }
