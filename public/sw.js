@@ -1,7 +1,7 @@
 // ------ PWA Service Worker (safe for next-pwa) ------
 
 // VERSION (change this to clear cache after deployment)
-const CACHE_VERSION = 'v12.0';
+const CACHE_VERSION = 'v12.1';
 const STATIC_CACHE = `medicine-static-${CACHE_VERSION}`;
 const PAGE_CACHE = `medicine-pages-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `medicine-runtime-${CACHE_VERSION}`;
@@ -10,6 +10,7 @@ const OFFLINE_URL = '/offline.html';
 
 // Only static assets you want to precache manually
 const PRECACHE_ASSETS = [
+  '/',
   OFFLINE_URL,
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
@@ -67,7 +68,8 @@ self.addEventListener('fetch', (event) => {
         })
         .catch(async () => {
           const cachedPage = await caches.match(event.request);
-          return cachedPage || caches.match(OFFLINE_URL);
+          const cachedAppShell = await caches.match('/', { ignoreSearch: true });
+          return cachedPage || cachedAppShell || caches.match(OFFLINE_URL);
         }),
     );
     return;
