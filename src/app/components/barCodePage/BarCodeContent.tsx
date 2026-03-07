@@ -6,29 +6,15 @@ import SavedCodes from '../SavedCodes';
 import SavedUsers from '../SavedUsers';
 import { useTranslations } from 'next-intl';
 import generateBarcode from '@/app/utils/generateBarcode';
-import { compressImage } from '@/app/utils/compressImage';
-import { BrowserMultiFormatReader } from '@zxing/browser';
-import {
-  extractUniqueCodes,
-  recognizePlaceNumber,
-} from '@/app/utils/recognizePlaceNumber';
 import styles from './BarCodeContent.module.css';
 import { List, QrCode, User } from 'lucide-react';
 import Modal from '../modalWindow/Modal';
 import ListCodes from '../listCodes/ListCodes';
-
-interface SavedUser {
-  login: string;
-  password: string;
-}
-// Виправив типи для відповідності вашим умовам у рендері
-type ViewMode = 'savedCodes' | 'savedUsers' | 'listCodes';
+import { processUploadedImage } from './processUploadedImage';
+import { useScannerStorage, type ViewMode } from './useScannerStorage';
 
 const BarCodeContent = () => {
   const [text, setText] = useState('');
-  const [password, setPassword] = useState(''); // Стейт для пароля
-  const [savedCodes, setSavedCodes] = useState<string[]>([]);
-  const [savedUsers, setSavedUsers] = useState<SavedUser[]>([]);
   const [viewMode, setViewMode] = useState<ViewMode>('savedCodes');
   const [decoding, setDecoding] = useState(false);
   const [activeModal, setActiveModal] = useState<boolean>(false);
@@ -38,64 +24,31 @@ const BarCodeContent = () => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const noFoundMessage = t('noFoundMessage');
+  const {
+    password,
+    setPassword,
+    savedCodes,
+    savedUsers,
+    saveEntry,
+    deleteCode,
+    deleteUser,
+    setSavedCodes,
+  } = useScannerStorage(noFoundMessage);
 
   useEffect(() => {
     generateBarcode(svgRef.current, text);
   }, [text]);
 
-  // useEffect(() => {
-  //   if (listCodes.length > 0) {
-  //     setActiveModal(true);
-  //   }
-  // }, [listCodes]);
-  // Завантаження даних
-  useEffect(() => {
-    const storedCodes = localStorage.getItem('savedCodes');
-    const storedUsers = localStorage.getItem('savedUsers');
-    if (storedCodes) setSavedCodes(JSON.parse(storedCodes));
-    if (storedUsers) setSavedUsers(JSON.parse(storedUsers));
-  }, []);
-
-  // Збереження даних
-  useEffect(() => {
-    localStorage.setItem('savedCodes', JSON.stringify(savedCodes));
-  }, [savedCodes]);
-
-  useEffect(() => {
-    localStorage.setItem('savedUsers', JSON.stringify(savedUsers));
-  }, [savedUsers]);
-
-  // --- ЛОГІКА ЗБЕРЕЖЕННЯ ---
   const handleSave = (inputText: string) => {
-    const trimmed = inputText.trim();
-    if (!trimmed || trimmed === noFoundMessage) return;
-
-    if (viewMode !== 'savedUsers') {
-      if (!savedCodes.includes(trimmed)) {
-        setSavedCodes((prev) => [trimmed, ...prev]);
-      }
-    } else {
-      // Режим збереження користувача
-      if (password.trim() === '') {
-        alert('Please enter a password');
-        return;
-      }
-      if (!savedUsers.find((u) => u.login === trimmed)) {
-        setSavedUsers((prev) => [
-          { login: trimmed, password: password.trim() },
-          ...prev,
-        ]);
-        setPassword(''); // Очищуємо пароль після збереження
-      }
-    }
+    saveEntry(inputText, viewMode);
   };
 
   const handleDeleteCode = (code: string) => {
-    setSavedCodes((prev) => prev.filter((c) => c !== code));
+    deleteCode(code);
   };
 
   const handleDeleteUser = (login: string) => {
-    setSavedUsers((prev) => prev.filter((u) => u.login !== login));
+    deleteUser(login);
   };
 
   const handleSelectUser = (value: string) => {
@@ -106,58 +59,48 @@ const BarCodeContent = () => {
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
+
     setDecoding(true);
     try {
-      const compressed = await compressImage(file);
-      const compressedFile = new File([compressed], file.name, {
-        type: 'image/jpeg',
-      });
-      const imageUrl = URL.createObjectURL(compressedFile);
-      const image = new Image();
-      image.src = imageUrl;
-      const codeReader = new BrowserMultiFormatReader();
+      const { recognizedText, uniqueCodes, source } =
+        await processUploadedImage(file);
 
-      const result = await new Promise<string | null>((resolve) => {
-        image.onload = async () => {
-          try {
-            const decoded = await codeReader.decodeFromImageElement(image);
-            resolve(decoded.getText());
-          } catch {
-            resolve(null);
-          }
-        };
-        image.onerror = () => resolve(null);
-      });
-
-      URL.revokeObjectURL(imageUrl);
-
-      if (result) {
-        setText(result);
-      } else {
-        const formData = new FormData();
-        formData.append('file', compressedFile);
-        const res = await fetch('/api/ocr', { method: 'POST', body: formData });
-        const data = await res.json();
-        const uniqueCodes = extractUniqueCodes(data.text);
-        if (uniqueCodes.length > 1) {
-          setListCodes(uniqueCodes);
-        }
-        const recognizedText = recognizePlaceNumber(data.text);
-        setText(recognizedText);
-        if (viewMode === 'savedCodes') {
-          handleSave(text);
-        }
-        // Автоматично не зберігаємо, щоб юзер міг ввести пароль якщо треба
+      if (uniqueCodes.length > 1) {
+        setListCodes(uniqueCodes);
       }
-    } catch (err) {
-      console.error(err);
+
+      setText(recognizedText);
+
+      if (source === 'ocr' && viewMode === 'savedCodes') {
+        saveEntry(recognizedText, 'savedCodes');
+      }
+    } catch (error) {
+      console.error('File processing error:', error);
+    } finally {
+      setDecoding(false);
+      e.target.value = '';
     }
-    setDecoding(false);
+  };
+
+  const openListModal = () => {
+    if (listCodes.length > 0) {
+      setActiveModal(true);
+    }
+  };
+
+  const closeListModal = () => {
+    setActiveModal(false);
+  };
+
+  const saveAllCodes = (codes: string[]) => {
+    setSavedCodes((prev) => {
+      const merged = [...codes, ...prev];
+      return Array.from(new Set(merged));
+    });
   };
 
   return (
     <div className={styles.container}>
-      {/* ТУМБЛЕР ПЕРЕКЛЮЧЕННЯ */}
       <div className={styles.toggleWrapper}>
         <button
           className={viewMode === 'savedCodes' ? styles.activeTab : styles.tab}
@@ -167,15 +110,9 @@ const BarCodeContent = () => {
           <QrCode size={18} />
         </button>
         <button
-          className={viewMode === 'listCodes' ? styles.activeTab : styles.tab}
-          onClick={() => {
-            if (listCodes.length > 0) {
-              setActiveModal(true);
-            }
-
-            // setViewMode('listCodes');
-          }}
-          title={'listButton'}
+          className={activeModal ? styles.activeTab : styles.tab}
+          onClick={openListModal}
+          title='listButton'
         >
           <List size={18} color={listCodes.length > 0 ? '#007bff' : '#ccc'} />
         </button>
@@ -197,7 +134,6 @@ const BarCodeContent = () => {
         fileInputRef={fileInputRef}
       />
 
-      {/* ПОЛЕ ПАРОЛЯ (показуємо лише в режимі Users) */}
       {viewMode === 'savedUsers' && (
         <input
           type='text'
@@ -214,20 +150,17 @@ const BarCodeContent = () => {
         <svg ref={svgRef}></svg>
       </div>
 
-      <Modal isOpen={activeModal} onClose={() => setActiveModal(!activeModal)}>
+      <Modal isOpen={activeModal} onClose={closeListModal}>
         <ListCodes
           listCodes={listCodes}
+          savedCodes={savedCodes}
+          selectedCode={text}
           onSelect={(code) => setText(code)}
-          onSave={(text) => {
-            handleSave(text);
-          }}
-          onSaveAll={(codes) => {
-            setSavedCodes((prev) => [...codes, ...prev]);
-          }}
+          onSave={handleSave}
+          onSaveAll={saveAllCodes}
         />
       </Modal>
 
-      {/* ВІДОБРАЖЕННЯ СПИСКІВ */}
       {viewMode === 'savedUsers' ? (
         <SavedUsers
           savedUsers={savedUsers}

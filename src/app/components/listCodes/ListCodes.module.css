@@ -60,17 +60,31 @@
   justify-content: space-between;
   align-items: center;
   background: #f7f8fa;
+  border: 1px solid transparent;
   padding: 8px 12px;
   border-radius: 10px;
   margin-bottom: 6px;
   transition:
     background 0.2s,
-    transform 0.1s;
+    transform 0.1s,
+    border-color 0.2s,
+    box-shadow 0.2s;
 }
 
 .listItem:hover {
   background: #e9eaec;
   transform: scale(1.01);
+}
+
+.selectedItem {
+  background: #e8f2ff;
+  border-color: #0070f3;
+  box-shadow: 0 0 0 2px rgba(0, 112, 243, 0.12);
+}
+
+.savedItem {
+  background: #eefbf2;
+  border-color: #2f9e44;
 }
 
 /* --- Code text --- */
@@ -87,6 +101,19 @@
 .actions {
   display: flex;
   gap: 6px;
+  align-items: center;
+}
+
+.savedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #1b7d2f;
+  background: #dcf5e3;
 }
 
 /* --- Save button --- */
@@ -107,6 +134,16 @@
 .saveButton:hover {
   color: #0059c1;
   transform: scale(1.1);
+}
+
+.saveButtonSaved {
+  color: #1b7d2f;
+  cursor: default;
+}
+
+.saveButtonSaved:hover {
+  color: #1b7d2f;
+  transform: none;
 }
 
 /* --- Empty state --- */

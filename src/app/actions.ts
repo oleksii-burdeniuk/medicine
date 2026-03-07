@@ -25,26 +25,48 @@ function ensureVapid() {
   vapidInitialized = true;
 }
 
-let subscription: webpush.PushSubscription | null = null;
+type PushSubscriptionInput = {
+  endpoint: string;
+  expirationTime?: number | null;
+  keys?: {
+    p256dh?: string;
+    auth?: string;
+  };
+};
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export async function subscribeUser(sub: any) {
-  // Ensure VAPID keys are configured (so server doesn't crash silently)
+function toWebPushSubscription(
+  sub: PushSubscriptionInput
+): webpush.PushSubscription {
+  if (!sub?.endpoint || !sub?.keys?.p256dh || !sub?.keys?.auth) {
+    throw new Error('Invalid push subscription payload');
+  }
+
+  return {
+    endpoint: sub.endpoint,
+    expirationTime: sub.expirationTime ?? null,
+    keys: {
+      p256dh: sub.keys.p256dh,
+      auth: sub.keys.auth,
+    },
+  };
+}
+
+export async function subscribeUser(sub: PushSubscriptionInput) {
   ensureVapid();
-  // Safely cast and store the browser subscription object
-  subscription = sub as webpush.PushSubscription;
+  toWebPushSubscription(sub);
   return { success: true };
 }
 
 export async function unsubscribeUser() {
-  subscription = null;
   return { success: true };
 }
 
-export async function sendNotification(message: string) {
-  if (!subscription) throw new Error('No subscription available');
-
+export async function sendNotification(
+  message: string,
+  sub: PushSubscriptionInput
+) {
   ensureVapid();
+  const subscription = toWebPushSubscription(sub);
 
   try {
     await webpush.sendNotification(

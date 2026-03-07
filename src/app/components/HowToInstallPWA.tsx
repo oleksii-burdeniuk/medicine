@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import {
   Smartphone,
   MonitorSmartphone,
-  Download,
   Tablet,
   CheckCircle,
 } from 'lucide-react';
@@ -26,12 +25,10 @@ export default function HowToInstallPWA() {
   const [installPrompt, setInstallPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [showInstallButton, setShowInstallButton] = useState(false);
-  const [isIOS, setIsIOS] = useState(false);
 
   useEffect(() => {
     const iOS =
       /iPad|iPhone|iPod/.test(navigator.userAgent) && !window['MSStream'];
-    setIsIOS(!!iOS);
 
     const handleBeforeInstallPrompt = (e: Event) => {
       e.preventDefault();

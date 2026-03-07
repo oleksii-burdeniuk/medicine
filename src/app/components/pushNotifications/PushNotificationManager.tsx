@@ -86,7 +86,8 @@ export default function PushNotificationManager() {
 
   async function sendTestNotification() {
     if (subscription) {
-      await sendNotification(message);
+      const serializedSub = JSON.parse(JSON.stringify(subscription));
+      await sendNotification(message, serializedSub);
       setMessage('');
     }
   }

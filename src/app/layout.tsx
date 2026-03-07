@@ -1,5 +1,3 @@
-import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import Header from './components/Header';
@@ -9,15 +7,6 @@ import { Analytics } from '@vercel/analytics/next';
 import FloatingHomeButton from './components/FloatingHomeButton';
 import { NextIntlClientProvider } from 'next-intl';
 import { cookies } from 'next/headers';
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
-});
 
 export const metadata = {
   title: 'Barcode Scanner',
@@ -38,7 +27,7 @@ export default async function RootLayout({
   const locale = store.get('locale')?.value || 'pl';
   return (
     <html suppressHydrationWarning lang={locale}>
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body>
         <NextIntlClientProvider>
           <Header />
           {children}
