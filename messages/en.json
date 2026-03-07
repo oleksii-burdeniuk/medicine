@@ -47,18 +47,9 @@
     "infoBox": "X – pure color without patterns A – pattern or texture"
   },
   "Colors": {
-    "MLA_MLB": "Flowers, patterns",
-    "99": "Black",
-    "00": "White",
-    "01": "Cream",
-    "02": "Light beige",
-    "03": "Pink",
-    "07": "Light green",
-    "09": "Light gray",
     "23": "Orange",
     "42": "Rose",
     "49": "Purple",
-    "50/55": "Blue",
     "59": "Navy blue",
     "67": "Turquoise",
     "69": "Dark turquoise",
@@ -66,7 +57,6 @@
     "77": "Green",
     "79": "Dark green",
     "80": "Beige",
-    "82/88": "Brown",
     "87": "Army green",
     "89": "Dark brown",
     "90": "Gray",
@@ -74,7 +64,17 @@
     "94": "Steel purple",
     "95": "Steel blue",
     "96": "Steel green",
-    "97": "Olive green"
+    "97": "Olive green",
+    "99": "Black",
+    "MLA_MLB": "Flowers, patterns",
+    "00": "White",
+    "01": "Cream",
+    "02": "Light beige",
+    "03": "Pink",
+    "07": "Light green",
+    "09": "Light gray",
+    "50/55": "Blue",
+    "82/88": "Brown"
   },
   "HoursPage": {
     "title": "🕒 My Working Hours",
@@ -86,14 +86,18 @@
     "monthlySalary": "💰 Monthly earnings",
     "exportPDF": "📄 Export to PDF",
     "currency": "zł",
-
     "weekdayMon": "Mon",
     "weekdayTue": "Tue",
     "weekdayWed": "Wed",
     "weekdayThu": "Thu",
     "weekdayFri": "Fri",
     "weekdaySat": "Sat",
-    "weekdaySun": "Sun"
+    "weekdaySun": "Sun",
+    "entriesCount": "entries",
+    "pdfTitle": "Work hours report - {month}",
+    "pdfWorkDaysSection": "Work days:",
+    "pdfNoData": "No data for the selected month.",
+    "pdfSummary": "Summary:"
   },
   "WorkBreakTimePage": {
     "title": "🕒 Work & Break Schedule",
@@ -160,7 +164,11 @@
     "copyYesterday": "Copy from yesterday",
     "save": "Save",
     "delete": "Delete entry",
-    "close": "Close"
+    "close": "Close",
+    "pasteLastSaved": "Paste last saved",
+    "addInterval": "Add interval",
+    "removeInterval": "Remove interval",
+    "validationError": "Please fill start and end time for each interval."
   },
   "ListCodes": {
     "title": "Saved codes ({count})",
@@ -169,5 +177,27 @@
     "saveButton": "Save code",
     "saveAll": "Save all",
     "noResults": "No results found"
+  },
+  "PushNotificationsPage": {
+    "title": "🔔 Push Notifications",
+    "description": "Enable notifications to receive important alerts from the Medicine app, such as break reminders or updates."
+  },
+  "PushNotificationManager": {
+    "title": "🔔 Push Notifications",
+    "unsupported": "Your browser does not support push notifications 😕",
+    "vapidMissing": "❌ VAPID public key is not configured. Set NEXT_PUBLIC_VAPID_PUBLIC_KEY in your environment.",
+    "vapidInvalid": "❌ Invalid VAPID public key format.",
+    "subscribeError": "❌ Error while subscribing to push notifications: {error}",
+    "subscribedInfo": "You are subscribed to push notifications.",
+    "messagePlaceholder": "Type a test message",
+    "sendTest": "Send test notification",
+    "unsubscribe": "Unsubscribe",
+    "notSubscribedInfo": "You are not subscribed to push notifications yet.",
+    "subscribe": "Subscribe"
+  },
+  "SavedUsers": {
+    "title": "Saved users",
+    "noUsers": "No saved users",
+    "deleteAccount": "Delete account"
   }
 }

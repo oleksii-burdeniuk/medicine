@@ -1,8 +1,10 @@
 // ------ PWA Service Worker (safe for next-pwa) ------
 
 // VERSION (change this to clear cache after deployment)
-const CACHE_VERSION = 'v11.1';
-const CACHE_NAME = `medicine-cache-${CACHE_VERSION}`;
+const CACHE_VERSION = 'v12.0';
+const STATIC_CACHE = `medicine-static-${CACHE_VERSION}`;
+const PAGE_CACHE = `medicine-pages-${CACHE_VERSION}`;
+const RUNTIME_CACHE = `medicine-runtime-${CACHE_VERSION}`;
 
 const OFFLINE_URL = '/offline.html';
 
@@ -17,7 +19,7 @@ const PRECACHE_ASSETS = [
 // INSTALL
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(PRECACHE_ASSETS)),
+    caches.open(STATIC_CACHE).then((cache) => cache.addAll(PRECACHE_ASSETS)),
   );
   self.skipWaiting();
 });
@@ -30,7 +32,8 @@ self.addEventListener('activate', (event) => {
         cacheNames
           .filter(
             (cacheName) =>
-              cacheName !== CACHE_NAME && !cacheName.includes('workbox'),
+              ![STATIC_CACHE, PAGE_CACHE, RUNTIME_CACHE].includes(cacheName) &&
+              !cacheName.includes('workbox'),
           )
           .map((cacheName) => caches.delete(cacheName)),
       );
@@ -42,28 +45,68 @@ self.addEventListener('activate', (event) => {
 
 // -------- Fix navigation freezes (important!) -----------
 self.addEventListener('fetch', (event) => {
-  // Skip Next.js internals + API
-  if (
-    event.request.url.includes('_next') ||
-    event.request.url.includes('/api') ||
-    event.request.method !== 'GET'
-  ) {
+  if (event.request.method !== 'GET') {
     return;
   }
 
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(event.request)
-        .then((networkResponse) => {
-          return caches.open('dynamic-v2').then((cache) => {
-            cache.put(event.request, networkResponse.clone());
-            return networkResponse;
-          });
-        })
-        .catch(() => cachedResponse || caches.match(OFFLINE_URL));
+  const requestUrl = new URL(event.request.url);
 
-      return cachedResponse || fetchPromise;
-    }),
+  // Never cache API calls
+  if (requestUrl.pathname.startsWith('/api/')) {
+    return;
+  }
+
+  // HTML pages: network-first with offline fallback
+  if (event.request.mode === 'navigate') {
+    event.respondWith(
+      fetch(event.request)
+        .then((networkResponse) => {
+          const responseClone = networkResponse.clone();
+          caches.open(PAGE_CACHE).then((cache) => cache.put(event.request, responseClone));
+          return networkResponse;
+        })
+        .catch(async () => {
+          const cachedPage = await caches.match(event.request);
+          return cachedPage || caches.match(OFFLINE_URL);
+        }),
+    );
+    return;
+  }
+
+  // App assets (including /_next/static/*.css, *.js): cache-first
+  if (
+    ['style', 'script', 'worker', 'font', 'image'].includes(
+      event.request.destination,
+    ) ||
+    requestUrl.pathname.startsWith('/_next/static/')
+  ) {
+    event.respondWith(
+      caches.match(event.request).then((cachedResponse) => {
+        if (cachedResponse) return cachedResponse;
+
+        return fetch(event.request).then((networkResponse) => {
+          const responseClone = networkResponse.clone();
+          caches
+            .open(RUNTIME_CACHE)
+            .then((cache) => cache.put(event.request, responseClone));
+          return networkResponse;
+        });
+      }),
+    );
+    return;
+  }
+
+  // Other requests: network-first with cache fallback
+  event.respondWith(
+    fetch(event.request)
+      .then((networkResponse) => {
+        const responseClone = networkResponse.clone();
+        caches
+          .open(RUNTIME_CACHE)
+          .then((cache) => cache.put(event.request, responseClone));
+        return networkResponse;
+      })
+      .catch(() => caches.match(event.request).then((res) => res || caches.match(OFFLINE_URL))),
   );
 });
 

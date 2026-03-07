@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import {
   subscribeUser,
   unsubscribeUser,
@@ -22,6 +23,7 @@ function urlBase64ToUint8Array(base64String: string) {
 }
 
 export default function PushNotificationManager() {
+  const t = useTranslations('PushNotificationManager');
   const [isSupported, setIsSupported] = useState(false);
   const [subscription, setSubscription] = useState<PushSubscription | null>(
     null
@@ -49,9 +51,7 @@ export default function PushNotificationManager() {
     try {
       const vapidKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
       if (!vapidKey) {
-        alert(
-          '❌ VAPID public key is not configured. Set NEXT_PUBLIC_VAPID_PUBLIC_KEY in your environment.'
-        );
+        alert(t('vapidMissing'));
         return;
       }
 
@@ -59,7 +59,7 @@ export default function PushNotificationManager() {
       try {
         applicationServerKey = urlBase64ToUint8Array(vapidKey);
       } catch {
-        alert('❌ Invalid VAPID public key format.');
+        alert(t('vapidInvalid'));
         return;
       }
 
@@ -72,9 +72,7 @@ export default function PushNotificationManager() {
       await subscribeUser(serializedSub);
     } catch (error) {
       console.error('Push subscription error', error);
-      alert(
-        '❌ Błąd podczas subskrypcji na powiadomienia push: ' + String(error)
-      );
+      alert(t('subscribeError', { error: String(error) }));
     }
   }
 
@@ -94,26 +92,22 @@ export default function PushNotificationManager() {
 
   if (!isSupported) {
     return (
-      <p className={styles.unsupported}>
-        Twoja przeglądarka nie obsługuje powiadomień push 😕
-      </p>
+      <p className={styles.unsupported}>{t('unsupported')}</p>
     );
   }
 
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <h3 className={styles.title}>🔔 Powiadomienia Push</h3>
+        <h3 className={styles.title}>{t('title')}</h3>
 
         {!!subscription ? (
           <>
-            <p className={styles.info}>
-              Jesteś subskrybowany na powiadomienia push.
-            </p>
+            <p className={styles.info}>{t('subscribedInfo')}</p>
             <div className={styles.actions}>
               <input
                 type='text'
-                placeholder='Wpisz wiadomość testową'
+                placeholder={t('messagePlaceholder')}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 className={styles.input}
@@ -122,27 +116,25 @@ export default function PushNotificationManager() {
                 onClick={sendTestNotification}
                 className={styles.primaryButton}
               >
-                Wyślij testowe powiadomienie
+                {t('sendTest')}
               </button>
               <button
                 onClick={unsubscribeFromPush}
                 className={styles.dangerButton}
               >
-                Anuluj subskrypcję
+                {t('unsubscribe')}
               </button>
             </div>
           </>
         ) : (
           <>
-            <p className={styles.info}>
-              Nie jesteś jeszcze zapisany na powiadomienia push.
-            </p>
+            <p className={styles.info}>{t('notSubscribedInfo')}</p>
             <button
               id='subscribeToPush'
               onClick={subscribeToPush}
               className={styles.primaryButton}
             >
-              Subskrybuj
+              {t('subscribe')}
             </button>
           </>
         )}

@@ -25,6 +25,16 @@ export default function Header() {
         </Link>
       </div>
 
+      <a
+        href='https://vonco.partners/'
+        target='_blank'
+        rel='noopener noreferrer'
+        className={styles.voncoLink}
+      >
+        <span className={styles.voncoIcon} aria-hidden='true'></span>
+        <span className={styles.voncoText}>Vonco</span>
+      </a>
+
       <button
         className={styles.menuButton}
         onClick={toggleMenu}

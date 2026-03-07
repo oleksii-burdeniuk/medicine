@@ -47,18 +47,9 @@
     "infoBox": "X – czysty kolor bez wzorów A – wzór lub tekstura"
   },
   "Colors": {
-    "MLA_MLB": "Kwiaty, wzory",
-    "99": "Czarny",
-    "00": "Biały",
-    "01": "Kremowy",
-    "02": "Jasny beżowy",
-    "03": "Róż",
-    "07": "Jasny zielony",
-    "09": "Jasny szary",
     "23": "Pomarańczowy",
     "42": "Różowy",
     "49": "Fiolet",
-    "50/55": "Niebieski",
     "59": "Granatowy",
     "67": "Turkus",
     "69": "Ciemny turkus",
@@ -66,7 +57,6 @@
     "77": "Zielony",
     "79": "Ciemny zielony",
     "80": "Beż",
-    "82/88": "Brązowy",
     "87": "Wojskowy",
     "89": "Ciemny brąz",
     "90": "Szary",
@@ -74,7 +64,17 @@
     "94": "Stalowy fiolet",
     "95": "Stalowy niebieski",
     "96": "Stalowa zieleń",
-    "97": "Zgniła zieleń"
+    "97": "Zgniła zieleń",
+    "99": "Czarny",
+    "MLA_MLB": "Kwiaty, wzory",
+    "00": "Biały",
+    "01": "Kremowy",
+    "02": "Jasny beżowy",
+    "03": "Róż",
+    "07": "Jasny zielony",
+    "09": "Jasny szary",
+    "50/55": "Niebieski",
+    "82/88": "Brązowy"
   },
   "HoursPage": {
     "title": "🕒 Moje godziny pracy",
@@ -92,7 +92,12 @@
     "weekdayThu": "Czw",
     "weekdayFri": "Pt",
     "weekdaySat": "Sob",
-    "weekdaySun": "Nd"
+    "weekdaySun": "Nd",
+    "entriesCount": "wpisy",
+    "pdfTitle": "Raport godzin pracy - {month}",
+    "pdfWorkDaysSection": "Dni pracy:",
+    "pdfNoData": "Brak danych w wybranym miesiącu.",
+    "pdfSummary": "Podsumowanie:"
   },
   "WorkBreakTimePage": {
     "title": "🕒 Grafik pracy i przerwy",
@@ -159,7 +164,11 @@
     "copyYesterday": "Skopiuj z wczoraj",
     "save": "Zapisz",
     "delete": "Usuń wpis",
-    "close": "Zamknij"
+    "close": "Zamknij",
+    "pasteLastSaved": "Wstaw ostatni zapis",
+    "addInterval": "Dodaj przedział",
+    "removeInterval": "Usuń przedział",
+    "validationError": "Uzupełnij godzinę startu i zakończenia dla każdego przedziału."
   },
   "ListCodes": {
     "title": "Zapisane kody ({count})",
@@ -168,5 +177,27 @@
     "saveButton": "Zapisz kod",
     "saveAll": "Zapisz wszystkie",
     "noResults": "Brak wyników"
+  },
+  "PushNotificationsPage": {
+    "title": "🔔 Powiadomienia Push",
+    "description": "Włącz powiadomienia, aby otrzymywać ważne alerty z aplikacji Medicine, np. przypomnienia o przerwach lub nowościach."
+  },
+  "PushNotificationManager": {
+    "title": "🔔 Powiadomienia Push",
+    "unsupported": "Twoja przeglądarka nie obsługuje powiadomień push 😕",
+    "vapidMissing": "❌ VAPID public key is not configured. Set NEXT_PUBLIC_VAPID_PUBLIC_KEY in your environment.",
+    "vapidInvalid": "❌ Invalid VAPID public key format.",
+    "subscribeError": "❌ Błąd podczas subskrypcji na powiadomienia push: {error}",
+    "subscribedInfo": "Jesteś subskrybowany na powiadomienia push.",
+    "messagePlaceholder": "Wpisz wiadomość testową",
+    "sendTest": "Wyślij testowe powiadomienie",
+    "unsubscribe": "Anuluj subskrypcję",
+    "notSubscribedInfo": "Nie jesteś jeszcze zapisany na powiadomienia push.",
+    "subscribe": "Subskrybuj"
+  },
+  "SavedUsers": {
+    "title": "Zapisani użytkownicy",
+    "noUsers": "Brak zapisanych użytkowników",
+    "deleteAccount": "Usuń konto"
   }
 }

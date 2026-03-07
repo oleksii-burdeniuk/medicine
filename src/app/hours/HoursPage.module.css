@@ -1,27 +1,54 @@
 .container {
-  padding: 10px;
+  padding: 14px;
 }
 
 .title {
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 20px;
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 16px;
   color: white;
 }
 
 .calendar {
   background: #fff;
-  padding: 16px;
-  border-radius: 12px;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .header {
   display: flex;
+  align-items: center;
   justify-content: space-between;
-  font-size: 20px;
-  margin-bottom: 10px;
+  gap: 10px;
+  margin-bottom: 12px;
   color: #000;
+}
+
+.monthTitle {
+  flex: 1;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  color: #141414;
+}
+
+.monthNavBtn {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid #d6d6d6;
+  background: #fff;
+  color: #1c1c1c;
+  cursor: pointer;
+  font-weight: 700;
+  transition: transform 0.15s ease;
+}
+
+.monthNavBtn:hover {
+  transform: translateY(-1px);
 }
 
 .weekdays {
@@ -40,7 +67,7 @@
 }
 
 .day {
-  background: #f0f0f0;
+  background: #f7f7f7;
   padding: 6px;
   border-radius: 8px;
   min-height: 60px;
@@ -53,11 +80,11 @@
 }
 
 .day:hover {
-  background: #e0e0e0;
+  background: #ededed;
 }
 
 .hasHours {
-  background: #c0ffc0;
+  background: #e7f7ec;
   border: 1px solid #4caf50;
 }
 
@@ -112,27 +139,113 @@
 .weekdays div {
   color: black;
 }
-.header button {
-  color: rgb(249, 249, 249);
-}
-
 .summaryContainer {
   margin-top: 25px;
-  padding: 20px;
+  padding: 22px;
   background: #ffffff;
   color: #000;
-  border-radius: 12px;
-
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.12);
-  font-size: 18px;
-  line-height: 1.6;
+  border-radius: 16px;
+  border: 1px solid #e8e8e8;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-.summaryContainer h2 {
+.summaryTitle {
   margin: 0 0 10px 0;
   font-size: 22px;
-  font-weight: 600;
+  font-weight: 700;
+  color: #111;
 }
+
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.metricCard {
+  background: #f8fafc;
+  border: 1px solid #e7edf3;
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.metricLabel {
+  font-size: 0.8rem;
+  color: #5d6670;
+}
+
+.metricValue {
+  font-size: 1.25rem;
+  color: #101820;
+}
+
+.rateRow {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.rateLabel {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.rateInputWrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rateInput {
+  width: 100px;
+  border: 1px solid #cfd8e3;
+  border-radius: 10px;
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  color: #111;
+}
+
+.rateCurrency {
+  font-weight: 700;
+  color: #374151;
+}
+
+.salaryLine {
+  margin-top: 14px;
+  font-size: 1.05rem;
+  color: #222;
+}
+
+.exportBtn {
+  margin-top: 12px;
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, #0d6efd, #1f7aff);
+  box-shadow: 0 10px 22px rgba(13, 110, 253, 0.26);
+}
+
+.exportBtn:hover {
+  filter: brightness(1.03);
+}
+
 .today {
   border: 3px solid #4a90e2;
+}
+
+@media (max-width: 760px) {
+  .metricsGrid {
+    grid-template-columns: 1fr;
+  }
 }

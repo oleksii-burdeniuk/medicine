@@ -20,6 +20,7 @@ const eslintConfig = [
       ".intlayer/**",
       "public/sw.js",
       "public/workbox-*.js",
+      "src/app/hours/page copy.tsx",
       "next-env.d.ts",
     ],
   },

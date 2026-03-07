@@ -3,7 +3,7 @@ import runtimeCaching from 'next-pwa/cache.js';
 
 const config = {
   dest: 'public',
-  register: true,
+  register: false,
   skipWaiting: true,
 
   // ВАЖЛИВО: вимикаємо SW у dev-режимі

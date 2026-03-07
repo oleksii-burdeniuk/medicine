@@ -2,6 +2,7 @@
 
 import styles from './SavedUsers.module.css';
 import { Trash2, User, Key } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface SavedUser {
   login: string;
@@ -15,13 +16,15 @@ interface Props {
 }
 
 const SavedUsers = ({ savedUsers, onDelete, onSelect }: Props) => {
+  const t = useTranslations('SavedUsers');
+
   return (
     <div className={styles.savedUsers}>
-      <h2>Saved Users</h2>
+      <h2>{t('title')}</h2>
 
       <ul className={styles.list}>
         {savedUsers.length === 0 ? (
-          <p className={styles.noResults}>No users found</p>
+          <p className={styles.noResults}>{t('noUsers')}</p>
         ) : (
           savedUsers.map((user) => (
             <li key={user.login} className={styles.listItem}>
@@ -49,7 +52,7 @@ const SavedUsers = ({ savedUsers, onDelete, onSelect }: Props) => {
                 className={styles.deleteButton}
                 onClick={() => onDelete(user.login)}
                 type='button'
-                title='Delete account'
+                title={t('deleteAccount')}
               >
                 <Trash2 size={18} />
               </button>

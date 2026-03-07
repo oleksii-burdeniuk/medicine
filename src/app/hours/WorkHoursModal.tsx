@@ -4,39 +4,77 @@ import styles from './WorkHoursModal.module.css';
 import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 
+interface WorkInterval {
+  start: string;
+  end: string;
+}
+
 interface Props {
   date: string;
-  data?: { start: string; end: string };
-  isPrevDateData: boolean;
+  intervals: WorkInterval[];
+  hasLastSavedData: boolean;
   onClose: () => void;
-  onSave: (start: string, end: string) => void;
+  onSave: (intervals: WorkInterval[]) => void;
   onDelete: () => void;
-  onCopyTime: () => void;
+  onPasteLastSaved: () => void;
 }
 
 export default function WorkHoursModal({
   date,
-  data,
+  intervals,
   onClose,
   onSave,
   onDelete,
-  onCopyTime,
-  isPrevDateData,
+  onPasteLastSaved,
+  hasLastSavedData,
 }: Props) {
   const t = useTranslations('modal');
-
-  const [start, setStart] = useState(data?.start || '');
-  const [end, setEnd] = useState(data?.end || '');
-
-  // 🔥 синхронізація даних дня – основна проблема була тут
-  useEffect(() => {
-    setStart(data?.start || '');
-    setEnd(data?.end || '');
-  }, [data, date]);
+  const [rows, setRows] = useState<WorkInterval[]>(intervals);
 
   const formatDate = (d: string) => {
     const [y, m, day] = d.split('-');
     return `${day}.${m}.${y}`;
+  };
+
+  useEffect(() => {
+    setRows(intervals);
+  }, [intervals, date]);
+
+  const updateRow = (
+    index: number,
+    field: keyof WorkInterval,
+    value: string
+  ) => {
+    setRows((prev) =>
+      prev.map((row, rowIndex) =>
+        rowIndex === index ? { ...row, [field]: value } : row
+      )
+    );
+  };
+
+  const addInterval = () => {
+    setRows((prev) => [...prev, { start: '', end: '' }]);
+  };
+
+  const removeInterval = (index: number) => {
+    setRows((prev) => prev.filter((_, rowIndex) => rowIndex !== index));
+  };
+
+  const save = () => {
+    const normalized = rows.filter((row) => row.start || row.end);
+
+    if (normalized.length === 0) {
+      onSave([]);
+      return;
+    }
+
+    const hasInvalid = normalized.some((row) => !row.start || !row.end);
+    if (hasInvalid) {
+      alert(t('validationError'));
+      return;
+    }
+
+    onSave(normalized);
   };
 
   return (
@@ -44,48 +82,60 @@ export default function WorkHoursModal({
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
         <h2 className={styles.title}>📅 {formatDate(date)}</h2>
 
-        <label className={styles.label}>{t('start')}</label>
-        <input
-          type='time'
-          value={start}
-          onChange={(e) => setStart(e.target.value)}
-          className={styles.input}
-        />
+        {rows.map((row, index) => (
+          <div key={index} className={styles.intervalCard}>
+            <label className={styles.label}>
+              {t('start')} #{index + 1}
+            </label>
+            <input
+              type='time'
+              value={row.start}
+              onChange={(e) => updateRow(index, 'start', e.target.value)}
+              className={styles.input}
+            />
 
-        <label className={styles.label}>{t('end')}</label>
-        <input
-          type='time'
-          value={end}
-          onChange={(e) => setEnd(e.target.value)}
-          className={styles.input}
-        />
+            <label className={styles.label}>{t('end')}</label>
+            <input
+              type='time'
+              value={row.end}
+              onChange={(e) => updateRow(index, 'end', e.target.value)}
+              className={styles.input}
+            />
+
+            {rows.length > 1 && (
+              <button
+                type='button'
+                className={styles.removeIntervalBtn}
+                onClick={() => removeInterval(index)}
+              >
+                {t('removeInterval')}
+              </button>
+            )}
+          </div>
+        ))}
 
         <div className={styles.buttons}>
-          {!!isPrevDateData && !data ? (
+          <button className={styles.secondaryBtn} onClick={addInterval}>
+            ➕ {t('addInterval')}
+          </button>
+
+          {hasLastSavedData && (
             <button
-              className={styles.saveBtn}
+              className={styles.secondaryBtn}
               onClick={() => {
-                onCopyTime();
+                onPasteLastSaved();
                 onClose();
               }}
             >
-              💾 {t('copyYesterday')}
+              📥 {t('pasteLastSaved')}
             </button>
-          ) : (
-            <div />
           )}
 
-          <button
-            className={styles.saveBtn}
-            onClick={() => {
-              if (!start || !end) return;
-              onSave(start, end);
-            }}
-          >
+          <button className={styles.saveBtn} onClick={save}>
             💾 {t('save')}
           </button>
 
-          {data && (
+          {intervals.length > 0 && (
             <button className={styles.deleteBtn} onClick={onDelete}>
               🗑 {t('delete')}
             </button>
