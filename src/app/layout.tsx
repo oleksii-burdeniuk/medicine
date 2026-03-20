@@ -3,10 +3,11 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ServiceWorkerRegister from './components/ServiceWorkerRegister';
-import { Analytics } from '@vercel/analytics/next';
 import FloatingHomeButton from './components/FloatingHomeButton';
 import { NextIntlClientProvider } from 'next-intl';
 import { cookies } from 'next/headers';
+import Script from 'next/script';
+import Analytics from './components/Analitics/analitics';
 
 export const metadata = {
   title: 'Barcode Scanner',
@@ -33,11 +34,25 @@ export default async function RootLayout({
           {children}
 
           <SpeedInsights />
-          <Analytics />
+
           <FloatingHomeButton />
           <Footer />
           <ServiceWorkerRegister />
         </NextIntlClientProvider>
+
+        <Script
+          src='https://www.googletagmanager.com/gtag/js?id=G-PYHS0CDP9Z'
+          strategy='afterInteractive'
+        />
+        <Script id='ga-script' strategy='afterInteractive'>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-PYHS0CDP9Z');
+          `}
+        </Script>
+        <Analytics />
       </body>
     </html>
   );

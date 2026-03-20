@@ -25,7 +25,7 @@ export default function Header() {
         </Link>
       </div>
 
-      <a
+      {/* <a
         href='https://vonco.partners/'
         target='_blank'
         rel='noopener noreferrer'
@@ -33,7 +33,7 @@ export default function Header() {
       >
         <span className={styles.voncoIcon} aria-hidden='true'></span>
         <span className={styles.voncoText}>Vonco</span>
-      </a>
+      </a> */}
 
       <button
         className={styles.menuButton}
