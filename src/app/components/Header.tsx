@@ -25,15 +25,9 @@ export default function Header() {
         </Link>
       </div>
 
-      {/* <a
-        href='https://vonco.partners/'
-        target='_blank'
-        rel='noopener noreferrer'
-        className={styles.voncoLink}
-      >
-        <span className={styles.voncoIcon} aria-hidden='true'></span>
-        <span className={styles.voncoText}>Vonco</span>
-      </a> */}
+      <Link href='/hours' onClick={closeMenu} className={styles.voncoLink}>
+        {t('hours')}
+      </Link>
 
       <button
         className={styles.menuButton}
