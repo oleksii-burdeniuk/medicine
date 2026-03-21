@@ -208,7 +208,8 @@
   border-radius: 10px;
   padding: 8px 10px;
   font-size: 0.95rem;
-  color: #111;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .rateCurrency {
