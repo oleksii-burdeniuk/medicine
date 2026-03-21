@@ -1,5 +1,7 @@
 'use client';
 
+import { EVENTS } from '../libs/analytics/events';
+import { event } from '../libs/analytics/gtag';
 import styles from './LocaleSwitcher.module.css';
 import { useEffect, useState } from 'react';
 
@@ -13,6 +15,7 @@ export default function LocaleSwitcher() {
   }, []);
 
   const switchLocale = (newLocale: string) => {
+    event(EVENTS.LANGUAGE_CHANGE);
     document.cookie = `locale=${newLocale}; path=/; max-age=${
       60 * 60 * 24 * 365
     }`;

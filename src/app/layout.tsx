@@ -7,7 +7,7 @@ import FloatingHomeButton from './components/FloatingHomeButton';
 import { NextIntlClientProvider } from 'next-intl';
 import { cookies } from 'next/headers';
 import Script from 'next/script';
-import Analytics from './components/Analitics/analitics';
+import Analytics from './components/Analytics/Analytics';
 
 export const metadata = {
   title: 'Barcode Scanner',
@@ -49,7 +49,10 @@ export default async function RootLayout({
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', 'G-PYHS0CDP9Z');
+            gtag('config', 'G-PYHS0CDP9Z', {
+  send_page_view: false,
+});
+            
           `}
         </Script>
         <Analytics />

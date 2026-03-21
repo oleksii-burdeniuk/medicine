@@ -1,8 +1,11 @@
 'use client';
 
+import { EVENTS } from '../libs/analytics/events';
+import { event } from '../libs/analytics/gtag';
+
 export function openSmartLunch() {
   const ua = navigator.userAgent || '';
-
+  event(EVENTS.SMART_LUNCH_CLICK);
   const isIOS = /iPhone|iPad|iPod/i.test(ua);
   const isAndroid = /Android/i.test(ua);
 

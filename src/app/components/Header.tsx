@@ -7,13 +7,18 @@ import styles from './Header.module.css';
 import LocaleSwitcher from './LocaleSwitcher';
 import { useTranslations } from 'next-intl';
 import { openSmartLunch } from './SmartLunchButton';
+import { event } from '../libs/analytics/gtag';
+import { EVENTS } from '../libs/analytics/events';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const pathname = usePathname();
   const t = useTranslations('Header');
 
-  const toggleMenu = () => setIsOpen((prev) => !prev);
+  const toggleMenu = () => {
+    setIsOpen((prev) => !prev);
+    event(EVENTS.MENU_OPEN);
+  };
   const closeMenu = () => setIsOpen(false);
   const isActive = (href: string) => pathname === href;
 

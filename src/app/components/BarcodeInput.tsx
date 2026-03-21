@@ -3,6 +3,8 @@
 import { Image as ImageIcon, Save } from 'lucide-react';
 import styles from './BarcodeInput.module.css';
 import { useTranslations } from 'next-intl';
+import { event } from '../libs/analytics/gtag';
+import { EVENTS } from '../libs/analytics/events';
 
 interface BarcodeInputProps {
   text: string;
@@ -39,7 +41,10 @@ export default function BarcodeInput({
         type='button'
         className={styles.iconButton}
         title={t('uploadButton')}
-        onClick={() => fileInputRef.current?.click()}
+        onClick={() => {
+          fileInputRef.current?.click();
+          event(EVENTS.CHOOSE_PHOTO_CLICK);
+        }}
       >
         <ImageIcon size={20} />
       </button>

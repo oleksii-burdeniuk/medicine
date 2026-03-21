@@ -12,6 +12,8 @@ import Modal from '../modalWindow/Modal';
 import ListCodes from '../listCodes/ListCodes';
 import { processUploadedImage } from './processUploadedImage';
 import { useScannerStorage, type ViewMode } from './useScannerStorage';
+import { event } from '@/app/libs/analytics/gtag';
+import { EVENTS } from '@/app/libs/analytics/events';
 
 const BarCodeContent = () => {
   const [text, setText] = useState('');
@@ -41,10 +43,12 @@ const BarCodeContent = () => {
 
   const handleSave = (inputText: string) => {
     saveEntry(inputText, viewMode);
+    event(EVENTS.SAVE_CLICK);
   };
 
   const handleDeleteCode = (code: string) => {
     deleteCode(code);
+    event(EVENTS.DELETE_CLICK);
   };
 
   const handleDeleteUser = (login: string) => {
@@ -83,8 +87,10 @@ const BarCodeContent = () => {
   };
 
   const openListModal = () => {
+    event(EVENTS.LIST_CLICK);
     if (listCodes.length > 0) {
       setActiveModal(true);
+      event(EVENTS.LIST_CLICK);
     }
   };
 
@@ -104,7 +110,10 @@ const BarCodeContent = () => {
       <div className={styles.toggleWrapper}>
         <button
           className={viewMode === 'savedCodes' ? styles.activeTab : styles.tab}
-          onClick={() => setViewMode('savedCodes')}
+          onClick={() => {
+            setViewMode('savedCodes');
+            event(EVENTS.SCANNER_CLICK);
+          }}
           title='Codes'
         >
           <QrCode size={18} />
@@ -118,7 +127,10 @@ const BarCodeContent = () => {
         </button>
         <button
           className={viewMode === 'savedUsers' ? styles.activeTab : styles.tab}
-          onClick={() => setViewMode('savedUsers')}
+          onClick={() => {
+            setViewMode('savedUsers');
+            event(EVENTS.USER_CLICK);
+          }}
           title='Users'
         >
           <User size={18} />
