@@ -1,7 +1,7 @@
 // ------ PWA Service Worker (safe for next-pwa) ------
 
 // VERSION (change this to clear cache after deployment)
-const CACHE_VERSION = 'v12.1';
+const CACHE_VERSION = 'v12.2';
 const STATIC_CACHE = `medicine-static-${CACHE_VERSION}`;
 const PAGE_CACHE = `medicine-pages-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `medicine-runtime-${CACHE_VERSION}`;
@@ -63,12 +63,16 @@ self.addEventListener('fetch', (event) => {
       fetch(event.request)
         .then((networkResponse) => {
           const responseClone = networkResponse.clone();
-          caches.open(PAGE_CACHE).then((cache) => cache.put(event.request, responseClone));
+          caches
+            .open(PAGE_CACHE)
+            .then((cache) => cache.put(event.request, responseClone));
           return networkResponse;
         })
         .catch(async () => {
           const cachedPage = await caches.match(event.request);
-          const cachedAppShell = await caches.match('/', { ignoreSearch: true });
+          const cachedAppShell = await caches.match('/', {
+            ignoreSearch: true,
+          });
           return cachedPage || cachedAppShell || caches.match(OFFLINE_URL);
         }),
     );
@@ -108,7 +112,11 @@ self.addEventListener('fetch', (event) => {
           .then((cache) => cache.put(event.request, responseClone));
         return networkResponse;
       })
-      .catch(() => caches.match(event.request).then((res) => res || caches.match(OFFLINE_URL))),
+      .catch(() =>
+        caches
+          .match(event.request)
+          .then((res) => res || caches.match(OFFLINE_URL)),
+      ),
   );
 });
 
