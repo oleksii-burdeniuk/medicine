@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import styles from './Header.module.css';
@@ -12,8 +12,24 @@ import { EVENTS } from '../libs/analytics/events';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
+  const [now, setNow] = useState(new Date());
   const pathname = usePathname();
   const t = useTranslations('Header');
+
+  useEffect(() => {
+    const timer = window.setInterval(() => setNow(new Date()), 60 * 1000);
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const dayText = String(now.getDate());
+  const monthText = useMemo(
+    () =>
+      now
+        .toLocaleString(undefined, { month: 'short' })
+        .replace('.', '')
+        .toUpperCase(),
+    [now]
+  );
 
   const toggleMenu = () => {
     setIsOpen((prev) => !prev);
@@ -30,8 +46,12 @@ export default function Header() {
         </Link>
       </div>
 
-      <Link href='/hours' onClick={closeMenu} className={styles.voncoLink}>
-        {t('hours')}
+      <Link href='/hours' onClick={closeMenu} className={styles.calendarLink}>
+        <span className={styles.calendarDateBadge} aria-hidden='true'>
+          <span className={styles.calendarMonth}>{monthText}</span>
+          <span className={styles.calendarDay}>{dayText}</span>
+        </span>
+        <span>{t('hours')}</span>
       </Link>
 
       <button

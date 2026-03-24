@@ -124,7 +124,7 @@
   flex: 1;
   padding: 5;
   border: none;
-  background: #ffffff; /* Біла "кнопка" на сірому фоні */
+  background: #fff; /* Біла "кнопка" на сірому фоні */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   cursor: pointer;
   border-radius: 8px;

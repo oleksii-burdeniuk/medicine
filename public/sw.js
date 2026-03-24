@@ -1,7 +1,13 @@
 // ------ PWA Service Worker (safe for next-pwa) ------
+try {
+  importScripts('/sw-version.js');
+} catch (_) {
+  // Keep fallback for environments where the generated file is missing.
+}
 
-// VERSION (change this to clear cache after deployment)
-const CACHE_VERSION = 'v12.2';
+// VERSION: generated in public/sw-version.js during prebuild/predev
+const CACHE_VERSION =
+  (self && self.__SW_CACHE_VERSION__) || `dev-${Date.now()}`;
 const STATIC_CACHE = `medicine-static-${CACHE_VERSION}`;
 const PAGE_CACHE = `medicine-pages-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `medicine-runtime-${CACHE_VERSION}`;

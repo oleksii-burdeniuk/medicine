@@ -24,7 +24,7 @@
     "workBreak": "Робота та перерви",
     "share": "Поділитися додатком",
     "contact": "Контактні телефони",
-    "hours": "Години роботи",
+    "hours": "Календар",
     "about": "Про додаток",
     "pwa": "Що таке PWA?",
     "publicGroup": "Публічна група"
@@ -33,7 +33,9 @@
     "description": "Створено з турботою для {appName}. Цей додаток повністю безкоштовний, щоб полегшити вашу роботу 🙌",
     "linkedin": "Мій LinkedIn",
     "github": "GitHub",
-    "copyright": "© {year} Oleksii Burdeniuk"
+    "copyright": "© {year} Oleksii Burdeniuk",
+    "phoneLabel": "Телефон",
+    "instagram": "Instagram"
   },
   "ColorsPage": {
     "title": "Кольори та Асортимент",

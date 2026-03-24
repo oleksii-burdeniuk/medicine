@@ -16,13 +16,23 @@
 
 .links {
   margin: 0.3rem 0;
+  display: inline-flex;
+  gap: 18px;
+  align-items: center;
+}
+
+.phoneLine {
+  margin: 0.25rem 0;
 }
 
 .link {
   color: #c1d8ff;
   text-decoration: none;
   transition: color 0.2s ease;
-  font-weight: 400;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px;
 }
 
 .link:hover {

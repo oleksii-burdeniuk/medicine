@@ -24,7 +24,7 @@
     "workBreak": "Work & Breaks",
     "share": "Share app",
     "contact": "Contact numbers",
-    "hours": "Working hours",
+    "hours": "Calendar",
     "about": "About",
     "pwa": "What is PWA?",
     "publicGroup": "Public group"
@@ -33,7 +33,9 @@
     "description": "Created with care for {appName}. This app is completely free to help you with your work 🙌",
     "linkedin": "My LinkedIn",
     "github": "GitHub",
-    "copyright": "© {year} Oleksii Burdeniuk"
+    "copyright": "© {year} Oleksii Burdeniuk",
+    "phoneLabel": "Phone",
+    "instagram": "Instagram"
   },
   "ColorsPage": {
     "title": "Colors & Assortment",

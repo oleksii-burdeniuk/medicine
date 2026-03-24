@@ -24,7 +24,7 @@
     "workBreak": "Praca i przerwy",
     "share": "Udostępnij aplikację",
     "contact": "Telefony kontaktowe",
-    "hours": "Godziny pracy",
+    "hours": "Kalendarz",
     "about": "O aplikacji",
     "pwa": "Czym jest PWA?",
     "publicGroup": "Grupa publiczna"
@@ -33,7 +33,9 @@
     "description": "Stworzone z troską dla magazynu {appName}. Ta aplikacja została wykonana całkowicie za darmo, aby ułatwić Twoją pracę 🙌",
     "linkedin": "Mój LinkedIn",
     "github": "GitHub",
-    "copyright": "© {year} Oleksii Burdeniuk"
+    "copyright": "© {year} Oleksii Burdeniuk",
+    "phoneLabel": "Telefon",
+    "instagram": "Instagram"
   },
   "ColorsPage": {
     "title": "Kolory i Asortyment",
