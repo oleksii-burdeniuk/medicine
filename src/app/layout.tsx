@@ -28,6 +28,12 @@ export default async function RootLayout({
   const locale = store.get('locale')?.value || 'pl';
   return (
     <html suppressHydrationWarning lang={locale}>
+      <head>
+        <meta
+          name='google-site-verification'
+          content='kC9hDHTgvtKlxmFsywp4i7UaWyj2wGfK8TRG9Rs-eZ8'
+        />
+      </head>
       <body>
         <NextIntlClientProvider>
           <Header />
