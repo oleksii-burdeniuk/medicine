@@ -67,6 +67,7 @@ export async function POST(req: Request) {
       '[]';
 
     const items = JSON.parse(outputText);
+    console.log('Parsed control items:', items);
     return NextResponse.json({ items });
   } catch (err) {
     console.error('Parsing error:', err);

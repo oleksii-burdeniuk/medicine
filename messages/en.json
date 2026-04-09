@@ -152,6 +152,7 @@
     "description": "Upload a photo of the control sheet and the app will recognize employee numbers and save them locally.",
     "takePhoto": "Select photo",
     "processing": "Processing image...",
+    "processingError": "Processing error",
     "latestRecognized": "Latest recognized",
     "savedListTitle": "Saved records ({count})",
     "clearSaved": "Clear saved",

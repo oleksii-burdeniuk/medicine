@@ -152,6 +152,7 @@
     "description": "Prześlij zdjęcie arkusza kontrolnego, a aplikacja rozpozna pracowników i zapisze dane lokalnie.",
     "takePhoto": "Wybierz zdjęcie",
     "processing": "Przetwarzanie obrazu...",
+    "processingError": "Błąd przetwarzania",
     "latestRecognized": "Ostatnio rozpoznane",
     "savedListTitle": "Zapisane rekordy ({count})",
     "clearSaved": "Wyczyść zapisane",

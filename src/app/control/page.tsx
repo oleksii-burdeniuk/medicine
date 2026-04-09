@@ -137,9 +137,9 @@ export default function ControlPage() {
             type='button'
             onClick={() => fileInputRef.current?.click()}
             disabled={loading}
+            title={loading ? t('processing') : t('takePhoto')}
           >
             <Camera size={18} />
-            {loading ? t('processing') : t('takePhoto')}
           </button>
 
           <input
@@ -156,9 +156,9 @@ export default function ControlPage() {
             type='button'
             onClick={() => setIsModalOpen(true)}
             disabled={latestItems.length === 0}
+            title={t('latestRecognized')}
           >
             <Users size={18} />
-            {t('latestRecognized')}
           </button>
         </div>
 
@@ -190,7 +190,7 @@ export default function ControlPage() {
                     {t('dzial')}: {item.dzial || '-'}
                   </span>
                   <span>
-                    {t('nosnikNumer')}: {item.nosnikNumer}
+                    {t('nosnikNumer')}: <strong>{item.nosnikNumer}</strong>
                   </span>
                   <span>
                     {t('dodaneKiedy')}: {item.dodaneKiedy}
@@ -237,7 +237,7 @@ export default function ControlPage() {
                       {t('dzial')}: {item.dzial || '-'}
                     </span>
                     <span>
-                      {t('nosnikNumer')}: {item.nosnikNumer}
+                      {t('nosnikNumer')}: <strong>{item.nosnikNumer}</strong>
                     </span>
                     <span>
                       {t('dodaneKiedy')}: {item.dodaneKiedy}
