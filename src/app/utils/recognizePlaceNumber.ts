@@ -14,32 +14,30 @@ const PATTERNS = {
   PK: /\b[A-Z]{2}\/\d{2}\/\d{2}\/\d{2}\/\d{4}\b/g,
 };
 
+// 2. Оновлена функція з усіма форматами
 export function extractUniqueCodes(text: string) {
-  // 1. Покращений RS/RW (знайде RS26-MKM720-SAND-S)
+  // Носії (P-02037, M0291)
+  const carrierPattern = /\b[PM]-?\d{4,6}\b/g;
+
+  // Артикули RS/RW (твій новий гнучкий паттерн)
   const rsRwPattern = /\b(?:RS|RW)[A-Z0-9]*(?:-[A-Z0-9]+)+\b/g;
 
-  // 2. Універсальний артикул (літера + цифри + дефіси)
-  // Підійде для C127-Y-1 та інших подібних
-  const generalArticul = /\b[A-Z]\d+[A-Z0-9]*(?:-[A-Z0-9]+)+\b/g;
-
-  // 3. Твій формат зі слешами
+  // Локації зі слешами (PO/26/02...)
   const slashPattern = /\b[A-Z]{1,3}\/\d{2}\/\d{2}\/\d{2}\/\d{3,4}\b/g;
 
-  const rsRwMatches = text.match(rsRwPattern) ?? [];
-  const articulMatches = text.match(generalArticul) ?? [];
-  const slashMatches = text.match(slashPattern) ?? [];
+  // Артикули типу C127-Y-1
+  const articulPattern = /\b[A-Z]\d+[A-Z0-9]*(?:-[A-Z0-9]+)+\b/g;
 
-  // EAN-13 (тільки 13 цифр, щоб не ловити сміття)
-  const eanMatches = text.match(/\b\d{13}\b/g) ?? [];
+  // Збираємо збіги
+  const matches = [
+    ...(text.match(carrierPattern) ?? []),
+    ...(text.match(rsRwPattern) ?? []),
+    ...(text.match(slashPattern) ?? []),
+    ...(text.match(articulPattern) ?? []),
+    ...(text.match(/\b\d{13}\b/g) ?? []), // EAN
+  ];
 
-  return Array.from(
-    new Set([
-      ...rsRwMatches,
-      ...articulMatches,
-      ...slashMatches,
-      ...eanMatches,
-    ]),
-  );
+  return Array.from(new Set(matches));
 }
 
 export const recognizePlaceNumber = (text: string) => {
