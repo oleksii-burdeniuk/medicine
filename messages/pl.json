@@ -24,6 +24,7 @@
     "barcode": "Kod kreskowy",
     "colors": "Kolory i Asortyment",
     "workBreak": "Praca i przerwy",
+    "control": "Kontrola",
     "share": "Udostępnij aplikację",
     "contact": "Telefony kontaktowe",
     "hours": "Kalendarz",
@@ -145,6 +146,25 @@
     "step3": "Poczekaj, aż system odczyta kod — pojawi się on w polu tekstowym.",
     "step4": "Zapisz wynik, aby mieć go zawsze pod ręką.",
     "footer": "Aplikacja działa również offline i obsługuje PWA — możesz dodać ją na ekran główny telefonu i korzystać jak ze zwykłej aplikacji."
+  },
+  "ControlPage": {
+    "title": "Kontrola",
+    "description": "Prześlij zdjęcie arkusza kontrolnego, a aplikacja rozpozna pracowników i zapisze dane lokalnie.",
+    "takePhoto": "Wybierz zdjęcie",
+    "processing": "Przetwarzanie obrazu...",
+    "latestRecognized": "Ostatnio rozpoznane",
+    "savedListTitle": "Zapisane rekordy ({count})",
+    "clearSaved": "Wyczyść zapisane",
+    "noSaved": "Brak zapisanych rekordów",
+    "dzial": "Dział",
+    "nosnikNumer": "Numer nośnika",
+    "dodaneKiedy": "Dodano",
+    "kontrahent": "Kontrahent",
+    "deleteOne": "Usuń",
+    "saveAll": "Zapisz wszystko",
+    "noLatest": "Brak rozpoznanych rekordów",
+    "saveOne": "Zapisz",
+    "confirmClearSaved": "Wyczyścić wszystkie zapisane rekordy?"
   },
   "HowToInstallPWA": {
     "installButton": "Zainstaluj Aplikację!",

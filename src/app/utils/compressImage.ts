@@ -2,7 +2,8 @@
 export const compressImage = (
   file: File,
   maxSize = 600,
-  quality = 0.4
+  quality = 0.4,
+  forControl = false,
 ): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -13,7 +14,17 @@ export const compressImage = (
         const ctx = canvas.getContext('2d');
         if (!ctx) return reject('Brak kontekstu canvas');
 
-        const scale = Math.min(maxSize / img.width, maxSize / img.height, 1);
+        // Для control мінімальне стиснення для кращого OCR
+        const effectiveMaxSize = forControl
+          ? Math.max(img.width, img.height)
+          : maxSize;
+        const effectiveQuality = forControl ? 0.9 : quality;
+
+        const scale = Math.min(
+          effectiveMaxSize / img.width,
+          effectiveMaxSize / img.height,
+          1,
+        );
         const width = img.width * scale;
         const height = img.height * scale;
 
@@ -27,7 +38,7 @@ export const compressImage = (
             else reject('Kompresja nie powiodła się');
           },
           'image/jpeg',
-          quality
+          effectiveQuality,
         );
       };
       img.onerror = reject;

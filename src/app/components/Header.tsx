@@ -28,7 +28,7 @@ export default function Header() {
         .toLocaleString(undefined, { month: 'short' })
         .replace('.', '')
         .toUpperCase(),
-    [now]
+    [now],
   );
 
   const toggleMenu = () => {
@@ -89,6 +89,15 @@ export default function Header() {
               className={isActive('/work-break-time') ? styles.active : ''}
             >
               {t('workBreak')}
+            </Link>
+          </li>
+          <li>
+            <Link
+              href='/control'
+              onClick={closeMenu}
+              className={isActive('/control') ? styles.active : ''}
+            >
+              {t('control')}
             </Link>
           </li>
           <li>

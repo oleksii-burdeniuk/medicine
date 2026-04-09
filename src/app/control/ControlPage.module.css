@@ -1,0 +1,244 @@
+.container {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  min-height: 80vh;
+  background: #f7f8fa;
+}
+
+.card {
+  width: 100%;
+  max-width: 720px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 10px 35px rgba(17, 24, 39, 0.08);
+  padding: 1.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.title {
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.description {
+  margin: 0;
+  color: #4b5563;
+  line-height: 1.7;
+  font-size: 0.98rem;
+}
+
+.uploadRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+}
+
+.photoButton,
+.latestButton,
+.saveAllButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  border: none;
+  border-radius: 14px;
+  padding: 0.95rem 1rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background 0.15s ease;
+}
+
+.photoButton,
+.latestButton {
+  background: #111827;
+  color: #fff;
+}
+
+.photoButton:hover,
+.latestButton:hover,
+.saveAllButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(17, 24, 39, 0.12);
+}
+
+.photoButton:disabled,
+.latestButton:disabled,
+.saveOneButton:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.latestButton {
+  background: #2563eb;
+}
+
+.error {
+  color: #b91c1c;
+  border: 1px solid rgba(185, 28, 28, 0.15);
+  background: #fef2f2;
+  padding: 0.9rem 1rem;
+  border-radius: 14px;
+  margin: 0;
+}
+
+.savedHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.savedHeader h2 {
+  margin: 0;
+  font-size: 1.05rem;
+  color: #111827;
+}
+
+.clearButton {
+  border: none;
+  background: #ef4444;
+  color: white;
+  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.clearButton:hover {
+  background: #dc2626;
+  transform: translateY(-1px);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 0.85rem;
+}
+
+.empty {
+  margin: 0;
+  color: #6b7280;
+  padding: 1rem 0.5rem;
+  text-align: center;
+}
+
+.listItem {
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+  padding: 1rem 1rem 0.95rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: start;
+}
+
+.itemContent {
+  display: grid;
+  gap: 0.45rem;
+}
+
+.itemContent strong {
+  font-size: 1rem;
+  color: #111827;
+}
+
+.itemContent span {
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.deleteButton,
+.saveOneButton {
+  border: none;
+  background: #111827;
+  color: #ffffff;
+  border-radius: 14px;
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition:
+    background 0.15s ease,
+    transform 0.15s ease;
+}
+
+.deleteButton:hover,
+.saveOneButton:hover {
+  background: #374151;
+  transform: translateY(-1px);
+}
+
+.modalContent {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 320px;
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.modalHeader h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #111827;
+}
+
+.saveAllButton {
+  background: #16a34a;
+  color: #ffffff;
+}
+
+.saveAllButton:hover {
+  background: #15803d;
+}
+
+@media (max-width: 660px) {
+  .uploadRow {
+    grid-template-columns: 1fr;
+  }
+
+  .listItem {
+    grid-template-columns: 1fr;
+  }
+
+  .clearButton,
+  .deleteButton,
+  .saveOneButton {
+    width: 100%;
+    border-radius: 14px;
+    height: 50px;
+  }
+
+  .modalHeader {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

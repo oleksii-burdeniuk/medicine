@@ -24,6 +24,7 @@
     "barcode": "Barcode",
     "colors": "Colors & Inventory",
     "workBreak": "Work & Breaks",
+    "control": "Control",
     "share": "Share app",
     "contact": "Contact numbers",
     "hours": "Calendar",
@@ -145,6 +146,25 @@
     "step3": "Wait for the system to read the code — it will appear in the text field.",
     "step4": "Save the result to always have it at hand.",
     "footer": "The app also works offline and supports PWA — you can add it to your phone's home screen and use it like a regular app."
+  },
+  "ControlPage": {
+    "title": "Control scanner",
+    "description": "Upload a photo of the control sheet and the app will recognize employee numbers and save them locally.",
+    "takePhoto": "Select photo",
+    "processing": "Processing image...",
+    "latestRecognized": "Latest recognized",
+    "savedListTitle": "Saved records ({count})",
+    "clearSaved": "Clear saved",
+    "noSaved": "No saved records",
+    "dzial": "Department",
+    "nosnikNumer": "Carrier number",
+    "dodaneKiedy": "Added at",
+    "kontrahent": "Client",
+    "deleteOne": "Delete",
+    "saveAll": "Save all",
+    "noLatest": "No recognized records yet",
+    "saveOne": "Save",
+    "confirmClearSaved": "Clear all saved records?"
   },
   "HowToInstallPWA": {
     "installButton": "Install App!",
