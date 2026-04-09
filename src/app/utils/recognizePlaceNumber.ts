@@ -42,8 +42,16 @@ export function extractUniqueCodes(text: string) {
   // --- 2. Формат C127-Y-1 ---
   const dashPattern = /\b[A-Z]\d{2,4}(?:-[A-Z0-9]+)+\b/g;
 
+  // --- 3. RS/RW формат (RS26TSM860-79X-S, RW24TSD404-10X-L, etc.) ---
+  const rsRwPattern = /\b(?:RS|RW)\d{2}[A-Z]{3}\d{3}-\d{2}[A-Z]-\w{1,3}\b/g;
+
+  // --- 4. EAN/UPC коди (13 цифр) ---
+  const eanPattern = /\b\d{13}\b/g;
+
   const slashMatches = text.match(slashPattern) ?? [];
   const dashMatches = text.match(dashPattern) ?? [];
+  const rsRwMatches = text.match(rsRwPattern) ?? [];
+  const eanMatches = text.match(eanPattern) ?? [];
 
   const found = text.match(regex) ?? [];
   const found2 = text.match(regex2) ?? [];
@@ -56,6 +64,8 @@ export function extractUniqueCodes(text: string) {
     new Set([
       ...slashMatches,
       ...dashMatches,
+      ...rsRwMatches,
+      ...eanMatches,
       ...found,
       ...found2,
       ...found3,

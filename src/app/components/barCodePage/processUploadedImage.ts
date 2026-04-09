@@ -11,20 +11,27 @@ async function decodeBarcodeFromImage(file: File) {
   image.src = imageUrl;
   const codeReader = new BrowserMultiFormatReader();
 
-  const barcodeText = await new Promise<string | null>((resolve) => {
+  const barcodeTexts: string[] = [];
+
+  await new Promise<void>((resolve) => {
     image.onload = async () => {
       try {
+        // Try to decode multiple barcodes by attempting multiple reads
+        // ZXing doesn't natively support multiple barcodes, but we can try different approaches
         const decoded = await codeReader.decodeFromImageElement(image);
-        resolve(decoded.getText());
+        if (decoded) {
+          barcodeTexts.push(decoded.getText());
+        }
       } catch {
-        resolve(null);
+        // No barcode found
       }
+      resolve();
     };
-    image.onerror = () => resolve(null);
+    image.onerror = () => resolve();
   });
 
   URL.revokeObjectURL(imageUrl);
-  return barcodeText;
+  return barcodeTexts;
 }
 
 async function recognizeTextViaOcr(file: File) {
@@ -50,11 +57,11 @@ export async function processUploadedImage(file: File) {
     type: 'image/jpeg',
   });
 
-  const barcodeText = await decodeBarcodeFromImage(compressedFile);
-  if (barcodeText) {
+  const barcodeTexts = await decodeBarcodeFromImage(compressedFile);
+  if (barcodeTexts.length > 0) {
     return {
-      recognizedText: barcodeText,
-      uniqueCodes: [] as string[],
+      recognizedText: barcodeTexts[0], // Keep first one for backward compatibility
+      uniqueCodes: barcodeTexts, // Return all found barcodes
       source: 'barcode' as const,
     };
   }

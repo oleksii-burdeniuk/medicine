@@ -71,13 +71,17 @@ const BarCodeContent = () => {
       const { recognizedText, uniqueCodes, source } =
         await processUploadedImage(file);
 
-      if (uniqueCodes.length > 1) {
+      // Always show all found codes in the list if there are multiple
+      if (uniqueCodes.length > 0) {
         setListCodes(uniqueCodes);
+        setActiveModal(true); // Auto-open modal when codes are found
       }
 
+      // Set the first code as the current text
       setText(recognizedText);
 
-      if (source === 'ocr' && viewMode === 'savedCodes') {
+      // Auto-save if it's from OCR and we're in savedCodes mode
+      if (source === 'ocr' && viewMode === 'savedCodes' && recognizedText) {
         saveEntry(recognizedText, 'savedCodes');
       }
     } catch (error) {
