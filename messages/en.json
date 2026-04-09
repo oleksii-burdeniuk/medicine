@@ -14,7 +14,9 @@
     "title": "Saved codes: {count}",
     "searchPlaceholder": "Search code...",
     "deleteButton": "Delete",
-    "noResults": "No results"
+    "noResults": "No results",
+    "clearAll": "Clear all",
+    "confirmClearAll": "Delete all saved codes?"
   },
   "Header": {
     "logo": "Medicine",
@@ -200,6 +202,8 @@
   "SavedUsers": {
     "title": "Saved users",
     "noUsers": "No saved users",
-    "deleteAccount": "Delete account"
+    "deleteAccount": "Delete account",
+    "clearAll": "Clear all",
+    "confirmClearAll": "Delete all saved users?"
   }
 }

@@ -24,8 +24,8 @@
 }
 .colorBtn {
   position: fixed;
-  bottom: 90px;
-  left: 20px;
+  bottom: calc(90px + env(safe-area-inset-bottom, 0px));
+  left: calc(20px + env(safe-area-inset-left, 0px));
 
   width: 50px;
   height: 50px;
@@ -54,4 +54,18 @@
 .paletteIcon {
   width: 28px;
   height: 28px;
+}
+
+@media (max-width: 420px) {
+  .colorBtn {
+    width: 46px;
+    height: 46px;
+    bottom: calc(82px + env(safe-area-inset-bottom, 0px));
+    left: calc(14px + env(safe-area-inset-left, 0px));
+  }
+
+  .paletteIcon {
+    width: 24px;
+    height: 24px;
+  }
 }

@@ -7,14 +7,18 @@ import { useTranslations } from 'next-intl';
 
 interface SavedCodesProps {
   savedCodes: string[];
+  selectedCode: string;
   onSelect: (code: string) => void;
   onDelete: (code: string) => void;
+  onClearAll: () => void;
 }
 
 export default function SavedCodes({
   savedCodes,
+  selectedCode,
   onSelect,
   onDelete,
+  onClearAll,
 }: SavedCodesProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const t = useTranslations('SavedCodes');
@@ -25,6 +29,20 @@ export default function SavedCodes({
 
   return (
     <div className={styles.savedList}>
+      {savedCodes.length > 0 && (
+        <button
+          className={styles.clearAllButton}
+          type='button'
+          title={t('clearAll')}
+          onClick={() => {
+            if (window.confirm(t('confirmClearAll'))) {
+              onClearAll();
+            }
+          }}
+        >
+          <Trash2 size={16} />
+        </button>
+      )}
       <h2 id='listTitle'>{t('title', { count: savedCodes.length })}</h2>
       <input
         type='text'
@@ -37,7 +55,12 @@ export default function SavedCodes({
       {filteredCodes.length > 0 ? (
         <ul className={styles.list}>
           {filteredCodes.map((code) => (
-            <li key={code} className={styles.listItem}>
+            <li
+              key={code}
+              className={`${styles.listItem} ${
+                selectedCode === code ? styles.selectedItem : ''
+              }`}
+            >
               <span onClick={() => onSelect(code)} className={styles.codeText}>
                 {code}
               </span>

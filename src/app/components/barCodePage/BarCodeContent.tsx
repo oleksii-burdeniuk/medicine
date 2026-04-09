@@ -33,7 +33,9 @@ const BarCodeContent = () => {
     savedUsers,
     saveEntry,
     deleteCode,
+    clearCodes,
     deleteUser,
+    clearUsers,
     setSavedCodes,
   } = useScannerStorage(noFoundMessage);
 
@@ -178,12 +180,15 @@ const BarCodeContent = () => {
           savedUsers={savedUsers}
           onSelect={handleSelectUser}
           onDelete={handleDeleteUser}
+          onClearAll={clearUsers}
         />
       ) : (
         <SavedCodes
           savedCodes={savedCodes}
+          selectedCode={text}
           onSelect={(code) => setText(code)}
           onDelete={handleDeleteCode}
+          onClearAll={clearCodes}
         />
       )}
     </div>

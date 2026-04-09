@@ -13,13 +13,28 @@ interface Props {
   savedUsers: SavedUser[];
   onDelete: (login: string) => void;
   onSelect: (value: string) => void;
+  onClearAll: () => void;
 }
 
-const SavedUsers = ({ savedUsers, onDelete, onSelect }: Props) => {
+const SavedUsers = ({ savedUsers, onDelete, onSelect, onClearAll }: Props) => {
   const t = useTranslations('SavedUsers');
 
   return (
     <div className={styles.savedUsers}>
+      {savedUsers.length > 0 && (
+        <button
+          className={styles.clearAllButton}
+          type='button'
+          title={t('clearAll')}
+          onClick={() => {
+            if (window.confirm(t('confirmClearAll'))) {
+              onClearAll();
+            }
+          }}
+        >
+          <Trash2 size={16} />
+        </button>
+      )}
       <h2>{t('title')}</h2>
 
       <ul className={styles.list}>

@@ -14,7 +14,9 @@
     "title": "Збережені коди: {count}",
     "searchPlaceholder": "Пошук коду...",
     "deleteButton": "Видалити",
-    "noResults": "Немає результатів"
+    "noResults": "Немає результатів",
+    "clearAll": "Очистити все",
+    "confirmClearAll": "Видалити всі збережені коди?"
   },
   "Header": {
     "logo": "Medicine",
@@ -200,6 +202,8 @@
   "SavedUsers": {
     "title": "Збережені користувачі",
     "noUsers": "Немає збережених користувачів",
-    "deleteAccount": "Видалити обліковий запис"
+    "deleteAccount": "Видалити обліковий запис",
+    "clearAll": "Очистити все",
+    "confirmClearAll": "Видалити всіх збережених користувачів?"
   }
 }

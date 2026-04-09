@@ -68,8 +68,16 @@ export function useScannerStorage(noFoundMessage: string) {
     setSavedCodes((prev) => prev.filter((item) => item !== code));
   };
 
+  const clearCodes = () => {
+    setSavedCodes([]);
+  };
+
   const deleteUser = (login: string) => {
     setSavedUsers((prev) => prev.filter((user) => user.login !== login));
+  };
+
+  const clearUsers = () => {
+    setSavedUsers([]);
   };
 
   return {
@@ -79,7 +87,9 @@ export function useScannerStorage(noFoundMessage: string) {
     savedUsers,
     saveEntry,
     deleteCode,
+    clearCodes,
     deleteUser,
+    clearUsers,
     setSavedCodes,
   };
 }

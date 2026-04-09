@@ -1,7 +1,7 @@
 .floatingBtn {
   position: fixed;
-  bottom: 80px;
-  left: 20px;
+  bottom: calc(80px + env(safe-area-inset-bottom, 0px));
+  left: calc(20px + env(safe-area-inset-left, 0px));
   z-index: 9999;
   background: var(--primary, #0a0a0a);
   color: white;
@@ -31,4 +31,14 @@
 
 .floatingBtn:hover {
   transform: scale(1.05);
+}
+
+@media (max-width: 420px) {
+  .floatingBtn {
+    width: 52px;
+    height: 52px;
+    font-size: 20px;
+    bottom: calc(74px + env(safe-area-inset-bottom, 0px));
+    left: calc(14px + env(safe-area-inset-left, 0px));
+  }
 }

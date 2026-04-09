@@ -14,7 +14,9 @@
     "title": "Zapisane kody: {count}",
     "searchPlaceholder": "Szukaj kodu...",
     "deleteButton": "Usuń",
-    "noResults": "Brak wyników"
+    "noResults": "Brak wyników",
+    "clearAll": "Wyczyść wszystko",
+    "confirmClearAll": "Usunąć wszystkie zapisane kody?"
   },
   "Header": {
     "logo": "Medicine",
@@ -200,6 +202,8 @@
   "SavedUsers": {
     "title": "Zapisani użytkownicy",
     "noUsers": "Brak zapisanych użytkowników",
-    "deleteAccount": "Usuń konto"
+    "deleteAccount": "Usuń konto",
+    "clearAll": "Wyczyść wszystko",
+    "confirmClearAll": "Usunąć wszystkich zapisanych użytkowników?"
   }
 }

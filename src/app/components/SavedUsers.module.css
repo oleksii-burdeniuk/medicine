@@ -5,6 +5,30 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   padding: 1.2rem 0.8rem;
   border: 1px solid #e0e0e0;
+  position: relative;
+}
+
+.clearAllButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid #ffd0d0;
+  background: #fff3f3;
+  color: #d62828;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clearAllButton:hover {
+  background: #e53e3e;
+  color: #fff;
+  border-color: #e53e3e;
 }
 
 .savedUsers h2 {
