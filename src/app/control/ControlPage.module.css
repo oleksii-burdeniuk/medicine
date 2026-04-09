@@ -56,7 +56,6 @@
     box-shadow 0.15s ease,
     background 0.15s ease;
   min-width: 50px;
-  aspect-ratio: 1;
 }
 
 .photoButton,

@@ -1,8 +1,8 @@
 // --- Kompresja obrazu ---
 export const compressImage = (
   file: File,
-  maxSize = 600,
-  quality = 0.4,
+  maxSize = 1200,
+  quality = 0.6,
   forControl = false,
 ): Promise<Blob> => {
   return new Promise((resolve, reject) => {

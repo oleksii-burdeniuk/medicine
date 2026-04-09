@@ -77,6 +77,7 @@ export default function ControlPage() {
   const saveAllLatest = () => {
     const merged = mergeUniqueByLogin([...latestItems, ...savedItems]);
     persist(merged);
+    setIsModalOpen(false);
   };
 
   const removeSaved = (login: string) => {

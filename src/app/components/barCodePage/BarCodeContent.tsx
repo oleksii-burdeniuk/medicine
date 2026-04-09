@@ -21,6 +21,8 @@ const BarCodeContent = () => {
   const [decoding, setDecoding] = useState(false);
   const [activeModal, setActiveModal] = useState<boolean>(false);
   const [listCodes, setListCodes] = useState<string[]>([]);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   const t = useTranslations('HomePage');
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -71,10 +73,20 @@ const BarCodeContent = () => {
       const { recognizedText, uniqueCodes, source } =
         await processUploadedImage(file);
 
+      // Check if nothing was found
+      const noFoundMessage = 'Nic nie znaleziono 😕';
+      if (recognizedText === noFoundMessage && uniqueCodes.length === 0) {
+        // Show toast notification for 2 seconds
+        setToastMessage(t('noFoundMessage'));
+        setShowToast(true);
+        setTimeout(() => setShowToast(false), 4000);
+        return;
+      }
+
       // Always show all found codes in the list if there are multiple
       if (uniqueCodes.length > 0) {
         setListCodes(uniqueCodes);
-        setActiveModal(true); // Auto-open modal when codes are found
+        // setActiveModal(true); // Auto-open modal when codes are found
       }
 
       // Set the first code as the current text
@@ -195,6 +207,9 @@ const BarCodeContent = () => {
           onClearAll={clearCodes}
         />
       )}
+
+      {/* Toast notification */}
+      {showToast && <div className={styles.toast}>{toastMessage}</div>}
     </div>
   );
 };

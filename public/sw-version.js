@@ -1,1 +1,1 @@
-self.__SW_CACHE_VERSION__ = '07124e1';
+self.__SW_CACHE_VERSION__ = '6fb9f72';

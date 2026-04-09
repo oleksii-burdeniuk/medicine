@@ -1,78 +1,48 @@
-// --- Wyszukiwanie numeru miejsca (PK/25/04/23/0813) ---
-const noFoundMessage = 'Nic nie znaleziono 😕';
-const regex = /\b[A-Z]{2}\/\d{2}\/\d{2}\/\d{2}\/\d{4}\b/;
-const regex2 = /\b\d{8,13}\b/;
-const regex3 = /^[A-Za-z]\/\d{6}\/\d{4}$/m;
-const regex4 = /^\d{3}-[A-Za-z0-9]+\s+[A-Za-z0-9]+$/;
-const regex5 = /\b[A-Z]\d{2}-\d{3}-[A-Z]\d\b/;
-
-export const recognizePlaceNumber = (text: string) => {
-  const found = text.match(regex);
-  const found2 = text.match(regex2);
-  const found3 = text.match(regex3);
-  const found4 = text.match(regex4);
-  const found5 = text.match(regex5);
-  console.log('Found:', found, found2, found3, found4, found5);
-
-  if (found4) {
-    const raw = found4[0].trim();
-    const parts = raw.split(/\s+/);
-    if (parts.length === 2) {
-      const [first, second] = parts;
-      const finalCode = `${second}-${first}`;
-      return finalCode;
-    }
-  }
-
-  return found
-    ? found[0]
-    : found2
-      ? found2[0]
-      : found3
-        ? found3[0]
-        : found5
-          ? found5[0]
-          : noFoundMessage;
+// Константи виносимо окремо
+const PATTERNS = {
+  // PO/26/02/11/0454
+  SLASH: /\b[A-Z]{1,3}\/\d{2}\/\d{2}\/\d{2}\/\d{3,4}\b/g,
+  // C127-Y-1 або A01-102-B1
+  DASH: /\b[A-Z]\d{2,4}(?:-[A-Z0-9]+)+\b/g,
+  // RS26TSM860-79X-S
+  RS_RW: /\b(?:RS|RW)\d{2}[A-Z]{3}\d{3}-\d{2}[A-Z]-\w{1,3}\b/g,
+  // EAN-13
+  EAN: /\b\d{13}\b/g,
+  // Формат 303-ABC 123 (який ти перевертаєш)
+  FLIPPED: /\b\d{3}-[A-Za-z0-9]+\s+[A-Za-z0-9]+\b/g,
+  // Специфічний PK/25/04...
+  PK: /\b[A-Z]{2}\/\d{2}\/\d{2}\/\d{2}\/\d{4}\b/g,
 };
 
 export function extractUniqueCodes(text: string) {
-  // --- 1. Формат PO/26/02/11/0454 ---
+  // 1. Покращений RS/RW (знайде RS26-MKM720-SAND-S)
+  const rsRwPattern = /\b(?:RS|RW)[A-Z0-9]*(?:-[A-Z0-9]+)+\b/g;
+
+  // 2. Універсальний артикул (літера + цифри + дефіси)
+  // Підійде для C127-Y-1 та інших подібних
+  const generalArticul = /\b[A-Z]\d+[A-Z0-9]*(?:-[A-Z0-9]+)+\b/g;
+
+  // 3. Твій формат зі слешами
   const slashPattern = /\b[A-Z]{1,3}\/\d{2}\/\d{2}\/\d{2}\/\d{3,4}\b/g;
 
-  // --- 2. Формат C127-Y-1 ---
-  const dashPattern = /\b[A-Z]\d{2,4}(?:-[A-Z0-9]+)+\b/g;
-
-  // --- 3. RS/RW формат (RS26TSM860-79X-S, RW24TSD404-10X-L, etc.) ---
-  const rsRwPattern = /\b(?:RS|RW)\d{2}[A-Z]{3}\d{3}-\d{2}[A-Z]-\w{1,3}\b/g;
-
-  // --- 4. EAN/UPC коди (13 цифр) ---
-  const eanPattern = /\b\d{13}\b/g;
-
-  const slashMatches = text.match(slashPattern) ?? [];
-  const dashMatches = text.match(dashPattern) ?? [];
   const rsRwMatches = text.match(rsRwPattern) ?? [];
-  const eanMatches = text.match(eanPattern) ?? [];
+  const articulMatches = text.match(generalArticul) ?? [];
+  const slashMatches = text.match(slashPattern) ?? [];
 
-  const found = text.match(regex) ?? [];
-  const found2 = text.match(regex2) ?? [];
-  const found3 = text.match(regex3) ?? [];
-  const found4 = text.match(regex4) ?? [];
-  const found5 = text.match(regex5) ?? [];
+  // EAN-13 (тільки 13 цифр, щоб не ловити сміття)
+  const eanMatches = text.match(/\b\d{13}\b/g) ?? [];
 
-  // Обʼєднуємо і робимо унікальними
-  const unique = Array.from(
+  return Array.from(
     new Set([
-      ...slashMatches,
-      ...dashMatches,
       ...rsRwMatches,
+      ...articulMatches,
+      ...slashMatches,
       ...eanMatches,
-      ...found,
-      ...found2,
-      ...found3,
-      ...found4,
-      ...found5,
     ]),
   );
-
-  return unique;
 }
+
+export const recognizePlaceNumber = (text: string) => {
+  const codes = extractUniqueCodes(text);
+  return codes.length > 0 ? codes[0] : 'Nic nie znaleziono 😕';
+};
