@@ -147,7 +147,7 @@ export default function ControlPage() {
             ref={fileInputRef}
             type='file'
             accept='image/*'
-            capture='environment'
+            // capture='environment'
             onChange={onFileSelected}
             style={{ display: 'none' }}
           />
