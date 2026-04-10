@@ -151,7 +151,7 @@ if (match) {
           title='listButton'
         >
           <List size={18} color={listCodes.length > 0 ? '#007bff' : '#ccc'} />
-<listCodes.length+1}</span>
+<span>{listCodes.length+1}</span>
         </button>
         <button
           className={viewMode === 'savedUsers' ? styles.activeTab : styles.tab}
