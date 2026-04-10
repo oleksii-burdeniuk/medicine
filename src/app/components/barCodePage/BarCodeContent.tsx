@@ -89,8 +89,17 @@ const BarCodeContent = () => {
         // setActiveModal(true); // Auto-open modal when codes are found
       }
 
-      // Set the first code as the current text
-      setText(recognizedText);
+      // Шукаємо патерн: P, цифри, потім групи зі слешем та цифрами
+const codePattern = /P\d{1,2}(?:\/\d{2,4})+/;
+const match = recognizedText.match(codePattern);
+
+if (match) {
+  // Якщо знайшли код (наприклад, P0/26/03/02/0592), ставимо тільки його
+  setText(match[0]);
+} else {
+  // Якщо специфічного коду немає, ставимо весь розпізнаний текст
+  setText(recognizedText);
+}
 
       // Auto-save if it's from OCR and we're in savedCodes mode
       if (source === 'ocr' && viewMode === 'savedCodes' && recognizedText) {
