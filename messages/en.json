@@ -226,5 +226,17 @@
     "deleteAccount": "Delete account",
     "clearAll": "Clear all",
     "confirmClearAll": "Delete all saved users?"
+  },
+  "EmptyStatus": {
+    "title": "List is empty",
+    "description": "No codes recognized yet. Upload or take a photo of the WMS screen for the system to extract data.",
+    "supportedFormats": "Supported formats",
+    "footer": "Tip: Hold the camera parallel to the screen. You can save the required codes to the main list; otherwise, they will be replaced during the next recognition.",
+    "formats": {
+      "location": "Storage locations",
+      "carrier": "Carriers (Pallets/Bins)",
+      "article": "Articles & Models",
+      "ean": "Barcodes (EAN-13)"
+    }
   }
 }

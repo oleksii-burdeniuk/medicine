@@ -37,7 +37,9 @@ export default function ListCodes({
       {listCodes.length > 0 && (
         <button
           className={styles.saveAllButton}
-          onClick={() => onSaveAll(filteredCodes.filter((code) => !savedSet.has(code)))}
+          onClick={() =>
+            onSaveAll(filteredCodes.filter((code) => !savedSet.has(code)))
+          }
         >
           {t('saveAll')}
         </button>
@@ -60,7 +62,9 @@ export default function ListCodes({
               } ${savedSet.has(code) ? styles.savedItem : ''}`}
               onClick={() => onSelect(code)}
             >
-              <span className={styles.codeText}>{code}</span>
+              <span className={styles.codeText}>
+                {index + 1}. {code}
+              </span>
 
               <div className={styles.actions}>
                 {savedSet.has(code) && (
@@ -81,7 +85,11 @@ export default function ListCodes({
                   title={t('saveButton')}
                   disabled={savedSet.has(code)}
                 >
-                  {savedSet.has(code) ? <Check size={16} /> : <Save size={16} />}
+                  {savedSet.has(code) ? (
+                    <Check size={19} />
+                  ) : (
+                    <Save size={22} />
+                  )}
                 </button>
               </div>
             </li>

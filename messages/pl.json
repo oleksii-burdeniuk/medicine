@@ -226,5 +226,17 @@
     "deleteAccount": "Usuń konto",
     "clearAll": "Wyczyść wszystko",
     "confirmClearAll": "Usunąć wszystkich zapisanych użytkowników?"
+  },
+  "EmptyStatus": {
+    "title": "Lista jest pusta",
+    "description": "Obecnie nie ma rozpoznanych kodów. Prześlij lub zrób zdjęcie ekranu WMS, aby system mógł wyodrębnić dane.",
+    "supportedFormats": "Obsługiwane formaty",
+    "footer": "Wskazówka: trzymaj aparat równolegle do ekranu. Możesz zapisać potrzebne kody na liście głównej, w przeciwnym razie zostaną one zastąpione przy następnym rozpoznawaniu.",
+    "formats": {
+      "location": "Adresy miejsc",
+      "carrier": "Nośniki (Palety/Kosze)",
+      "article": "Artykuły i modele",
+      "ean": "Kody kreskowe (EAN-13)"
+    }
   }
 }

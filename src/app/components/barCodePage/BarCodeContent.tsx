@@ -14,6 +14,7 @@ import { processUploadedImage } from './processUploadedImage';
 import { useScannerStorage, type ViewMode } from './useScannerStorage';
 import { event } from '@/app/libs/analytics/gtag';
 import { EVENTS } from '@/app/libs/analytics/events';
+import EmptyStatus from '../EmptyStatus/EmptyStatus';
 
 const BarCodeContent = () => {
   const [text, setText] = useState('');
@@ -23,6 +24,7 @@ const BarCodeContent = () => {
   const [listCodes, setListCodes] = useState<string[]>([]);
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState('');
+  const [activeListModal, setActiveListModal] = useState<boolean>(false);
 
   const t = useTranslations('HomePage');
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -90,16 +92,16 @@ const BarCodeContent = () => {
       }
 
       // Шукаємо патерн: P, цифри, потім групи зі слешем та цифрами
-const codePattern = /P[A-Z]\/\d{2}\/\d{2}\/\d{2}\/\d{4}/;
-const match = recognizedText.match(codePattern);
+      const codePattern = /P[A-Z]\/\d{2}\/\d{2}\/\d{2}\/\d{4}/;
+      const match = recognizedText.match(codePattern);
 
-if (match) {
-  // Якщо знайшли код (наприклад, P0/26/03/02/0592), ставимо тільки його
-  setText(match[0]);
-} else {
-  // Якщо специфічного коду немає, ставимо весь розпізнаний текст
-  setText(recognizedText);
-}
+      if (match) {
+        // Якщо знайшли код (наприклад, P0/26/03/02/0592), ставимо тільки його
+        setText(match[0]);
+      } else {
+        // Якщо специфічного коду немає, ставимо весь розпізнаний текст
+        setText(recognizedText);
+      }
 
       // Auto-save if it's from OCR and we're in savedCodes mode
       if (source === 'ocr' && viewMode === 'savedCodes' && recognizedText) {
@@ -118,11 +120,15 @@ if (match) {
     if (listCodes.length > 0) {
       setActiveModal(true);
       event(EVENTS.LIST_CLICK);
+    } else {
+      setActiveListModal(true);
+      event(EVENTS.LIST_CLICK);
     }
   };
 
   const closeListModal = () => {
     setActiveModal(false);
+    setActiveListModal(false);
   };
 
   const saveAllCodes = (codes: string[]) => {
@@ -143,15 +149,20 @@ if (match) {
           }}
           title='Codes'
         >
-          <QrCode size={18} />
+          <QrCode size={22} />
         </button>
         <button
-          className={activeModal ? styles.activeTab : styles.tab}
+          className={
+            (activeModal ? styles.activeTab : styles.tab, styles.listButton)
+          }
           onClick={openListModal}
           title='listButton'
         >
-          <List size={18} color={listCodes.length > 0 ? '#007bff' : '#ccc'} />
-<span>{listCodes.length+1}</span>
+          <List
+            size={22}
+            color={listCodes.length > 0 ? '#007bff' : '#090909'}
+          />
+          <span className={styles.codeCount}>{listCodes.length}</span>
         </button>
         <button
           className={viewMode === 'savedUsers' ? styles.activeTab : styles.tab}
@@ -161,7 +172,7 @@ if (match) {
           }}
           title='Users'
         >
-          <User size={18} />
+          <User size={22} />
         </button>
       </div>
 
@@ -190,12 +201,16 @@ if (match) {
         <svg ref={svgRef}></svg>
       </div>
 
+      <Modal isOpen={activeListModal} onClose={closeListModal}>
+        <EmptyStatus />
+      </Modal>
+
       <Modal isOpen={activeModal} onClose={closeListModal}>
         <ListCodes
           listCodes={listCodes}
           savedCodes={savedCodes}
           selectedCode={text}
-          onSelect={(code) =>setText(code) }
+          onSelect={(code) => setText(code)}
           onSave={handleSave}
           onSaveAll={saveAllCodes}
         />
