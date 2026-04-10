@@ -90,7 +90,7 @@ const BarCodeContent = () => {
       }
 
       // Шукаємо патерн: P, цифри, потім групи зі слешем та цифрами
-const codePattern = /P\d{1,2}(?:\/\d{2,4})+/;
+const codePattern = /P[A-Z]\/\d{2}\/\d{2}\/\d{2}\/\d{4}/;
 const match = recognizedText.match(codePattern);
 
 if (match) {
@@ -194,7 +194,7 @@ if (match) {
           listCodes={listCodes}
           savedCodes={savedCodes}
           selectedCode={text}
-          onSelect={(code) => setText(code)}
+          onSelect={(code) => setText(code) closeListModal()}
           onSave={handleSave}
           onSaveAll={saveAllCodes}
         />
