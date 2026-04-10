@@ -194,10 +194,7 @@ if (match) {
           listCodes={listCodes}
           savedCodes={savedCodes}
           selectedCode={text}
-          onSelect={(code) => {
-setText(code) 
-closeListModal()}
-}
+          onSelect={(code) =>setText(code) }
           onSave={handleSave}
           onSaveAll={saveAllCodes}
         />
