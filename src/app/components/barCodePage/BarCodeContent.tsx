@@ -86,7 +86,7 @@ const BarCodeContent = () => {
       // Always show all found codes in the list if there are multiple
       if (uniqueCodes.length > 0) {
         setListCodes(uniqueCodes);
-        // setActiveModal(true); // Auto-open modal when codes are found
+        setActiveModal(true); // Auto-open modal when codes are found
       }
 
       // Шукаємо патерн: P, цифри, потім групи зі слешем та цифрами
