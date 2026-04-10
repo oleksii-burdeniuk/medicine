@@ -30,9 +30,10 @@ export function extractUniqueCodes(text: string) {
 
   // Збираємо збіги
   const matches = [
+    ...(text.match(slashPattern) ?? []),
     ...(text.match(carrierPattern) ?? []),
     ...(text.match(rsRwPattern) ?? []),
-    ...(text.match(slashPattern) ?? []),
+
     ...(text.match(articulPattern) ?? []),
     ...(text.match(/\b\d{13}\b/g) ?? []), // EAN
   ];
