@@ -1,0 +1,36 @@
+/* 💡 DODANY STYL: Przycisk instalacji */
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.installButton {
+  padding: 0.8rem 1.5rem;
+  background-color: #0070f3; /* Używamy koloru z Twojego motywu */
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-bottom: 2rem; /* Dodatkowa przestrzeń nad nagłówkiem */
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  width: fit-content;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.installButton:hover {
+  background-color: #005bb5;
+}
+
+.installButton:active {
+  transform: translateY(1px);
+}
+/* Koniec nowego stylu */

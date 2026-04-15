@@ -210,7 +210,10 @@ const BarCodeContent = () => {
           listCodes={listCodes}
           savedCodes={savedCodes}
           selectedCode={text}
-          onSelect={(code) => setText(code)}
+          onSelect={(code) => {
+            setText(code);
+            closeListModal();
+          }}
           onSave={handleSave}
           onSaveAll={saveAllCodes}
         />

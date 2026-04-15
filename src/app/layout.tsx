@@ -8,6 +8,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { cookies } from 'next/headers';
 import Script from 'next/script';
 import Analytics from './components/Analytics/Analytics';
+import PwaInstallBtn from './components/PwaInstallBtn/PwaInstallBtn';
 
 export const metadata = {
   title: 'Barcode Scanner',
@@ -37,6 +38,7 @@ export default async function RootLayout({
       <body>
         <NextIntlClientProvider>
           <Header />
+          <PwaInstallBtn />
           {children}
 
           <SpeedInsights />

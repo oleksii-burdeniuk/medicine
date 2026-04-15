@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import styles from './HowToInstallPWA.module.css';
 import { useTranslations } from 'next-intl';
+import PwaInstallBtn from './PwaInstallBtn/PwaInstallBtn';
 
 interface BeforeInstallPromptEvent extends Event {
   readonly platforms: Array<string>;
@@ -42,7 +43,7 @@ export default function HowToInstallPWA() {
     return () =>
       window.removeEventListener(
         'beforeinstallprompt',
-        handleBeforeInstallPrompt
+        handleBeforeInstallPrompt,
       );
   }, []);
 
@@ -58,12 +59,7 @@ export default function HowToInstallPWA() {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        {showInstallButton && (
-          <button onClick={handleInstallClick} className={styles.installButton}>
-            <Tablet size={20} style={{ verticalAlign: 'middle' }} />{' '}
-            {t('installButton')}
-          </button>
-        )}
+        <PwaInstallBtn />
 
         <h1 className={styles.title}>{t('title')}</h1>
         <p className={styles.text}>{t('description')}</p>
