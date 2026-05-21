@@ -30,7 +30,8 @@
     "hours": "Календар",
     "about": "Про додаток",
     "pwa": "Що таке PWA?",
-    "publicGroup": "Публічна група"
+    "publicGroup": "Публічна група",
+    "support": "Підтримка"
   },
   "Footer": {
     "description": "Створено з турботою для {appName}. Цей додаток повністю безкоштовний, щоб полегшити вашу роботу 🙌",
@@ -38,7 +39,22 @@
     "github": "GitHub",
     "copyright": "© {year} Oleksii Burdeniuk",
     "phoneLabel": "Телефон",
-    "instagram": "Instagram"
+    "instagram": "Instagram",
+    "betaSupportLink": "Підтримати beta-проєкти",
+    "betaSupportTitle": "Підтримка beta-проєктів",
+    "betaSupportSubtitle": "Добровільна підтримка моїх проектів та невеликих цифрових інструментів. Якщо вам подобається те, що я роблю, і ви хочете підтримати розвиток, будь ласка, розгляньте можливість зробити внесок. Це допоможе мені продовжувати створювати корисні інструменти та підтримувати їх безкоштовними для всіх.",
+    "betaSupportDescription": "Це не оплата тарифу чи підписки. Внески допомагають покривати технічні витрати, AI‑інструменти, хостинг і довше тримати бета‑проєкти доступними безкоштовно.",
+    "betaSupportGoal": "🎯 Мета: підтримка розробки та технічних витрат",
+    "betaSupportJarLinkLabel": "🔗 Посилання на скарбничку",
+    "betaSupportCardLabel": "💳 Номер картки скарбнички",
+    "betaSupportOpenJar": "Відкрити скарбничку",
+    "betaSupportCopyLink": "Копіювати посилання",
+    "betaSupportCopyCard": "Копіювати номер картки",
+    "betaSupportLinkCopied": "Посилання скопійовано.",
+    "betaSupportCardCopied": "Номер картки скопійовано.",
+    "betaSupportCopyError": "Не вдалося скопіювати. Спробуйте ще раз.",
+    "betaSupportNotNow": "Не зараз",
+    "betaSupportClose": "Закрити"
   },
   "ColorsPage": {
     "title": "Кольори та Асортимент",

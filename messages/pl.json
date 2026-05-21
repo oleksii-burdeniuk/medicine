@@ -30,7 +30,8 @@
     "hours": "Kalendarz",
     "about": "O aplikacji",
     "pwa": "Czym jest PWA?",
-    "publicGroup": "Grupa publiczna"
+    "publicGroup": "Grupa publiczna",
+    "support": "Wsparcie"
   },
   "Footer": {
     "description": "Stworzone z troską dla magazynu {appName}. Ta aplikacja została wykonana całkowicie za darmo, aby ułatwić Twoją pracę 🙌",
@@ -38,7 +39,22 @@
     "github": "GitHub",
     "copyright": "© {year} Oleksii Burdeniuk",
     "phoneLabel": "Telefon",
-    "instagram": "Instagram"
+    "instagram": "Instagram",
+    "betaSupportLink": "Wesprzyj projekty beta",
+    "betaSupportTitle": "Wsparcie projektów beta",
+    "betaSupportSubtitle": "Dobrowolne wsparcie moich projektów i małych cyfrowych narzędzi. Jeśli podoba Ci się to, co robię, i chcesz wesprzeć rozwój, rozważ dokonanie wpłaty. To pomoże mi nadal tworzyć przydatne narzędzia i utrzymywać je darmowymi dla wszystkich.",
+    "betaSupportDescription": "To nie jest płatność za plan ani subskrypcję. Wpłaty pomagają pokrywać koszty techniczne, narzędzia AI, hosting i dłużej utrzymywać projekty beta dostępne bezpłatnie.",
+    "betaSupportGoal": "🎯 Cel: wsparcie rozwoju i kosztów technicznych",
+    "betaSupportJarLinkLabel": "🔗 Link do skarbonki",
+    "betaSupportCardLabel": "💳 Numer karty skarbonki",
+    "betaSupportOpenJar": "Otwórz skarbonkę",
+    "betaSupportCopyLink": "Skopiuj link",
+    "betaSupportCopyCard": "Skopiuj numer",
+    "betaSupportLinkCopied": "Link skopiowano.",
+    "betaSupportCardCopied": "Numer karty skopiowano.",
+    "betaSupportCopyError": "Nie udało się skopiować. Spróbuj ponownie.",
+    "betaSupportNotNow": "Nie teraz",
+    "betaSupportClose": "Zamknij"
   },
   "ColorsPage": {
     "title": "Kolory i Asortyment",

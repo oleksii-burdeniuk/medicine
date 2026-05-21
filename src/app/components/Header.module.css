@@ -186,6 +186,30 @@
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.supportMenuBtn {
+  background: linear-gradient(180deg, #dc2626 0%, #b91c1c 100%);
+  color: #fff;
+  border: 1px solid rgba(248, 113, 113, 0.7);
+  padding: 10px 16px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+  box-shadow: 0 10px 20px rgba(185, 28, 28, 0.36);
+}
+
+.supportMenuBtn:hover {
+  filter: brightness(1.08);
+}
+
+.supportMenuBtn:active {
+  transform: translateY(1px);
+}
+
 @media (max-width: 520px) {
   .header {
     padding: calc(0.65rem + env(safe-area-inset-top, 0px)) 0.8rem 0.65rem;

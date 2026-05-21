@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styles from './Footer.module.css';
 import { useTranslations } from 'next-intl';
 import { Github, Instagram, Linkedin } from 'lucide-react';
+import BetaSupportModal from './BetaSupportModal';
 
 export default function Footer() {
   const t = useTranslations('Footer');
@@ -54,6 +55,10 @@ export default function Footer() {
           +48 798 884 005
         </a>
       </p>
+
+      <div className={styles.supportWrap}>
+        <BetaSupportModal triggerClassName={styles.supportBtn} />
+      </div>
 
       <p className={styles.copy}>{t('copyright', { year })}</p>
     </footer>

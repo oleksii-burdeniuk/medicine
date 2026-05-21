@@ -1,0 +1,265 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 130;
+  background: rgba(9, 9, 11, 0.65);
+  backdrop-filter: blur(4px);
+  padding: 12px;
+}
+
+.modal {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 768px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid #fde68a;
+  background: linear-gradient(180deg, #fffdf9 0%, #fff8ed 100%);
+  box-shadow: 0 22px 42px rgba(0, 0, 0, 0.3);
+}
+
+.top,
+.bottom {
+  padding: 16px;
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid #fde68a;
+}
+
+.badge {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #b45309;
+}
+
+.title {
+  margin-top: 4px;
+  font-size: 28px;
+  line-height: 1.2;
+  font-weight: 700;
+  color: #18181b;
+}
+
+.subtitle {
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.45;
+  color: #3f3f46;
+}
+
+.closeBtn {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  border: 1px solid #fde68a;
+  background: #fff;
+  color: #3f3f46;
+  cursor: pointer;
+}
+
+.closeBtn:hover {
+  background: #fffbeb;
+}
+
+.content {
+  min-height: 0;
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  color: #18181b;
+}
+
+.heroWrap {
+  overflow: hidden;
+  border-radius: 16px;
+  border: 1px solid #fde68a;
+  background: #120c08;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+}
+
+.heroImage {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+
+.card {
+  margin-top: 16px;
+  border-radius: 12px;
+  border: 1px solid #fde68a;
+  background: #fff;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.cardSoft {
+  border-color: #e4e4e7;
+}
+
+.ctaRow {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.btnPrimary,
+.btnSecondary,
+.btnNeutral {
+  display: inline-flex;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 0 16px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btnPrimary {
+  background: #d97706;
+  color: #fff;
+}
+
+.btnPrimary:hover {
+  background: #b45309;
+}
+
+.btnSecondary {
+  border: 1px solid #fcd34d;
+  background: #fff;
+  color: #92400e;
+}
+
+.btnSecondary:hover {
+  background: #fffbeb;
+}
+
+.btnNeutral {
+  border: 1px solid #d4d4d8;
+  background: #fafafa;
+  color: #27272a;
+}
+
+.btnNeutral:hover {
+  background: #f4f4f5;
+}
+
+.btnWide {
+  width: 100%;
+}
+
+.monoLine {
+  margin-top: 8px;
+  text-align: center;
+  font-size: 12px;
+  color: #71717a;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #52525b;
+}
+
+.cardNumber {
+  margin-top: 8px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #18181b;
+}
+
+.description {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #3f3f46;
+}
+
+.goal {
+  margin-top: 12px;
+  border-radius: 12px;
+  border: 1px solid #fde68a;
+  background: #fffbeb;
+  padding: 12px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #78350f;
+}
+
+.feedback {
+  margin-top: 12px;
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.feedbackSuccess {
+  border: 1px solid #a7f3d0;
+  background: #ecfdf5;
+  color: #065f46;
+}
+
+.feedbackError {
+  border: 1px solid #fecaca;
+  background: #fef2f2;
+  color: #991b1b;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  border-top: 1px solid #fde68a;
+}
+
+@media (min-width: 640px) {
+  .overlay {
+    padding: 24px;
+  }
+
+  .top,
+  .content,
+  .bottom {
+    padding: 20px;
+  }
+
+  .heroImage {
+    height: 260px;
+  }
+
+  .ctaRow {
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .btnWide {
+    width: auto;
+  }
+}
+
+@media (min-width: 1024px) {
+  .heroImage {
+    height: 300px;
+  }
+}

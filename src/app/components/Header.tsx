@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 import { openSmartLunch } from './SmartLunchButton';
 import { event } from '../libs/analytics/gtag';
 import { EVENTS } from '../libs/analytics/events';
+import BetaSupportModal from './BetaSupportModal';
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -154,6 +155,12 @@ export default function Header() {
             >
               {t('pwa')}
             </Link>
+          </li>
+          <li style={{ textAlign: 'center', lineHeight: '1.5' }}>
+            <BetaSupportModal
+              triggerClassName={styles.supportMenuBtn}
+              triggerLabel={t('support')}
+            />
           </li>
           <li style={{ textAlign: 'center', lineHeight: '1.5' }}>
             <Link

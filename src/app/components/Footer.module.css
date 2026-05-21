@@ -44,3 +44,32 @@
   color: #fffefe;
   font-size: 0.8rem;
 }
+
+.supportWrap {
+  margin-top: 0.55rem;
+}
+
+.supportBtn {
+  border: 1px solid #b45309;
+  background: linear-gradient(180deg, #dc2626 0%, #b91c1c 100%);
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.5rem 0.9rem;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.01em;
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.2s ease,
+    filter 0.2s ease;
+  box-shadow: 0 10px 22px rgba(185, 28, 28, 0.34);
+}
+
+.supportBtn:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 12px 24px rgba(185, 28, 28, 0.42);
+}
+
+.supportBtn:active {
+  transform: translateY(1px);
+}

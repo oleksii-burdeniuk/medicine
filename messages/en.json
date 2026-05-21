@@ -30,7 +30,8 @@
     "hours": "Calendar",
     "about": "About",
     "pwa": "What is PWA?",
-    "publicGroup": "Public group"
+    "publicGroup": "Public group",
+    "support": "Support"
   },
   "Footer": {
     "description": "Created with care for {appName}. This app is completely free to help you with your work 🙌",
@@ -38,7 +39,22 @@
     "github": "GitHub",
     "copyright": "© {year} Oleksii Burdeniuk",
     "phoneLabel": "Phone",
-    "instagram": "Instagram"
+    "instagram": "Instagram",
+    "betaSupportLink": "Support beta projects",
+    "betaSupportTitle": "Support beta projects",
+    "betaSupportSubtitle": "Voluntary support for my projects and small digital tools. If you like what I do and want to support development, please consider making a contribution. It helps me keep creating useful tools and maintaining them free for everyone.",
+    "betaSupportDescription": "This is not a subscription or plan payment. Contributions help cover technical costs, AI tools, hosting, and keep beta projects available for free longer.",
+    "betaSupportGoal": "🎯 Goal: support development and technical costs",
+    "betaSupportJarLinkLabel": "🔗 Jar link",
+    "betaSupportCardLabel": "💳 Jar card number",
+    "betaSupportOpenJar": "Open jar",
+    "betaSupportCopyLink": "Copy link",
+    "betaSupportCopyCard": "Copy card number",
+    "betaSupportLinkCopied": "Link copied.",
+    "betaSupportCardCopied": "Card number copied.",
+    "betaSupportCopyError": "Could not copy. Please try again.",
+    "betaSupportNotNow": "Not now",
+    "betaSupportClose": "Close"
   },
   "ColorsPage": {
     "title": "Colors & Assortment",
