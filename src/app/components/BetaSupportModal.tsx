@@ -22,6 +22,7 @@ export default function BetaSupportModal({
   } | null>(null);
 
   const jarUrl = 'https://send.monobank.ua/jar/6wEyKX16pk';
+  const revolutUrl = 'https://revolut.me/burdeniuk';
   const cardNumber = '4874 1000 3823 7361';
 
   const copyText = async (value: string, successMessage: string) => {
@@ -51,15 +52,9 @@ export default function BetaSupportModal({
           <div className={styles.modal}>
             <div className={styles.top}>
               <div>
-                <p className={styles.badge}>
-                  BETA SUPPORT
-                </p>
-                <h2 className={styles.title}>
-                  {t('betaSupportTitle')}
-                </h2>
-                <p className={styles.subtitle}>
-                  {t('betaSupportSubtitle')}
-                </p>
+                <p className={styles.badge}>BETA SUPPORT</p>
+                <h2 className={styles.title}>{t('betaSupportTitle')}</h2>
+                <p className={styles.subtitle}>{t('betaSupportSubtitle')}</p>
               </div>
               <button
                 type='button'
@@ -85,6 +80,26 @@ export default function BetaSupportModal({
               <div className={styles.card}>
                 <div className={styles.ctaRow}>
                   <a
+                    href={revolutUrl}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className={`${styles.btnPrimary} ${styles.btnWide}`}
+                  >
+                    Revolut
+                  </a>
+                  <button
+                    type='button'
+                    onClick={() => copyText(revolutUrl, 'Revolut link copied')}
+                    className={`${styles.btnSecondary} ${styles.btnWide}`}
+                  >
+                    Copy Revolut link
+                  </button>
+                </div>
+                <p className={styles.monoLine}>{revolutUrl}</p>
+              </div>
+              <div className={styles.card}>
+                <div className={styles.ctaRow}>
+                  <a
                     href={jarUrl}
                     target='_blank'
                     rel='noopener noreferrer'
@@ -104,15 +119,13 @@ export default function BetaSupportModal({
               </div>
 
               <div className={`${styles.card} ${styles.cardSoft}`}>
-                <p className={styles.label}>
-                  {t('betaSupportCardLabel')}
-                </p>
-                <p className={styles.cardNumber}>
-                  {cardNumber}
-                </p>
+                <p className={styles.label}>{t('betaSupportCardLabel')}</p>
+                <p className={styles.cardNumber}>{cardNumber}</p>
                 <button
                   type='button'
-                  onClick={() => copyText(cardNumber, t('betaSupportCardCopied'))}
+                  onClick={() =>
+                    copyText(cardNumber, t('betaSupportCardCopied'))
+                  }
                   className={styles.btnNeutral}
                 >
                   {t('betaSupportCopyCard')}
@@ -123,12 +136,12 @@ export default function BetaSupportModal({
                 {t('betaSupportDescription')}
               </p>
 
-              <p className={styles.goal}>
-                {t('betaSupportGoal')}
-              </p>
+              <p className={styles.goal}>{t('betaSupportGoal')}</p>
 
               {feedback && (
-                <p className={`${styles.feedback} ${feedback.type === 'success' ? styles.feedbackSuccess : styles.feedbackError}`}>
+                <p
+                  className={`${styles.feedback} ${feedback.type === 'success' ? styles.feedbackSuccess : styles.feedbackError}`}
+                >
                   {feedback.text}
                 </p>
               )}
