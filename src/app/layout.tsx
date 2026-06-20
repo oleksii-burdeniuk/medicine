@@ -1,15 +1,14 @@
 import './globals.css';
-import { SpeedInsights } from '@vercel/speed-insights/next';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ServiceWorkerRegister from './components/ServiceWorkerRegister';
 import FloatingHomeButton from './components/FloatingHomeButton';
 import { NextIntlClientProvider } from 'next-intl';
 import { cookies } from 'next/headers';
-import Script from 'next/script';
-import Analytics from './components/Analytics/Analytics';
 import PwaInstallBtn from './components/PwaInstallBtn/PwaInstallBtn';
 import TestFlightInvite from './components/TestFlightInvite';
+import CookieConsent from './components/CookieConsent';
+import ConsentAnalytics from './components/Analytics/ConsentAnalytics';
 
 export const metadata = {
   title: 'WareCode',
@@ -43,29 +42,12 @@ export default async function RootLayout({
           <TestFlightInvite />
           {children}
 
-          <SpeedInsights />
-
           <FloatingHomeButton />
           <Footer />
           <ServiceWorkerRegister />
+          <CookieConsent />
+          <ConsentAnalytics />
         </NextIntlClientProvider>
-
-        <Script
-          src='https://www.googletagmanager.com/gtag/js?id=G-PYHS0CDP9Z'
-          strategy='afterInteractive'
-        />
-        <Script id='ga-script' strategy='afterInteractive'>
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-PYHS0CDP9Z', {
-  send_page_view: false,
-});
-            
-          `}
-        </Script>
-        <Analytics />
       </body>
     </html>
   );

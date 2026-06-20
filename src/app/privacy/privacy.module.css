@@ -1,0 +1,26 @@
+.page { min-height: 70vh; padding: 24px 14px 48px; background: #f3f6f8; color: #14212f; }
+.card { max-width: 920px; margin: 0 auto; padding: 28px; border: 1px solid #d7e0ea; border-radius: 18px; background: #fff; box-shadow: 0 12px 34px rgba(0,0,0,.08); }
+.card h1 { font-size: clamp(26px, 4vw, 38px); line-height: 1.1; }
+.updated { margin-top: 8px; color: #657386; font-size: 13px; }
+.lead { margin-top: 18px; font-size: 16px; line-height: 24px; }
+.section { margin-top: 28px; }
+.section h2 { margin-bottom: 10px; font-size: 20px; }
+.section p, .section li { color: #405163; font-size: 15px; line-height: 23px; }
+.section ul { padding-left: 20px; }
+.section li + li { margin-top: 7px; }
+.section a { display: inline-block; margin-top: 10px; color: #0f5269; font-weight: 800; text-decoration: underline; text-underline-offset: 3px; }
+.tableWrap { overflow-x: auto; }
+.section table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.section th, .section td { padding: 10px; border: 1px solid #d7e0ea; text-align: left; vertical-align: top; }
+.section th { background: #edf2f6; }
+.manageButton { margin-top: 14px; min-height: 44px; padding: 0 15px; border: 0; border-radius: 9px; background: #176b87; color: #fff; cursor: pointer; font-weight: 900; }
+@media (prefers-color-scheme: dark) {
+  .page { background: #0b1117; color: #eff5f8; }
+  .card { border-color: #283847; background: #121b24; }
+  .updated, .section p, .section li { color: #9cadba; }
+  .section a { color: #a1e8f5; }
+  .section th, .section td { border-color: #283847; }
+  .section th { background: #182331; }
+  .manageButton { background: #62c6df; color: #101820; }
+}
+@media (max-width: 560px) { .card { padding: 20px 16px; } }

@@ -8,7 +8,9 @@
   "BarcodeInput": {
     "placeholder": "Wpisz lub zeskanuj kod",
     "uploadButton": "Załaduj obraz",
-    "saveButton": "Zapisz kod"
+    "saveButton": "Zapisz kod",
+    "uploadPrivacy": "Jeśli wymagane jest OCR, wybrany obraz zostanie przesłany do Google Cloud Vision. Nie przesyłaj zdjęć z danymi osobowymi bez upoważnienia.",
+    "privacyLink": "Dowiedz się więcej"
   },
   "SavedCodes": {
     "title": "Zapisane kody: {count}",
@@ -38,6 +40,8 @@
     "copyright": "© {year} Oleksii Burdeniuk",
     "phoneLabel": "Telefon",
     "instagram": "Instagram",
+    "privacy": "Prywatność i cookies",
+    "cookieSettings": "Ustawienia cookies",
     "betaSupportLink": "Wesprzyj projekty beta",
     "betaSupportTitle": "Wsparcie projektów beta",
     "betaSupportSubtitle": "Dobrowolne wsparcie moich projektów i małych cyfrowych narzędzi. Jeśli podoba Ci się to, co robię, i chcesz wesprzeć rozwój, rozważ dokonanie wpłaty. To pomoże mi nadal tworzyć przydatne narzędzia i utrzymywać je darmowymi dla wszystkich.",
@@ -53,6 +57,17 @@
     "betaSupportCopyError": "Nie udało się skopiować. Spróbuj ponownie.",
     "betaSupportNotNow": "Nie teraz",
     "betaSupportClose": "Zamknij"
+  },
+  "CookieConsent": {
+    "title": "Twoje ustawienia prywatności",
+    "description": "WareCode korzysta z niezbędnej pamięci, aby zachować ustawienia. Analityka działa tylko za Twoją zgodą.",
+    "essentialTitle": "Niezbędne",
+    "essentialDescription": "język, wybór zgody, lokalne dane aplikacji i tryb offline.",
+    "analyticsTitle": "Analityczne",
+    "analyticsDescription": "Google Analytics i Vercel Speed Insights.",
+    "policyLink": "Przeczytaj politykę prywatności i cookies",
+    "reject": "Tylko niezbędne",
+    "accept": "Akceptuj analityczne"
   },
   "ColorsPage": {
     "title": "Kolory i Asortyment",

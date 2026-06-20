@@ -1,0 +1,142 @@
+.banner {
+  position: fixed;
+  z-index: 2900;
+  right: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  left: 18px;
+  display: grid;
+  max-width: 760px;
+  margin: 0 auto;
+  grid-template-columns: auto 1fr;
+  gap: 14px;
+  padding: 18px;
+  border: 1px solid #d7e0ea;
+  border-radius: 16px;
+  background: #ffffff;
+  color: #14212f;
+  box-shadow: 0 22px 70px rgba(0, 0, 0, 0.3);
+}
+
+.icon {
+  display: grid;
+  width: 44px;
+  height: 44px;
+  place-items: center;
+  border-radius: 12px;
+  background: #d9eef4;
+  color: #0f5269;
+}
+
+.copy h2 {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.copy p {
+  margin-top: 6px;
+  color: #526170;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+.details {
+  font-size: 12px !important;
+}
+
+.policyLink {
+  display: inline-block;
+  margin-top: 8px;
+  color: #0f5269;
+  font-size: 13px;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.actions {
+  display: flex;
+  grid-column: 1 / -1;
+  gap: 10px;
+}
+
+.actions button {
+  min-height: 44px;
+  flex: 1;
+  padding: 0 14px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.rejectButton {
+  border: 1px solid #b8c5d0;
+  background: #ffffff;
+  color: #14212f;
+}
+
+.acceptButton {
+  border: 1px solid #176b87;
+  background: #176b87;
+  color: #ffffff;
+}
+
+.actions button:focus-visible,
+.policyLink:focus-visible {
+  outline: 3px solid rgba(23, 107, 135, 0.3);
+  outline-offset: 2px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .banner {
+    border-color: #283847;
+    background: #121b24;
+    color: #eff5f8;
+  }
+
+  .icon {
+    background: #163b46;
+    color: #a1e8f5;
+  }
+
+  .copy p {
+    color: #9cadba;
+  }
+
+  .policyLink {
+    color: #a1e8f5;
+  }
+
+  .rejectButton {
+    border-color: #405365;
+    background: #182331;
+    color: #eff5f8;
+  }
+
+  .acceptButton {
+    border-color: #62c6df;
+    background: #62c6df;
+    color: #101820;
+  }
+}
+
+@media (max-width: 520px) {
+  .banner {
+    right: 10px;
+    bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+    left: 10px;
+    max-height: calc(100dvh - 20px);
+    overflow-y: auto;
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .icon {
+    display: none;
+  }
+
+  .actions {
+    grid-column: 1;
+    flex-direction: column-reverse;
+  }
+}

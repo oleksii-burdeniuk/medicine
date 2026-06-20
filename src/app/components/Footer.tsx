@@ -6,6 +6,7 @@ import styles from './Footer.module.css';
 import { useTranslations } from 'next-intl';
 import { Github, Instagram, Linkedin } from 'lucide-react';
 import BetaSupportModal from './BetaSupportModal';
+import { OPEN_CONSENT_EVENT } from './privacy/consent';
 
 export default function Footer() {
   const t = useTranslations('Footer');
@@ -58,6 +59,19 @@ export default function Footer() {
 
       <div className={styles.supportWrap}>
         <BetaSupportModal triggerClassName={styles.supportBtn} />
+      </div>
+
+      <div className={styles.legalLinks}>
+        <Link href='/privacy' className={styles.legalLink}>
+          {t('privacy')}
+        </Link>
+        <button
+          type='button'
+          className={styles.legalButton}
+          onClick={() => window.dispatchEvent(new Event(OPEN_CONSENT_EVENT))}
+        >
+          {t('cookieSettings')}
+        </button>
       </div>
 
       <p className={styles.copy}>{t('copyright', { year })}</p>

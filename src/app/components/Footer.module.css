@@ -49,6 +49,29 @@
   margin-top: 0.55rem;
 }
 
+.legalLinks {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 0.7rem;
+}
+
+.legalLink,
+.legalButton {
+  border: 0;
+  background: none;
+  color: #c1d8ff;
+  cursor: pointer;
+  font: inherit;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.legalLink:hover,
+.legalButton:hover {
+  color: #8eb7ff;
+}
+
 .supportBtn {
   border: 1px solid #b45309;
   background: linear-gradient(180deg, #dc2626 0%, #b91c1c 100%);

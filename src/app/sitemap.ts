@@ -9,6 +9,7 @@ const paths = [
   '/work-break-time',
   '/share',
   '/about',
+  '/privacy',
   '/pwa', // рекомендую нижній регістр
 ];
 

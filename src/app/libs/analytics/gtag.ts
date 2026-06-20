@@ -1,10 +1,15 @@
 import { EventType } from './events';
+import { readConsent } from '@/app/components/privacy/consent';
 
 export const GA_ID = 'G-PYHS0CDP9Z';
 
 // page view
 export const pageview = (url: string) => {
-  if (typeof window !== 'undefined' && window.gtag) {
+  if (
+    typeof window !== 'undefined' &&
+    readConsent() === 'analytics' &&
+    window.gtag
+  ) {
     try {
       window.gtag('config', GA_ID, {
         page_path: url,
@@ -17,7 +22,11 @@ export const pageview = (url: string) => {
 
 // events
 export const event = (action: EventType, params?: Record<string, unknown>) => {
-  if (typeof window !== 'undefined' && window.gtag) {
+  if (
+    typeof window !== 'undefined' &&
+    readConsent() === 'analytics' &&
+    window.gtag
+  ) {
     try {
       window.gtag('event', action, params);
     } catch (error) {

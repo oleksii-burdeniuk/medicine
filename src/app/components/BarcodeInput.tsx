@@ -1,6 +1,7 @@
 'use client';
 
 import { Image as ImageIcon, Save } from 'lucide-react';
+import Link from 'next/link';
 import styles from './BarcodeInput.module.css';
 import { useTranslations } from 'next-intl';
 import { event } from '../libs/analytics/gtag';
@@ -26,45 +27,51 @@ export default function BarcodeInput({
   const t = useTranslations('BarcodeInput');
 
   return (
-    <div className={styles.inputWrapper}>
-      <input
-        name='input'
-        type='text'
-        placeholder={t('placeholder')}
-        value={text}
-        onChange={(e) => setText(e.target.value)}
-        className={styles.input}
-        onFocus={onInputFocus}
-      />
+    <div className={styles.fieldGroup}>
+      <div className={styles.inputWrapper}>
+        <input
+          name='input'
+          type='text'
+          placeholder={t('placeholder')}
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          className={styles.input}
+          onFocus={onInputFocus}
+        />
 
-      <button
-        type='button'
-        className={styles.iconButton}
-        title={t('uploadButton')}
-        onClick={() => {
-          fileInputRef.current?.click();
-          event(EVENTS.CHOOSE_PHOTO_CLICK);
-        }}
-      >
-        <ImageIcon size={20} />
-      </button>
+        <button
+          type='button'
+          className={styles.iconButton}
+          title={t('uploadButton')}
+          onClick={() => {
+            fileInputRef.current?.click();
+            event(EVENTS.CHOOSE_PHOTO_CLICK);
+          }}
+        >
+          <ImageIcon size={20} />
+        </button>
 
-      <input
-        ref={fileInputRef}
-        type='file'
-        accept='image/*'
-        style={{ display: 'none' }}
-        onChange={handleFileChange}
-      />
+        <input
+          ref={fileInputRef}
+          type='file'
+          accept='image/*'
+          style={{ display: 'none' }}
+          onChange={handleFileChange}
+        />
 
-      <button
-        type='button'
-        className={styles.saveButton}
-        title={t('saveButton')}
-        onClick={() => handleSave(text)}
-      >
-        <Save size={18} />
-      </button>
+        <button
+          type='button'
+          className={styles.saveButton}
+          title={t('saveButton')}
+          onClick={() => handleSave(text)}
+        >
+          <Save size={18} />
+        </button>
+      </div>
+      {/* <p className={styles.privacyNote}>
+        {t('uploadPrivacy')}{' '}
+        <Link href='/privacy'>{t('privacyLink')}</Link>
+      </p> */}
     </div>
   );
 }
