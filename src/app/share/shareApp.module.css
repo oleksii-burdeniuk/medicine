@@ -195,3 +195,43 @@
     padding-top: 28px;
   }
 }
+
+.androidRow {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.androidRow .targetButton {
+  width: 100%;
+}
+
+.betaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.betaButton:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(255, 255, 255, 0.28);
+}
+
+.betaButton:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.75);
+  outline-offset: 3px;
+}
+
+@media (max-width: 520px) {
+  .androidRow {
+    grid-template-columns: 1fr;
+  }
+
+  .betaButton {
+    width: 100%;
+    min-height: 46px;
+  }
+}

@@ -165,7 +165,8 @@
     "shareTitle": "WareCode",
     "shareText": "Wypróbuj WareCode do szybkiego tworzenia i skanowania kodów kreskowych.",
     "shareFailed": "Nie udało się udostępnić aplikacji",
-    "shareUnsupported": "Twoja przeglądarka nie obsługuje funkcji udostępniania 😕"
+    "shareUnsupported": "Twoja przeglądarka nie obsługuje funkcji udostępniania 😕",
+    "androidBetaRequest": "Wyślij prośbę o wersję beta na Androida"
   },
   "TestFlightInvite": {
     "title": "Pomóż testować WareCode na iPhonie",

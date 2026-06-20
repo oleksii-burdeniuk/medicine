@@ -165,7 +165,8 @@
     "shareTitle": "WareCode",
     "shareText": "Спробуйте WareCode для швидкого створення та сканування штрихкодів.",
     "shareFailed": "Не вдалося поділитися додатком",
-    "shareUnsupported": "Ваш браузер не підтримує функцію спільного доступу 😕"
+    "shareUnsupported": "Ваш браузер не підтримує функцію спільного доступу 😕",
+    "androidBetaRequest": "Надіслати заявку на beta"
   },
   "TestFlightInvite": {
     "title": "Допоможіть протестувати WareCode на iPhone",

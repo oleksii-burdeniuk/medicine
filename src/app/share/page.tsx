@@ -3,7 +3,13 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import QRCode from 'qrcode';
-import { Globe2, Share2, Smartphone, TabletSmartphone } from 'lucide-react';
+import {
+  Globe2,
+  Mail,
+  Share2,
+  Smartphone,
+  TabletSmartphone,
+} from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import styles from './shareApp.module.css';
 
@@ -12,16 +18,22 @@ type ShareTargetId = 'web' | 'ios' | 'android';
 const SHARE_TARGETS: Record<ShareTargetId, string | null> = {
   web: 'https://medicine-sand.vercel.app',
   ios: 'https://testflight.apple.com/join/eUXXnWWW',
-  android: null,
+  android: 'https://play.google.com/store/apps/details?id=com.warecode.app',
 };
+
+const ANDROID_BETA_EMAIL = 'burdeniuk.oleksiy@gmail.com';
+const ANDROID_BETA_SUBJECT = 'Beta android';
+const ANDROID_BETA_BODY = 'Beta android';
 
 export default function ShareAppPage() {
   const t = useTranslations('ShareAppPage');
-  const [selectedTarget, setSelectedTarget] =
-    useState<ShareTargetId>('web');
+  const [selectedTarget, setSelectedTarget] = useState<ShareTargetId>('web');
   const [qrUrl, setQrUrl] = useState('');
-  const selectedUrl =
-    SHARE_TARGETS[selectedTarget] ?? SHARE_TARGETS.web ?? '';
+  const selectedUrl = SHARE_TARGETS[selectedTarget] ?? SHARE_TARGETS.web ?? '';
+
+  const androidBetaHref = `mailto:${ANDROID_BETA_EMAIL}?subject=${encodeURIComponent(
+    ANDROID_BETA_SUBJECT,
+  )}&body=${encodeURIComponent(ANDROID_BETA_BODY)}`;
 
   useEffect(() => {
     QRCode.toDataURL(selectedUrl, {
@@ -36,9 +48,7 @@ export default function ShareAppPage() {
 
   const selectTarget = (target: ShareTargetId) => {
     if (!SHARE_TARGETS[target]) {
-      alert(
-        target === 'ios' ? t('iosUnavailable') : t('androidUnavailable'),
-      );
+      alert(target === 'ios' ? t('iosUnavailable') : t('androidUnavailable'));
       return;
     }
 
@@ -87,6 +97,7 @@ export default function ShareAppPage() {
             onClick={() => selectTarget('web')}
             icon={<Globe2 size={20} strokeWidth={2.3} />}
           />
+
           <TargetButton
             active={selectedTarget === 'ios'}
             available={SHARE_TARGETS.ios !== null}
@@ -95,14 +106,22 @@ export default function ShareAppPage() {
             onClick={() => selectTarget('ios')}
             icon={<TabletSmartphone size={20} strokeWidth={2.3} />}
           />
-          <TargetButton
-            active={selectedTarget === 'android'}
-            available={SHARE_TARGETS.android !== null}
-            label={t('androidVersion')}
-            comingSoon={t('comingSoon')}
-            onClick={() => selectTarget('android')}
-            icon={<Smartphone size={20} strokeWidth={2.3} />}
-          />
+
+          <div className={styles.androidRow}>
+            <TargetButton
+              active={selectedTarget === 'android'}
+              available={SHARE_TARGETS.android !== null}
+              label={t('androidVersion')}
+              comingSoon={t('comingSoon')}
+              onClick={() => selectTarget('android')}
+              icon={<Smartphone size={20} strokeWidth={2.3} />}
+            />
+
+            <a className={styles.betaButton} href={androidBetaHref}>
+              <Mail size={18} strokeWidth={2.3} />
+              <span>{t('androidBetaRequest')}</span>
+            </a>
+          </div>
         </section>
 
         <div className={styles.qrCard} aria-live='polite'>

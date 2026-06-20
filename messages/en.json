@@ -165,7 +165,8 @@
     "shareTitle": "WareCode",
     "shareText": "Try WareCode for quick barcode generation and scanning.",
     "shareFailed": "Could not share the app",
-    "shareUnsupported": "Your browser does not support the share feature 😕"
+    "shareUnsupported": "Your browser does not support the share feature 😕",
+    "androidBetaRequest": "Send beta request for Android version"
   },
   "TestFlightInvite": {
     "title": "Help test WareCode on iPhone",
