@@ -2,8 +2,8 @@ import type { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Medicine Generator Kodów',
-    short_name: 'Medicine',
+    name: 'WareCode',
+    short_name: 'WareCode',
     description:
       'Skaner Kodów Kreskowych PWA: Błyskawiczny Skaner i Generator Kodów 128.',
     start_url: '/',

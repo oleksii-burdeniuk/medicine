@@ -1,6 +1,6 @@
 {
-  "name": "Medicine bar code",
-  "short_name": "Medicine",
+  "name": "WareCode",
+  "short_name": "WareCode",
   "description": "Генератор і сканер штрихкодів",
   "start_url": "/",
   "display": "standalone",

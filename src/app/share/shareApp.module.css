@@ -1,65 +1,197 @@
-.container {
-  display: flex;
-  justify-content: center;
-  min-height: 70vh;
-  background: #f7f8fa;
-  padding: 1rem;
-  border-radius: 20px;
-  margin-top: 20px;
+.page {
+  --share-background: #f3f6f8;
+  --share-surface: #ffffff;
+  --share-text: #14212f;
+  --share-muted: #657386;
+  --share-line: #d7e0ea;
+  --share-accent: #176b87;
+  --share-accent-soft: #d9eef4;
+  --share-accent-strong: #0f5269;
+  min-height: 75vh;
+  padding: 40px 16px 48px;
+  background: var(--share-background);
+  color: var(--share-text);
 }
 
-.card {
-  background: #fff;
-  padding: 2rem;
-  border-radius: 16px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+.content {
+  display: flex;
   width: 100%;
-  text-align: center;
+  max-width: 440px;
+  margin: 0 auto;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.intro {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.wordmark {
+  color: var(--share-text);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 34px;
+  letter-spacing: -0.04em;
+}
+
+.wordmark span {
+  color: #fbbf24;
 }
 
 .title {
-  font-size: 1.4rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  color: black;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.25;
 }
 
-.text {
-  font-size: 1rem;
-  color: #333;
-  margin-bottom: 1.5rem;
+.description {
+  color: var(--share-muted);
+  font-size: 15px;
+  line-height: 22px;
 }
 
-.qrWrapper {
+.versions {
   display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sectionTitle {
+  margin-bottom: 2px;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.targetButton {
+  display: flex;
+  min-height: 50px;
+  width: 100%;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  border: 1px solid var(--share-line);
+  border-radius: 8px;
+  background: var(--share-surface);
+  color: var(--share-text);
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease,
+    opacity 0.15s ease;
+}
+
+.targetButton:active {
+  opacity: 0.72;
+}
+
+.targetButton:focus-visible,
+.shareButton:focus-visible,
+.selectedUrl:focus-visible {
+  outline: 3px solid rgba(23, 107, 135, 0.3);
+  outline-offset: 2px;
+}
+
+.targetActive {
+  border-color: var(--share-accent);
+  background: var(--share-accent-soft);
+  color: var(--share-accent-strong);
+}
+
+.targetLabel {
+  flex: 1;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.comingSoon {
+  color: var(--share-muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.qrCard {
+  display: flex;
+  width: 260px;
+  height: 260px;
+  align-items: center;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  border: 1px solid var(--share-line);
+  border-radius: 8px;
+  background: #ffffff;
 }
 
 .qrImage {
-  width: 210px;
-  height: 210px;
-  border: 2px solid #000000;
-  border-radius: 12px;
-  background: #fff;
-  padding: 0.5rem;
+  width: 244px;
+  height: 244px;
+}
+
+.qrLoading {
+  color: #657386;
+  font-size: 14px;
+}
+
+.selectedUrl {
+  max-width: 100%;
+  padding: 4px;
+  overflow-wrap: anywhere;
+  color: var(--share-accent-strong);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
 }
 
 .shareButton {
-  background: #0070f3;
-  border: none;
-  color: white;
-  border-radius: 10px;
-  padding: 0.7rem 1.2rem;
-  font-size: 1rem;
-  display: inline-flex;
+  display: flex;
+  min-height: 52px;
+  width: 100%;
   align-items: center;
+  justify-content: center;
   gap: 8px;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--share-accent);
+  color: #ffffff;
   cursor: pointer;
-  transition: background 0.2s;
+  font-size: 16px;
+  font-weight: 900;
+  transition: opacity 0.15s ease;
 }
 
 .shareButton:hover {
-  background: #0055b3;
+  opacity: 0.9;
+}
+
+.shareButton:active {
+  opacity: 0.78;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --share-background: #0b1117;
+    --share-surface: #121b24;
+    --share-text: #eff5f8;
+    --share-muted: #9cadba;
+    --share-line: #283847;
+    --share-accent: #62c6df;
+    --share-accent-soft: #163b46;
+    --share-accent-strong: #a1e8f5;
+  }
+
+  .shareButton {
+    color: #101820;
+  }
+}
+
+@media (max-width: 520px) {
+  .page {
+    padding-top: 28px;
+  }
 }

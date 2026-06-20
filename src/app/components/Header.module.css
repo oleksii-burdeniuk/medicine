@@ -13,9 +13,14 @@
 /* LOGO */
 .logoText {
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 900;
   color: #fff;
+  letter-spacing: -0.04em;
   text-decoration: none;
+}
+
+.logoAccent {
+  color: #d9ad50;
 }
 
 .calendarLink {

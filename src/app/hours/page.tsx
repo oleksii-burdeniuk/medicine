@@ -5,6 +5,7 @@ import styles from './HoursPage.module.css';
 import WorkHoursModal from './WorkHoursModal';
 import jsPDF from 'jspdf';
 import { useTranslations } from 'next-intl';
+import { Apple, ExternalLink, Monitor, Smartphone } from 'lucide-react';
 
 interface WorkInterval {
   start: string;
@@ -252,6 +253,47 @@ export default function HoursPage() {
   return (
     <div className={`${styles.container} ${styles.darkText}`}>
       <h1 className={styles.title}>{t('title')}</h1>
+
+      <section className={styles.wshiftCard} aria-labelledby='wshift-title'>
+        <div className={styles.wshiftCopy}>
+          <div className={styles.wshiftWordmark} id='wshift-title'>
+            <span>W</span>Shift
+          </div>
+          <p>{t('wshiftDescription')}</p>
+        </div>
+        <div className={styles.wshiftLinks}>
+          <a
+            href='https://workfolio-tan.vercel.app/'
+            target='_blank'
+            rel='noopener noreferrer'
+            className={styles.wshiftLink}
+          >
+            <Monitor size={19} />
+            <span>{t('wshiftWeb')}</span>
+            <ExternalLink size={15} className={styles.externalIcon} />
+          </a>
+          <a
+            href='https://play.google.com/store/apps/details?id=com.alejandroburdeniuk.wshift'
+            target='_blank'
+            rel='noopener noreferrer'
+            className={styles.wshiftLink}
+          >
+            <Smartphone size={19} />
+            <span>{t('wshiftAndroid')}</span>
+            <ExternalLink size={15} className={styles.externalIcon} />
+          </a>
+          <a
+            href='https://apps.apple.com/app/wshift/id6779746317'
+            target='_blank'
+            rel='noopener noreferrer'
+            className={styles.wshiftLink}
+          >
+            <Apple size={19} />
+            <span>{t('wshiftIos')}</span>
+            <ExternalLink size={15} className={styles.externalIcon} />
+          </a>
+        </div>
+      </section>
 
       <div className={styles.calendar}>
         {/* Header */}

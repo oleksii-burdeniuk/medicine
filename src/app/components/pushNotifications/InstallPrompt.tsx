@@ -23,7 +23,7 @@ function InstallPrompt() {
       <div className={styles.card}>
         <h3 className={styles.title}>📲 Zainstaluj aplikację</h3>
         <p className={styles.text}>
-          Dodaj <strong>Medicine App</strong> do ekranu głównego, aby mieć
+          Dodaj <strong>WareCode</strong> do ekranu głównego, aby mieć
           szybki dostęp — nawet bez internetu!
         </p>
 

@@ -42,8 +42,10 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Link href='/' onClick={closeMenu}>
-          <span className={styles.logoText}>{t('logo')}</span>
+        <Link href='/' onClick={closeMenu} aria-label={t('logo')}>
+          <span className={styles.logoText}>
+            <span className={styles.logoAccent}>Ware</span>Code
+          </span>
         </Link>
       </div>
 
@@ -94,29 +96,11 @@ export default function Header() {
           </li>
           <li>
             <Link
-              href='/control'
-              onClick={closeMenu}
-              className={isActive('/control') ? styles.active : ''}
-            >
-              {t('control')}
-            </Link>
-          </li>
-          <li>
-            <Link
               href='/share'
               onClick={closeMenu}
               className={isActive('/share') ? styles.active : ''}
             >
               {t('share')}
-            </Link>
-          </li>
-          <li>
-            <Link
-              href='/contact'
-              onClick={closeMenu}
-              className={isActive('/contact') ? styles.active : ''}
-            >
-              {t('contact')}
             </Link>
           </li>
           <li>

@@ -72,9 +72,9 @@ export async function sendNotification(
     await webpush.sendNotification(
       subscription,
       JSON.stringify({
-        title: '🔔 Medicine App',
-        body: message || 'Nowe powiadomienie z aplikacji Medicine!',
-        icon: '/icon.png',
+        title: '🔔 WareCode',
+        body: message || 'Nowe powiadomienie z aplikacji WareCode!',
+        icon: '/icons/icon-192x192.png',
       })
     );
 

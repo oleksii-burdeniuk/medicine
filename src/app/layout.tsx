@@ -9,10 +9,11 @@ import { cookies } from 'next/headers';
 import Script from 'next/script';
 import Analytics from './components/Analytics/Analytics';
 import PwaInstallBtn from './components/PwaInstallBtn/PwaInstallBtn';
+import TestFlightInvite from './components/TestFlightInvite';
 
 export const metadata = {
-  title: 'Barcode Scanner',
-  description: 'PWA штрихкод сканер та генератор',
+  title: 'WareCode',
+  description: 'WareCode — PWA сканер та генератор штрихкодів',
   manifest: '/manifest.json',
   icons: {
     icon: '/icons/icon-192x192.png',
@@ -39,6 +40,7 @@ export default async function RootLayout({
         <NextIntlClientProvider>
           <Header />
           <PwaInstallBtn />
+          <TestFlightInvite />
           {children}
 
           <SpeedInsights />

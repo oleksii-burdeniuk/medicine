@@ -19,14 +19,12 @@
     "confirmClearAll": "Usunąć wszystkie zapisane kody?"
   },
   "Header": {
-    "logo": "Medicine",
+    "logo": "WareCode",
     "menu": "Menu",
     "barcode": "Kod kreskowy",
     "colors": "Kolory i Asortyment",
     "workBreak": "Praca i przerwy",
-    "control": "Kontrola",
     "share": "Udostępnij aplikację",
-    "contact": "Telefony kontaktowe",
     "hours": "Kalendarz",
     "about": "O aplikacji",
     "pwa": "Czym jest PWA?",
@@ -99,6 +97,10 @@
   },
   "HoursPage": {
     "title": "🕒 Moje godziny pracy",
+    "wshiftDescription": "Korzystaj z pełnej aplikacji WShift do ewidencji czasu pracy, nadgodzin, wynagrodzenia i raportów miesięcznych.",
+    "wshiftWeb": "Otwórz wersję internetową",
+    "wshiftAndroid": "Pobierz na Androida",
+    "wshiftIos": "Pobierz w App Store",
     "monthSummary": "📊 Podsumowanie miesiąca",
     "totalHours": "🟦 Łącznie przepracowane",
     "workedDays": "🟩 Ilość dni pracujących",
@@ -134,23 +136,32 @@
     "footer": "Przestrzegaj czasu przerw 🕰️, aby magazyn działał sprawnie, a Ty nie był zmęczony 💪"
   },
   "ShareAppPage": {
-    "title": "📱 Udostępnij aplikację",
-    "description": "Udostępnij aplikację Medicine swoim współpracownikom! Zeskanuj kod QR lub użyj przycisku poniżej, aby przesłać link do aplikacji.",
+    "title": "Udostępnij aplikację",
+    "description": "Zeskanuj kod QR lub użyj przycisku poniżej, aby wysłać współpracownikowi link do aplikacji.",
+    "chooseVersion": "Wybierz wersję aplikacji",
+    "webVersion": "Wersja internetowa",
+    "iosVersion": "Wersja na iOS",
+    "androidVersion": "Wersja na Androida",
+    "comingSoon": "Wkrótce",
+    "iosUnavailable": "Wersja na iOS nie jest jeszcze dostępna",
+    "androidUnavailable": "Wersja na Androida nie jest jeszcze dostępna",
     "qrLoading": "Ładowanie kodu QR...",
-    "shareButton": "Udostępnij",
-    "shareTitle": "Medicine App",
-    "shareText": "Sprawdź aplikację Medicine — łatwe generowanie i skanowanie kodów kreskowych!",
+    "shareButton": "Udostępnij aplikację",
+    "shareTitle": "WareCode",
+    "shareText": "Wypróbuj WareCode do szybkiego tworzenia i skanowania kodów kreskowych.",
+    "shareFailed": "Nie udało się udostępnić aplikacji",
     "shareUnsupported": "Twoja przeglądarka nie obsługuje funkcji udostępniania 😕"
   },
-  "ContactPage": {
-    "title": "Telefony kontaktowe",
-    "roleRealization": "DZIAŁ REALIZACJI",
-    "roleManager": "Kierownik",
-    "roleSupervisor": "Brygadzista"
+  "TestFlightInvite": {
+    "title": "Pomóż testować WareCode na iPhonie",
+    "description": "Dołącz do testów beta w TestFlight, wypróbuj najnowszą wersję na iOS i pomóż nam ulepszyć WareCode przed premierą.",
+    "join": "Dołącz w TestFlight",
+    "later": "Może później",
+    "close": "Zamknij zaproszenie"
   },
   "AboutPage": {
-    "title": "📦 Medicine Kod kreskowy",
-    "description": "Medicine — to wygodna aplikacja do generowania kodów kreskowych. Pomaga szybko tworzyć, skanować i zapisywać kody kreskowe dla efektywnej pracy na magazynie.",
+    "title": "📦 WareCode",
+    "description": "WareCode — to wygodna aplikacja do generowania kodów kreskowych. Pomaga szybko tworzyć, skanować i zapisywać kody kreskowe dla efektywnej pracy na magazynie.",
     "featuresTitle": "⚙️ Główne funkcje:",
     "feature1": "🧾 Generowanie kodu kreskowego — wpisz dowolny tekst lub numer artykułu, a aplikacja automatycznie utworzy kod kreskowy (CODE128).",
     "feature2": "📷 Skanowanie kodu ze zdjęcia — zrób zdjęcie skanera lub pudełka z kodem, a system automatycznie rozpozna potrzebny numer. Na zdjęciu powinien być widoczny numer w formacie PK/25/04/23/0813.",
@@ -162,26 +173,6 @@
     "step3": "Poczekaj, aż system odczyta kod — pojawi się on w polu tekstowym.",
     "step4": "Zapisz wynik, aby mieć go zawsze pod ręką.",
     "footer": "Aplikacja działa również offline i obsługuje PWA — możesz dodać ją na ekran główny telefonu i korzystać jak ze zwykłej aplikacji."
-  },
-  "ControlPage": {
-    "title": "Kontrola",
-    "description": "Prześlij zdjęcie arkusza kontrolnego, a aplikacja rozpozna pracowników i zapisze dane lokalnie.",
-    "takePhoto": "Wybierz zdjęcie",
-    "processing": "Przetwarzanie obrazu...",
-    "processingError": "Błąd przetwarzania",
-    "latestRecognized": "Ostatnio rozpoznane",
-    "savedListTitle": "Zapisane rekordy ({count})",
-    "clearSaved": "Wyczyść zapisane",
-    "noSaved": "Brak zapisanych rekordów",
-    "dzial": "Dział",
-    "nosnikNumer": "Numer nośnika",
-    "dodaneKiedy": "Dodano",
-    "kontrahent": "Kontrahent",
-    "deleteOne": "Usuń",
-    "saveAll": "Zapisz wszystko",
-    "noLatest": "Brak rozpoznanych rekordów",
-    "saveOne": "Zapisz",
-    "confirmClearSaved": "Wyczyścić wszystkie zapisane rekordy?"
   },
   "HowToInstallPWA": {
     "installButton": "Zainstaluj Aplikację!",
@@ -221,7 +212,7 @@
   },
   "PushNotificationsPage": {
     "title": "🔔 Powiadomienia Push",
-    "description": "Włącz powiadomienia, aby otrzymywać ważne alerty z aplikacji Medicine, np. przypomnienia o przerwach lub nowościach."
+    "description": "Włącz powiadomienia, aby otrzymywać ważne alerty z aplikacji WareCode, np. przypomnienia o przerwach lub nowościach."
   },
   "PushNotificationManager": {
     "title": "🔔 Powiadomienia Push",

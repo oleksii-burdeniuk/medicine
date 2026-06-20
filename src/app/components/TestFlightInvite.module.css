@@ -1,0 +1,174 @@
+.overlay {
+  position: fixed;
+  z-index: 3000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  padding-top: calc(20px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  background: rgba(3, 9, 14, 0.78);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 390px;
+  flex-direction: column;
+  align-items: center;
+  padding: 34px 24px 22px;
+  border: 1px solid #d7e0ea;
+  border-radius: 22px;
+  background: #f8fafb;
+  color: #14212f;
+  text-align: center;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+  animation: slideUp 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #e9eff3;
+  color: #526170;
+  cursor: pointer;
+}
+
+.iconWrap {
+  padding: 5px;
+  border-radius: 21px;
+  background: linear-gradient(145deg, #ffffff, #e4ebef);
+  box-shadow: 0 10px 26px rgba(20, 33, 47, 0.2);
+}
+
+.appIcon {
+  display: block;
+  border-radius: 17px;
+}
+
+.eyebrow {
+  margin-top: 18px;
+  color: #176b87;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin-top: 7px;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1.16;
+  letter-spacing: -0.025em;
+}
+
+.description {
+  margin-top: 12px;
+  color: #657386;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.primaryButton,
+.secondaryButton {
+  width: 100%;
+  min-height: 50px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 900;
+}
+
+.primaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 22px;
+  border: 0;
+  background: #176b87;
+  color: #ffffff;
+}
+
+.secondaryButton {
+  margin-top: 8px;
+  border: 0;
+  background: transparent;
+  color: #657386;
+}
+
+.closeButton:focus-visible,
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible {
+  outline: 3px solid rgba(23, 107, 135, 0.32);
+  outline-offset: 2px;
+}
+
+.primaryButton:active,
+.secondaryButton:active,
+.closeButton:active {
+  opacity: 0.72;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .modal {
+    border-color: #283847;
+    background: #121b24;
+    color: #eff5f8;
+  }
+
+  .closeButton {
+    background: #1d2a36;
+    color: #9cadba;
+  }
+
+  .eyebrow {
+    color: #62c6df;
+  }
+
+  .description,
+  .secondaryButton {
+    color: #9cadba;
+  }
+
+  .primaryButton {
+    background: #62c6df;
+    color: #101820;
+  }
+}
+
+@media (max-width: 380px) {
+  .modal {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+}
