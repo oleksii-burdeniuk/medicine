@@ -68,10 +68,10 @@ export default function BarcodeInput({
           <Save size={18} />
         </button>
       </div>
-      {/* <p className={styles.privacyNote}>
+      <p className={styles.privacyNote}>
         {t('uploadPrivacy')}{' '}
         <Link href='/privacy'>{t('privacyLink')}</Link>
-      </p> */}
+      </p>
     </div>
   );
 }

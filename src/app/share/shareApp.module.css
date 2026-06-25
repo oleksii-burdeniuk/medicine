@@ -207,6 +207,11 @@
   width: 100%;
 }
 
+.androidActions {
+  display: grid;
+  gap: 8px;
+}
+
 .betaButton {
   display: inline-flex;
   align-items: center;
@@ -227,6 +232,10 @@
 
 @media (max-width: 520px) {
   .androidRow {
+    grid-template-columns: 1fr;
+  }
+
+  .androidActions {
     grid-template-columns: 1fr;
   }
 

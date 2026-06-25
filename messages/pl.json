@@ -5,12 +5,28 @@
     "decodingMessage": "🔍 Odczytywanie kodu, proszę czekać...",
     "colorsButtonAria": "Kolory"
   },
+  "HomeInstallButtons": {
+    "eyebrow": "Aplikacja mobilna",
+    "title": "Zainstaluj WareCode na telefonie",
+    "description": "iPhone otworzy App Store, a Android — zgłoszenie do beta testów.",
+    "installSmall": "Zainstaluj aplikację",
+    "closeInstallPanel": "Zamknij panel instalacji",
+    "iosButton": "Pobierz na iOS",
+    "androidButton": "Android beta",
+    "modalTitle": "Dołącz do Android beta",
+    "modalDescription": "Wyślij krótkie zgłoszenie, a dodamy Cię do testów wersji WareCode na Androida, gdy build będzie gotowy.",
+    "downloadAndroid": "Pobierz na Androida",
+    "alreadyAddedHint": "Jeśli już dodaliśmy Cię do beta testów, otwórz Google Play i zainstaluj aplikację.",
+    "sendRequest": "Wyślij zgłoszenie",
+    "later": "Później",
+    "close": "Zamknij"
+  },
   "BarcodeInput": {
     "placeholder": "Wpisz lub zeskanuj kod",
     "uploadButton": "Załaduj obraz",
     "saveButton": "Zapisz kod",
-    "uploadPrivacy": "Jeśli wymagane jest OCR, wybrany obraz zostanie przesłany do Google Cloud Vision. Nie przesyłaj zdjęć z danymi osobowymi bez upoważnienia.",
-    "privacyLink": "Dowiedz się więcej"
+    "uploadPrivacy": "Zdjęcie służy tylko do rozpoznania kodu przez Google Cloud Vision.",
+    "privacyLink": "O prywatności"
   },
   "SavedCodes": {
     "title": "Zapisane kody: {count}",
@@ -166,6 +182,7 @@
     "shareText": "Wypróbuj WareCode do szybkiego tworzenia i skanowania kodów kreskowych.",
     "shareFailed": "Nie udało się udostępnić aplikacji",
     "shareUnsupported": "Twoja przeglądarka nie obsługuje funkcji udostępniania 😕",
+    "androidDownload": "Pobierz",
     "androidBetaRequest": "Wyślij prośbę o wersję beta na Androida"
   },
   "TestFlightInvite": {

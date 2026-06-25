@@ -4,6 +4,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import Image from 'next/image';
 import QRCode from 'qrcode';
 import {
+  Download,
   Globe2,
   Mail,
   Share2,
@@ -17,9 +18,11 @@ type ShareTargetId = 'web' | 'ios' | 'android';
 
 const SHARE_TARGETS: Record<ShareTargetId, string | null> = {
   web: 'https://medicine-sand.vercel.app',
-  ios: 'https://testflight.apple.com/join/eUXXnWWW',
+  ios: 'https://apps.apple.com/ua/app/warecode/id6781419932',
   android: 'https://play.google.com/store/apps/details?id=com.warecode.app',
 };
+
+const ANDROID_PLAY_URL = SHARE_TARGETS.android;
 
 const ANDROID_BETA_EMAIL = 'burdeniuk.oleksiy@gmail.com';
 const ANDROID_BETA_SUBJECT = 'Beta android';
@@ -117,10 +120,24 @@ export default function ShareAppPage() {
               icon={<Smartphone size={20} strokeWidth={2.3} />}
             />
 
-            <a className={styles.betaButton} href={androidBetaHref}>
-              <Mail size={18} strokeWidth={2.3} />
-              <span>{t('androidBetaRequest')}</span>
-            </a>
+            <div className={styles.androidActions}>
+              {ANDROID_PLAY_URL && (
+                <a
+                  className={styles.betaButton}
+                  href={ANDROID_PLAY_URL}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                >
+                  <Download size={18} strokeWidth={2.3} />
+                  <span>{t('androidDownload')}</span>
+                </a>
+              )}
+
+              <a className={styles.betaButton} href={androidBetaHref}>
+                <Mail size={18} strokeWidth={2.3} />
+                <span>{t('androidBetaRequest')}</span>
+              </a>
+            </div>
           </div>
         </section>
 

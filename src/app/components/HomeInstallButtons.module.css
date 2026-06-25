@@ -1,0 +1,358 @@
+.panel {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  margin: 0 0 18px;
+  padding: 16px;
+  border: 1px solid #d7e0ea;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at top left, rgba(255, 202, 58, 0.22), transparent 38%),
+    linear-gradient(145deg, #ffffff, #f3f7fa);
+  box-shadow: 0 10px 28px rgba(20, 33, 47, 0.1);
+  text-align: left;
+}
+
+.panelCloseButton {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(233, 239, 243, 0.9);
+  color: #526170;
+  cursor: pointer;
+}
+
+.miniInstallButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 42px;
+  margin: 0 0 16px;
+  border: 1px solid #cfdbe4;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #176b87;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 900;
+  box-shadow: 0 8px 22px rgba(20, 33, 47, 0.08);
+}
+
+.copy {
+  display: grid;
+  gap: 5px;
+  padding-right: 28px;
+}
+
+.eyebrow {
+  margin: 0;
+  color: #176b87;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.title {
+  margin: 0;
+  color: #14212f;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.description {
+  margin: 0;
+  color: #657386;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.actions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 9px;
+}
+
+.primaryButton,
+.secondaryButton,
+.modalPrimaryButton,
+.modalOutlineButton,
+.modalSecondaryButton {
+  min-height: 48px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+.primaryButton,
+.secondaryButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.primaryButton {
+  border: 0;
+  background: #176b87;
+  color: #ffffff;
+}
+
+.secondaryButton {
+  border: 1px solid #cfdbe4;
+  background: #ffffff;
+  color: #14212f;
+}
+
+.primaryButton:focus-visible,
+.secondaryButton:focus-visible,
+.panelCloseButton:focus-visible,
+.miniInstallButton:focus-visible,
+.closeButton:focus-visible,
+.modalPrimaryButton:focus-visible,
+.modalOutlineButton:focus-visible,
+.modalSecondaryButton:focus-visible {
+  outline: 3px solid rgba(23, 107, 135, 0.32);
+  outline-offset: 2px;
+}
+
+.primaryButton:active,
+.secondaryButton:active,
+.panelCloseButton:active,
+.miniInstallButton:active,
+.closeButton:active,
+.modalPrimaryButton:active,
+.modalOutlineButton:active,
+.modalSecondaryButton:active {
+  opacity: 0.72;
+}
+
+.overlay {
+  position: fixed;
+  z-index: 3000;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  padding-top: calc(20px + env(safe-area-inset-top, 0px));
+  padding-bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  background: rgba(3, 9, 14, 0.78);
+  backdrop-filter: blur(12px);
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal {
+  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: 390px;
+  flex-direction: column;
+  align-items: center;
+  padding: 34px 24px 22px;
+  border: 1px solid #d7e0ea;
+  border-radius: 22px;
+  background: #f8fafb;
+  color: #14212f;
+  text-align: center;
+  box-shadow: 0 28px 80px rgba(0, 0, 0, 0.35);
+  animation: slideUp 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.closeButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: grid;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: #e9eff3;
+  color: #526170;
+  cursor: pointer;
+}
+
+.iconWrap {
+  padding: 5px;
+  border-radius: 21px;
+  background: linear-gradient(145deg, #ffffff, #e4ebef);
+  box-shadow: 0 10px 26px rgba(20, 33, 47, 0.2);
+}
+
+.appIcon {
+  display: block;
+  border-radius: 17px;
+}
+
+.modalEyebrow {
+  margin: 18px 0 0;
+  color: #176b87;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.modalTitle {
+  margin: 7px 0 0;
+  font-size: 25px;
+  font-weight: 900;
+  line-height: 1.16;
+  letter-spacing: -0.025em;
+}
+
+.modalDescription {
+  margin: 12px 0 0;
+  color: #657386;
+  font-size: 15px;
+  line-height: 22px;
+}
+
+.modalPrimaryButton,
+.modalOutlineButton,
+.modalSecondaryButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.modalPrimaryButton {
+  gap: 8px;
+  margin-top: 22px;
+  border: 0;
+  background: #176b87;
+  color: #ffffff;
+}
+
+.betaHint {
+  margin: 8px 0 0;
+  color: #657386;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.modalOutlineButton {
+  gap: 8px;
+  margin-top: 10px;
+  border: 1px solid #cfdbe4;
+  background: #ffffff;
+  color: #14212f;
+}
+
+.modalSecondaryButton {
+  margin-top: 8px;
+  border: 0;
+  background: transparent;
+  color: #657386;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .panel {
+    border-color: #283847;
+    background:
+      radial-gradient(circle at top left, rgba(255, 202, 58, 0.13), transparent 38%),
+      linear-gradient(145deg, #121b24, #101820);
+  }
+
+  .title,
+  .secondaryButton {
+    color: #eff5f8;
+  }
+
+  .description {
+    color: #9cadba;
+  }
+
+  .eyebrow,
+  .modalEyebrow {
+    color: #62c6df;
+  }
+
+  .secondaryButton {
+    border-color: #283847;
+    background: #121b24;
+  }
+
+  .panelCloseButton {
+    background: #1d2a36;
+    color: #9cadba;
+  }
+
+  .miniInstallButton {
+    border-color: #283847;
+    background: #121b24;
+    color: #62c6df;
+  }
+
+  .modal {
+    border-color: #283847;
+    background: #121b24;
+    color: #eff5f8;
+  }
+
+  .closeButton {
+    background: #1d2a36;
+    color: #9cadba;
+  }
+
+  .modalDescription,
+  .betaHint,
+  .modalSecondaryButton {
+    color: #9cadba;
+  }
+
+  .modalOutlineButton {
+    border-color: #283847;
+    background: #101820;
+    color: #eff5f8;
+  }
+
+  .primaryButton,
+  .modalPrimaryButton {
+    background: #62c6df;
+    color: #101820;
+  }
+}
+
+@media (max-width: 380px) {
+  .panel {
+    padding: 14px;
+  }
+
+  .modal {
+    padding-right: 18px;
+    padding-left: 18px;
+  }
+
+  .modalTitle {
+    font-size: 22px;
+  }
+}

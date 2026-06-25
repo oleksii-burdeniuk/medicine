@@ -5,12 +5,28 @@
     "decodingMessage": "🔍 Зчитування коду, будь ласка, зачекайте...",
     "colorsButtonAria": "Кольори"
   },
+  "HomeInstallButtons": {
+    "eyebrow": "Мобільний застосунок",
+    "title": "Встановіть WareCode на телефон",
+    "description": "iPhone відкриє App Store, а Android — заявку на beta-тестування.",
+    "installSmall": "Встановити застосунок",
+    "closeInstallPanel": "Закрити блок встановлення",
+    "iosButton": "Завантажити для iOS",
+    "androidButton": "Android beta",
+    "modalTitle": "Приєднатися до Android beta",
+    "modalDescription": "Надішліть коротку заявку, і ми додамо вас до тестування Android-версії WareCode, коли збірка буде готова.",
+    "downloadAndroid": "Завантажити для Android",
+    "alreadyAddedHint": "Якщо вас уже додали до beta-тестування, відкрийте Google Play і встановіть застосунок.",
+    "sendRequest": "Надіслати заявку",
+    "later": "Пізніше",
+    "close": "Закрити"
+  },
   "BarcodeInput": {
     "placeholder": "Введіть або відскануйте код",
     "uploadButton": "Завантажити зображення",
     "saveButton": "Зберегти код",
-    "uploadPrivacy": "Якщо потрібен OCR, обране зображення надсилається до Google Cloud Vision. Не завантажуйте фото з персональними даними без дозволу.",
-    "privacyLink": "Детальніше"
+    "uploadPrivacy": "Фото використовується лише для розпізнавання коду через Google Cloud Vision.",
+    "privacyLink": "Про приватність"
   },
   "SavedCodes": {
     "title": "Збережені коди: {count}",
@@ -166,6 +182,7 @@
     "shareText": "Спробуйте WareCode для швидкого створення та сканування штрихкодів.",
     "shareFailed": "Не вдалося поділитися додатком",
     "shareUnsupported": "Ваш браузер не підтримує функцію спільного доступу 😕",
+    "androidDownload": "Завантажити",
     "androidBetaRequest": "Надіслати заявку на beta"
   },
   "TestFlightInvite": {

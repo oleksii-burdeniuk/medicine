@@ -4,6 +4,7 @@ import styles from './page.module.css';
 
 import Link from 'next/link';
 import BarCodeContent from './components/barCodePage/BarCodeContent';
+import HomeInstallButtons from './components/HomeInstallButtons';
 
 export default async function BarcodePage() {
   const t = await getTranslations('HomePage');
@@ -12,6 +13,7 @@ export default async function BarcodePage() {
       <div className={styles.container}>
         <div className={styles.card}>
           <h1 className={styles.title}>{t('title')}</h1>
+          <HomeInstallButtons />
           <BarCodeContent />
         </div>
       </div>

@@ -5,12 +5,28 @@
     "decodingMessage": "🔍 Decoding barcode, please wait...",
     "colorsButtonAria": "Colors"
   },
+  "HomeInstallButtons": {
+    "eyebrow": "Mobile app",
+    "title": "Install WareCode on your phone",
+    "description": "iPhone opens the App Store, while Android opens the beta testing request.",
+    "installSmall": "Install app",
+    "closeInstallPanel": "Close install panel",
+    "iosButton": "Download for iOS",
+    "androidButton": "Android beta",
+    "modalTitle": "Join the Android beta",
+    "modalDescription": "Send a short request and we will add you to WareCode Android testing when the build is ready.",
+    "downloadAndroid": "Download for Android",
+    "alreadyAddedHint": "If we have already added you to beta testing, open Google Play and install the app.",
+    "sendRequest": "Send request",
+    "later": "Later",
+    "close": "Close"
+  },
   "BarcodeInput": {
     "placeholder": "Type or scan barcode",
     "uploadButton": "Upload image",
     "saveButton": "Save code",
-    "uploadPrivacy": "If OCR is needed, the selected image is sent to Google Cloud Vision. Do not upload images containing personal data without authorisation.",
-    "privacyLink": "Learn more"
+    "uploadPrivacy": "The photo is used only to recognize the code with Google Cloud Vision.",
+    "privacyLink": "Privacy info"
   },
   "SavedCodes": {
     "title": "Saved codes: {count}",
@@ -166,6 +182,7 @@
     "shareText": "Try WareCode for quick barcode generation and scanning.",
     "shareFailed": "Could not share the app",
     "shareUnsupported": "Your browser does not support the share feature 😕",
+    "androidDownload": "Download",
     "androidBetaRequest": "Send beta request for Android version"
   },
   "TestFlightInvite": {
